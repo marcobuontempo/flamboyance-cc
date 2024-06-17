@@ -1,0 +1,10 @@
+html, 
+body, 
+#root {
+  min-height: 100dvh;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+}
