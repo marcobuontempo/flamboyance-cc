@@ -1,17 +1,17 @@
 import { Outlet } from "react-router-dom"
+import Navbar from "./components/Navbar"
+import Footer from "./components/Footer"
 
 function App() {
   return (
     <>
       <header>
-        <nav className='bg-blue-300'>Navbar</nav>
+        <Navbar />
       </header>
 
-      <main className='flex flex-wrap justify-center items-stretch flex-1 bg-blue-100'>
-        <Outlet />
-      </main>
+      <Outlet />
 
-      <footer className='bg-blue-900'>Footer</footer>
+      <Footer />
     </>
   )
 }
