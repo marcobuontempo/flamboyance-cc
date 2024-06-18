@@ -205,7 +205,7 @@ type LiveDataPrice = {
 
 type LiveDataFiatExchangeRate = number;
 
-type LiveDataClaim = {
+export type LiveDataClaim = {
   unique_id: HexString,
   transaction_hash: HexString,
   time: number,

@@ -1,4 +1,6 @@
-export default {
+import { FlamingoToken } from "../types/flamingo-data";
+
+const tokens: { [key: string]: FlamingoToken } = {
   FLM: {
     symbol: "FLM",
     decimals: 8,
@@ -115,3 +117,5 @@ export default {
     hash: "0xb56f0fba45cc57a948b342186274dfd863996bb3",
   },
 };
+
+export default tokens;

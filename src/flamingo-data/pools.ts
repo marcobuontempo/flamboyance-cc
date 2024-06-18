@@ -1,6 +1,7 @@
+import { FlamingoPool } from "../types/flamingo-data";
 import tokens from "./tokens";
 
-export default {
+const pools: { [key: string]: FlamingoPool } = {
   "FLP-FLM-bNEO": {
     symbol: "FLP-FLM-bNEO",
     decimals: 8,
@@ -832,3 +833,5 @@ export default {
     },
   },
 };
+
+export default pools;

@@ -1,18 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 import apiClient from '../../../services/api-client';
-import { useState } from 'react';
 
 type Props = {}
 
 export default function Overview({ }: Props) {
-  const [page, setPage] = useState(1);
-
   const fetchData = async () => {
-    if (page === 1) {
-      return apiClient.getFlamingoLivedataClaimsLatest();
-    } else {
-      return apiClient.getFlamingoLivedataClaimsHistory(page);
-    }
+    return apiClient.getFlamingoLivedataPricesLatest();
   }
 
   const { isPending, isError, data } = useQuery({
