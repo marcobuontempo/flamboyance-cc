@@ -12,8 +12,8 @@ const links: SidebarLinks = [
     to: 'claims',
   },
   {
-    text: 'Trades',
-    to: 'trades',
+    text: 'Lending',
+    to: 'lending',
   },
   {
     text: 'Liquidity Pools',
@@ -24,15 +24,14 @@ const links: SidebarLinks = [
     to: 'staking',
   },
   {
-    text: 'Lending',
-    to: 'lending',
+    text: 'Trades',
+    to: 'trades',
   },
   {
     text: 'Transfers',
     to: 'transfers',
   },
-]
-
+];
 
 type Props = {}
 

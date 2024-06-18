@@ -1,4 +1,4 @@
-import MainWrapper from "../../components/MainWrapper"
+import MainWrapper from '../../components/MainWrapper';
 
 type Props = {}
 

@@ -381,7 +381,7 @@ export type WalletLendResponse = FlamingoFinanceBaseResponseType<WalletLend>;
 
 export type WalletTransferResponse = FlamingoFinanceBaseResponseType<WalletTransfer>;
 
-export type LiveDataPricesResponse = LiveDataPrice;
+export type LiveDataPricesResponse = LiveDataPrice[];
 
 export type LiveDataFiatExchangeRateResponse = LiveDataFiatExchangeRate;
 

@@ -6,16 +6,17 @@ import { createBrowserRouter, RouterProvider, } from 'react-router-dom';
 import ErrorPage from './pages/error';
 import HomePage from './pages/home';
 import WalletPage from './pages/wallet';
-import LiveDataPage from './pages/live';
+import LiveDataPage from './pages/live-data';
 import AnalyticsPage from './pages/analytics';
 import SettingsPage from './pages/settings';
-import Claims from './pages/live/components/Claims.tsx';
-import Overview from './pages/live/components/Overview.tsx';
-import Trades from './pages/live/components/Trades.tsx';
-import LiquidityPools from './pages/live/components/LiquidityPools.tsx';
-import Staking from './pages/live/components/Staking.tsx';
-import Lending from './pages/live/components/Lending.tsx';
-import Transfers from './pages/live/components/Transfers.tsx';
+import Claims from './pages/live-data/components/Claims.tsx';
+import Overview from './pages/live-data/components/Overview.tsx';
+import Trades from './pages/live-data/components/Trades.tsx';
+import LiquidityPools from './pages/live-data/components/LiquidityPools.tsx';
+import Staking from './pages/live-data/components/Staking.tsx';
+import Lending from './pages/live-data/components/Lending.tsx';
+import Transfers from './pages/live-data/components/Transfers.tsx';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const router = createBrowserRouter([
   {
@@ -77,8 +78,12 @@ const router = createBrowserRouter([
   },
 ]);
 
+const queryClient = new QueryClient()
+
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+    </QueryClientProvider>
   </React.StrictMode>,
 )

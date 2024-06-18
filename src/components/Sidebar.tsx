@@ -3,14 +3,19 @@ import { NavLink } from 'react-router-dom';
 import { SidebarLinks } from '../types';
 
 type Props = {
-  links: SidebarLinks;
+  links?: SidebarLinks;
   header?: ReactNode;
   footer?: ReactNode;
+  className?: string;
 }
 
-export default function Sidebar({ links, header, footer, }: Props) {
+export default function Sidebar({ links, header, footer, className }: Props) {
+  if (!links) {
+    return null;
+  }
+
   return (
-    <nav className='p-5 h-fit border-2 border-solid border-black'>
+    <nav className={`w-full h-full px-2 border-2 border-solid border-black bg-blue-50 ${className}`}>
       {
         header &&
         <div>{header}</div>
@@ -20,11 +25,12 @@ export default function Sidebar({ links, header, footer, }: Props) {
         {
           links.map(link => {
             return (
-              <li className='p-2' key={link.to}><NavLink to={link.to}>{link.text}</NavLink></li>
+              <li className='py-2' key={link.to}><NavLink to={link.to}>{link.text}</NavLink></li>
             )
           })
         }
       </ul>
+
 
       {
         footer &&
