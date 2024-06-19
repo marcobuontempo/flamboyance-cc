@@ -1,21 +1,28 @@
 import { ColumnDef, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table';
+import { Dispatch } from 'react';
 
 type Props<T> = {
   data: T[];
   columns: ColumnDef<T>[];
-  pageIndex?: number;
-  pageSize?: number;
+  pageCount: number;
+  pageIndex: number;
+  setPageIndex: Dispatch<number>;
 }
 
 export default function TableWrapper<T>({
   data,
   columns,
+  pageCount,
+  pageIndex,
+  setPageIndex,
 }: Props<T>) {
 
   const table = useReactTable({
-    columns,
     data,
+    columns,
     getCoreRowModel: getCoreRowModel(),
+    manualPagination: true,
+    pageCount,
   })
 
   return (
@@ -24,7 +31,7 @@ export default function TableWrapper<T>({
 
         <thead>
           {table.getHeaderGroups().map(header => {
-            return <tr key={header.id}>{header.headers.map(cell => {
+            return <tr key={header.id} className='sticky top-0'>{header.headers.map(cell => {
               return <th key={cell.id} colSpan={cell.colSpan}>
                 {flexRender(cell.column.columnDef.header, cell.getContext())}
               </th>
@@ -48,29 +55,33 @@ export default function TableWrapper<T>({
       </table>
 
       <button
-        onClick={() => table.firstPage()}
-        disabled={!table.getCanPreviousPage()}
+        onClick={() => setPageIndex(0)}
+        disabled={pageIndex === 0}
       >
-        {'<<'}
+        {'|<<|'}
       </button>
       <button
-        onClick={() => table.previousPage()}
-        disabled={!table.getCanPreviousPage()}
+        onClick={() => setPageIndex(pageIndex - 1)}
+        disabled={pageIndex === 0}
       >
-        {'<'}
+        {'|<|'}
       </button>
       <button
-        onClick={() => table.nextPage()}
-        disabled={!table.getCanNextPage()}
+        onClick={() => setPageIndex(pageIndex + 1)}
+        disabled={pageIndex === pageCount - 1}
       >
-        {'>'}
+        {'|>|'}
       </button>
       <button
-        onClick={() => table.lastPage()}
-        disabled={!table.getCanNextPage()}
+        onClick={() => setPageIndex(pageCount - 1)}
+        disabled={pageIndex === pageCount - 1}
       >
-        {'>>'}
+        {'|>>|'}
       </button>
+
+      <p>
+        Page: {pageIndex + 1} of {pageCount}
+      </p>
     </div>
   )
 }

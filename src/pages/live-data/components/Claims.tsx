@@ -2,8 +2,9 @@ import { useQuery } from '@tanstack/react-query';
 import apiClient from '../../../services/api-client';
 import TableWrapper from '../../../components/TableWrapper';
 import { ColumnDef } from '@tanstack/react-table';
-import { LiveDataClaim, LiveDataClaimResponse } from '../../../types';
+import { HistoryResponse, LatestResponse, LiveDataClaim } from '../../../types';
 import { poolHashToData, tokenHashToData } from '../../../utils/helpers';
+import { useRef, useState } from 'react';
 
 type Props = {}
 
@@ -51,27 +52,44 @@ const columns: ColumnDef<TransformedLiveDataClaim>[] = [
   },
 ];
 
+
 export default function Claims({ }: Props) {
+  const [pageIndex, setPageIndex] = useState(0);
+  const pageCount = useRef(0);
+
   const fetchData = async () => {
-    return apiClient.getFlamingoLivedataClaimsLatest();
+    if (pageIndex === 0) {
+      return apiClient.getFlamingoLivedataClaimsLatest();
+    }
+    else {
+      return apiClient.getFlamingoLivedataClaimsHistory(pageCount.current - pageIndex);
+    }
   }
 
-  const transformData = (data: LiveDataClaimResponse) => {
-    return data.data.map(claim => {
+  const selectData = (data: HistoryResponse<LiveDataClaim> | LatestResponse<LiveDataClaim>) => {    
+    if (pageIndex === 0) {
+      data = (data as LatestResponse<LiveDataClaim>);
+      pageCount.current = data.pages;
+      data = data.data;
+    } else {
+      data = (data as HistoryResponse<LiveDataClaim>);
+    }
+
+    return data.map(claim => {
       const token = tokenHashToData(claim.token);
       const pool = poolHashToData(claim.pool);
       return {
         ...claim,
-        pool: pool?.symbol || 'undefined',
-        token: token?.symbol || 'undefined',
+        pool: pool?.symbol || 'unknown',
+        token: token?.symbol || 'unknown',
       }
     })
   }
 
   const { isPending, isError, data } = useQuery({
-    queryKey: ['live-data-claims'],
+    queryKey: ['live-data-claims', pageIndex],
     queryFn: fetchData,
-    select: transformData,
+    select: selectData,
   })
 
   if (isPending) {
@@ -82,11 +100,13 @@ export default function Claims({ }: Props) {
     return <div>Error loading data</div>;
   }
 
-  console.log(data);
   return (
     <TableWrapper
       columns={columns}
       data={data}
+      pageCount={pageCount.current}
+      pageIndex={pageIndex}
+      setPageIndex={setPageIndex}
     />
   )
 }

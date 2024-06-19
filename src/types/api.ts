@@ -19,18 +19,20 @@ export type MonthQuery = {
 };
 
 
-/* Base Response for Flamingo Finance Data */
+/* Base Responses for Flamingo Finance Data */
 
-type FlamingoFinanceBaseResponseType<T> = {
+export type LatestResponse<T> = {
   data: T[],
   pages: number,
   total: number,
 };
 
+export type HistoryResponse<T> = T[];
+
 
 /* Wallet Data */
 
-type WalletWallet = {
+export type WalletWallet = {
   address: HexString,
   created_at_block: number,
   created_at_time: number,
@@ -95,7 +97,7 @@ type WalletWallet = {
   },
 };
 
-type WalletClaim = {
+export type WalletClaim = {
   unique_id: HexString,
   transaction_hash: HexString,
   time: number,
@@ -110,7 +112,7 @@ type WalletClaim = {
   total_usd_fees: number,
 };
 
-type WalletTrade = {
+export type WalletTrade = {
   transaction_hash: HexString,
   time: number,
   index: number,
@@ -136,7 +138,7 @@ type WalletTrade = {
   }[],
 };
 
-type WalletLiquidityPool = {
+export type WalletLiquidityPool = {
   index: number,
   time: number,
   hash: HexString,
@@ -153,7 +155,7 @@ type WalletLiquidityPool = {
   token_2_usd_amount: number,
 };
 
-type WalletStake = {
+export type WalletStake = {
   time: number,
   index: number,
   unique_id: HexString,
@@ -166,7 +168,7 @@ type WalletStake = {
   hash: HexString,
 };
 
-type WalletLend = {
+export type WalletLend = {
   type: 'RepayFToken' | 'WithdrawCollateral' | 'DepositCollateral' | 'MintFToken',
   tx_id: HexString,
   unique_id: HexString,
@@ -181,7 +183,7 @@ type WalletLend = {
   collateral_total: string,
 };
 
-type WalletTransfer = {
+export type WalletTransfer = {
   time: number,
   index: number,
   hash: HexString,
@@ -196,14 +198,14 @@ type WalletTransfer = {
 
 /* Live Data */
 
-type LiveDataPrice = {
+export type LiveDataPrice = {
   symbol: string,
   unwrappedSymbol: string,
   hash: HexString,
   usd_price: number,
 };
 
-type LiveDataFiatExchangeRate = number;
+export type LiveDataFiatExchangeRate = number;
 
 export type LiveDataClaim = {
   unique_id: HexString,
@@ -217,20 +219,20 @@ export type LiveDataClaim = {
   amount_usd: number,
 };
 
-type LiveDataTrade = WalletTrade;
+export type LiveDataTrade = WalletTrade;
 
-type LiveDataLiquidityPool = WalletLiquidityPool;
+export type LiveDataLiquidityPool = WalletLiquidityPool;
 
-type LiveDataStake = WalletStake;
+export type LiveDataStake = WalletStake;
 
-type LiveDataLend = WalletLend;
+export type LiveDataLend = WalletLend;
 
-type LiveDataTransfer = WalletTransfer;
+export type LiveDataTransfer = WalletTransfer;
 
 
 /* Analytics Data */
 
-type AnalyticsClaim = {
+export type AnalyticsClaim = {
   date: string,
   claim_data: {
     claims: string,
@@ -243,7 +245,7 @@ type AnalyticsClaim = {
   },
 };
 
-type AnalyticsTotalValueLocked = {
+export type AnalyticsTotalValueLocked = {
   date: string,
   tvl_data: {
     pool_usd: string,
@@ -255,7 +257,7 @@ type AnalyticsTotalValueLocked = {
   },
 };
 
-type AnalyticsFToken = {
+export type AnalyticsFToken = {
   date: string,
   f_token_data: {
     [key: HexString]: {
@@ -274,7 +276,7 @@ type AnalyticsFToken = {
   }
 };
 
-type AnalyticsPool = {
+export type AnalyticsPool = {
   date: string,
   pool_data: {
     [key: HexString]: {
@@ -316,7 +318,7 @@ type AnalyticsPool = {
   };
 };
 
-type AnalyticsToken = {
+export type AnalyticsToken = {
   date: string,
   token_data: {
     [key: HexString]: {
@@ -337,7 +339,7 @@ type AnalyticsToken = {
   },
 };
 
-type AnalyticsTotal = {
+export type AnalyticsTotal = {
   date: string,
   total_data: {
     swaps: string,
@@ -360,44 +362,11 @@ type AnalyticsTotal = {
   },
 };
 
-type AnalyticsTotalSupply = number;
+export type AnalyticsTotalSupply = number;
 
-type AnalyticsUSDValueLocked = string;
+export type AnalyticsUSDValueLocked = string;
 
-
-/* API Responses */
-
-export type WalletWalletResponse = FlamingoFinanceBaseResponseType<WalletWallet>;
-
-export type WalletClaimResponse = FlamingoFinanceBaseResponseType<WalletClaim>;
-
-export type WalletTradeResponse = FlamingoFinanceBaseResponseType<WalletTrade>;
-
-export type WalletLiquidityPoolResponse = FlamingoFinanceBaseResponseType<WalletLiquidityPool>;
-
-export type WalletStakeResponse = FlamingoFinanceBaseResponseType<WalletStake>;
-
-export type WalletLendResponse = FlamingoFinanceBaseResponseType<WalletLend>;
-
-export type WalletTransferResponse = FlamingoFinanceBaseResponseType<WalletTransfer>;
-
-export type LiveDataPricesResponse = LiveDataPrice[];
-
-export type LiveDataFiatExchangeRateResponse = LiveDataFiatExchangeRate;
-
-export type LiveDataClaimResponse = FlamingoFinanceBaseResponseType<LiveDataClaim>;
-
-export type LiveDataTradeResponse = FlamingoFinanceBaseResponseType<LiveDataTrade>;
-
-export type LiveDataLiquidityPoolResponse = FlamingoFinanceBaseResponseType<LiveDataLiquidityPool>;
-
-export type LiveDataStakeResponse = FlamingoFinanceBaseResponseType<LiveDataStake>;
-
-export type LiveDataLendResponse = FlamingoFinanceBaseResponseType<LiveDataLend>;
-
-export type LiveDataTransferResponse = FlamingoFinanceBaseResponseType<LiveDataTransfer>;
-
-export type AnalyticsDailyResponseMap = {
+export type AnalyticsDailyMap = {
   'claim_data': AnalyticsClaim,
   'tvl_data': AnalyticsTotalValueLocked,
   'f_token_data': AnalyticsFToken,
@@ -406,7 +375,7 @@ export type AnalyticsDailyResponseMap = {
   'total_data': AnalyticsTotal,
 };
 
-export type AnalyticsMonthlyResponseMap = {
+export type AnalyticsMonthlyMap = {
   'claim_data': AnalyticsClaim[],
   'tvl_data': AnalyticsTotalValueLocked[],
   'f_token_data': AnalyticsFToken[],
@@ -415,7 +384,7 @@ export type AnalyticsMonthlyResponseMap = {
   'total_data': AnalyticsTotal[],
 };
 
-export type AnalyticsRollingResponseMap = {
+export type AnalyticsRollingMap = {
   'claim_data': AnalyticsClaim[],
   'tvl_data': AnalyticsTotalValueLocked[],
   'f_token_data': AnalyticsFToken[],
@@ -423,7 +392,3 @@ export type AnalyticsRollingResponseMap = {
   'token_data': AnalyticsToken[],
   'total_data': AnalyticsTotal[],
 };
-
-export type AnalyticsFlamingoTotalSupplyResponse = AnalyticsTotalSupply;
-
-export type AnalyticsUSDValueLockedResponse = AnalyticsUSDValueLocked;
