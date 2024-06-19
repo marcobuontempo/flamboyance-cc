@@ -22,181 +22,184 @@ export class ApiClient {
 
   // Wallet Data
 
-  public async getWalletWalletHistory(address: string, page: number) {
+  public getWalletWalletHistory = async (address: string, page: number) => {
     return this.fetchData<HistoryResponse<WalletWallet>>("/wallet/wallet/history", { neo_address: address, page });
   }
 
-  public async getWalletWalletLatest(address: string) {
+  public getWalletWalletLatest = async (address: string) => {
     return this.fetchData<LatestResponse<WalletWallet>>("/wallet/wallet/latest", { neo_address: address });
   }
 
-  public async getWalletClaimsHistory(address: string, page: number) {
+  public getWalletClaimsHistory = async (address: string, page: number) => {
     return this.fetchData<HistoryResponse<WalletClaim>>("/wallet/claims/history", { neo_address: address, page });
   }
 
-  public async getWalletClaimsLatest(address: string) {
+  public getWalletClaimsLatest = async (address: string) => {
     return this.fetchData<LatestResponse<WalletClaim>>("/wallet/claims/latest", { neo_address: address });
   }
 
-  public async getWalletTradeHistory(address: string, page: number) {
+  public getWalletTradeHistory = async (address: string, page: number) => {
     return this.fetchData<HistoryResponse<WalletTrade>>("/wallet/trade/history", { neo_address: address, page });
   }
 
-  public async getWalletTradeLatest(address: string) {
+  public getWalletTradeLatest = async (address: string) => {
     return this.fetchData<LatestResponse<WalletTrade>>("/wallet/trade/latest", { neo_address: address });
   }
 
-  public async getWalletLpHistory(address: string, page: number) {
+  public getWalletLpHistory = async (address: string, page: number) => {
     return this.fetchData<HistoryResponse<WalletLiquidityPool>>("/wallet/lp/history", { neo_address: address, page });
   }
 
-  public async getWalletLpLatest(address: string) {
+  public getWalletLpLatest = async (address: string) => {
     return this.fetchData<LatestResponse<WalletLiquidityPool>>("/wallet/lp/latest", { neo_address: address });
   }
 
-  public async getWalletStakingHistory(address: string, page: number) {
+  public getWalletStakingHistory = async (address: string, page: number) => {
     return this.fetchData<HistoryResponse<WalletStake>>("/wallet/staking/history", { neo_address: address, page });
   }
 
-  public async getWalletStakingLatest(address: string) {
+  public getWalletStakingLatest = async (address: string) => {
     return this.fetchData<LatestResponse<WalletStake>>("/wallet/staking/latest", { neo_address: address });
   }
 
-  public async getWalletLendHistory(address: string, page: number) {
+  public getWalletLendHistory = async (address: string, page: number) => {
     return this.fetchData<HistoryResponse<WalletLend>>("/wallet/lend/history", { neo_address: address, page });
   }
 
-  public async getWalletLendLatest(address: string) {
+  public getWalletLendLatest = async (address: string) => {
     return this.fetchData<LatestResponse<WalletLend>>("/wallet/lend/latest", { neo_address: address });
   }
 
-  public async getWalletTransferHistory(address: string, page: number) {
+  public getWalletTransferHistory = async (address: string, page: number) => {
     return this.fetchData<HistoryResponse<WalletTransfer>>("/wallet/transfer/history", { neo_address: address, page });
   }
 
-  public async getWalletTransferLatest(address: string) {
+  public getWalletTransferLatest = async (address: string) => {
     return this.fetchData<LatestResponse<WalletTransfer>>("/wallet/transfer/latest", { neo_address: address });
   }
 
+
   // Flamingo Live Data
 
-  public async getFlamingoLivedataPricesLatest() {
+  public getFlamingoLivedataPricesLatest = async () => {
     return this.fetchData<LiveDataPrice[]>("/flamingo/live-data/prices/latest", {});
   }
 
-  public async getFlamingoLivedataPricesFromblock(blocknumber: number) {
+  public getFlamingoLivedataPricesFromblock = async (blocknumber: number) => {
     return this.fetchData<LiveDataPrice[]>(`/flamingo/live-data/prices/from-block/${blocknumber}`, {});
   }
 
-  public async getFlamingoLivedataPricesFromdatetime({ year, month, day, hour, minute }: DateTimeQuery) {
+  public getFlamingoLivedataPricesFromdatetime = async ({ year, month, day, hour, minute }: DateTimeQuery) => {
     return this.fetchData<LiveDataPrice[]>(`/flamingo/live-data/prices/from-datetime/${year}/${month}/${day}/${hour}/${minute}`, {});
   }
 
-  public async getFlamingoLivedataPricesFromtimestamp(timestamp: number) {
+  public getFlamingoLivedataPricesFromtimestamp = async (timestamp: number) => {
     return this.fetchData<LiveDataPrice[]>(`/flamingo/live-data/prices/from-timestamp/${timestamp}`, {});
   }
 
-  public async getFlamingoLivedataFiatexchangerate(pair: string) {
+  public getFlamingoLivedataFiatexchangerate = async (pair: string) => {
     return this.fetchData<LiveDataFiatExchangeRate>(`/flamingo/live-data/fiat-exchange-rate/${pair}`, {});
   }
 
-  public async getFlamingoLivedataClaimsHistory(page: number) {
+  public getFlamingoLivedataClaimsHistory = async (page: number) => {
     return this.fetchData<HistoryResponse<LiveDataClaim>>("/flamingo/live-data/claims/history", { page });
   }
 
-  public async getFlamingoLivedataClaimsLatest() {
+  public getFlamingoLivedataClaimsLatest = async () => {
     return this.fetchData<LatestResponse<LiveDataClaim>>("/flamingo/live-data/claims/latest", {});
   }
 
-  public async getFlamingoLivedataTradeHistory(page: number) {
+  public getFlamingoLivedataTradeHistory = async (page: number) => {
     return this.fetchData<HistoryResponse<LiveDataTrade>>("/flamingo/live-data/trade/history", { page });
   }
 
-  public async getFlamingoLivedataTradeLatest() {
+  public getFlamingoLivedataTradeLatest = async () => {
     return this.fetchData<LatestResponse<LiveDataTrade>>("/flamingo/live-data/trade/latest", {});
   }
 
-  public async getFlamingoLivedataLpHistory(page: number) {
+  public getFlamingoLivedataLpHistory = async (page: number) => {
     return this.fetchData<HistoryResponse<LiveDataLiquidityPool>>("/flamingo/live-data/lp/history", { page });
   }
 
-  public async getFlamingoLivedataLpLatest() {
+  public getFlamingoLivedataLpLatest = async () => {
     return this.fetchData<LatestResponse<LiveDataLiquidityPool>>("/flamingo/live-data/lp/latest", {});
   }
 
-  public async getFlamingoLivedataStakingHistory(page: number) {
+  public getFlamingoLivedataStakingHistory = async (page: number) => {
     return this.fetchData<HistoryResponse<LiveDataStake>>("/flamingo/live-data/staking/history", { page });
   }
 
-  public async getFlamingoLivedataStakingLatest() {
+  public getFlamingoLivedataStakingLatest = async () => {
     return this.fetchData<LatestResponse<LiveDataStake>>("/flamingo/live-data/staking/latest", {});
   }
 
-  public async getFlamingoLivedataLendHistory(page: number) {
+  public getFlamingoLivedataLendHistory = async (page: number) => {
     return this.fetchData<HistoryResponse<LiveDataLend>>("/flamingo/live-data/lend/history", { page });
   }
 
-  public async getFlamingoLivedataLendLatest() {
+  public getFlamingoLivedataLendLatest = async () => {
     return this.fetchData<LatestResponse<LiveDataLend>>("/flamingo/live-data/lend/latest", {});
   }
 
-  public async getFlamingoLivedataTransferHistory(page: number) {
+  public getFlamingoLivedataTransferHistory = async (page: number) => {
     return this.fetchData<HistoryResponse<LiveDataTransfer>>("/flamingo/live-data/transfer/history", { page });
   }
 
-  public async getFlamingoLivedataTransferLatest() {
+  public getFlamingoLivedataTransferLatest = async () => {
     return this.fetchData<LatestResponse<LiveDataTransfer>>("/flamingo/live-data/transfer/latest", {});
   }
 
+
   // Flamingo Analytics Data
 
-  public async getFlamingoAnalyticsMonthhistory(collection: CollectionType, { year, month }: MonthQuery) {
+  public getFlamingoAnalyticsMonthhistory = async (collection: CollectionType, { year, month }: MonthQuery) => {
     return this.fetchData<AnalyticsMonthlyMap[typeof collection]>(`/flamingo/analytics/month-history/${collection}`, { year, month });
   }
 
-  public async getFlamingoAnalyticsMonthlatest(collection: CollectionType) {
+  public getFlamingoAnalyticsMonthlatest = async (collection: CollectionType) => {
     return this.fetchData<AnalyticsMonthlyMap[typeof collection]>(`/flamingo/analytics/month-latest/${collection}`, {});
   }
 
-  public async getFlamingoAnalyticsDailyhistory(collection: CollectionType, { year, month, day }: DateTimeQuery) {
+  public getFlamingoAnalyticsDailyhistory = async (collection: CollectionType, { year, month, day }: DateTimeQuery) => {
     return this.fetchData<AnalyticsDailyMap[typeof collection]>(`/flamingo/analytics/daily-history/${collection}`, { year, month, day });
   }
 
-  public async getFlamingoAnalyticsDailylatest(collection: CollectionType) {
+  public getFlamingoAnalyticsDailylatest = async (collection: CollectionType) => {
     return this.fetchData<AnalyticsDailyMap[typeof collection]>(`/flamingo/analytics/daily-latest/${collection}`, {});
   }
 
-  public async getFlamingoAnalyticsRolling30days(collection: CollectionType) {
+  public getFlamingoAnalyticsRolling30days = async (collection: CollectionType) => {
     return this.fetchData<AnalyticsRollingMap[typeof collection]>(`/flamingo/analytics/rolling-30-days/${collection}`, {});
   }
 
-  public async getFlamingoAnalyticsFlamingoTotalsupply() {
+  public getFlamingoAnalyticsFlamingoTotalsupply = async () => {
     return this.fetchData<AnalyticsTotalSupply>("/flamingo/analytics/flamingo/total-supply", {});
   }
 
-  public async getFlamingoAnalyticsFlamingoUsdvaluelocked() {
+  public getFlamingoAnalyticsFlamingoUsdvaluelocked = async () => {
     return this.fetchData<AnalyticsUSDValueLocked>("/flamingo/analytics/flamingo/usd-value-locked", {});
   }
 
+
   // Neo Blockchain Data
 
-  public async getNeoBlock(index: number, flamingoData: boolean) {
+  public getNeoBlock = async (index: number, flamingoData: boolean) => {
     return this.fetchData<any>("/neo/block", { index, flamingo_data: flamingoData });
   }
 
-  public async getNeoBlockLatest(flamingoData: boolean) {
+  public getNeoBlockLatest = async (flamingoData: boolean) => {
     return this.fetchData<any>("/neo/block/latest", { flamingo_data: flamingoData });
   }
 
-  public async getNeoBlocksHistory(page: number, flamingoData: boolean) {
+  public getNeoBlocksHistory = async (page: number, flamingoData: boolean) => {
     return this.fetchData<any>("/neo/blocks/history", { page, flamingo_data: flamingoData });
   }
 
-  public async getNeoBlocksLatest(flamingoData: boolean) {
+  public getNeoBlocksLatest = async (flamingoData: boolean) => {
     return this.fetchData<any>("/neo/blocks/latest", { flamingo_data: flamingoData });
   }
 
-  public async getNeoTransaction(txHash: string) {
+  public getNeoTransaction = async (txHash: string) => {
     return this.fetchData<any>("/neo/transaction", { tx_hash: txHash });
   }
 }

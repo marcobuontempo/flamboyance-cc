@@ -1,17 +1,18 @@
-import { useQuery } from '@tanstack/react-query';
-import apiClient from '../../../services/api-client';
 import TableWrapper from '../../../components/TableWrapper';
 import { ColumnDef } from '@tanstack/react-table';
-import { HistoryResponse, LatestResponse, LiveDataClaim } from '../../../types';
 import { poolHashToData, tokenHashToData } from '../../../utils/helpers';
-import { useRef, useState } from 'react';
+import { LiveDataClaim } from '../../../types';
+import usePaginatedData from '../../../hooks/usePaginatedData';
+import apiClient from '../../../services/api-client';
 
 type Props = {}
 
-type TransformedLiveDataClaim = Omit<LiveDataClaim, 'pool' | 'token'> & {
-  pool: string;
-  token: string;
-};
+type TransformedLiveDataClaim =
+  Omit<LiveDataClaim, 'pool' | 'token'> &
+  {
+    pool: string;
+    token: string;
+  };
 
 const columns: ColumnDef<TransformedLiveDataClaim>[] = [
   {
@@ -52,61 +53,42 @@ const columns: ColumnDef<TransformedLiveDataClaim>[] = [
   },
 ];
 
+const transformData = (claim: LiveDataClaim) => {
+  const token = tokenHashToData(claim.token);
+  const pool = poolHashToData(claim.pool);
+  return {
+    ...claim,
+    pool: pool?.symbol || 'unknown',
+    token: token?.symbol || 'unknown',
+  }
+};
 
 export default function Claims({ }: Props) {
-  const [pageIndex, setPageIndex] = useState(0);
-  const pageCount = useRef(0);
-
-  const fetchData = async () => {
-    if (pageIndex === 0) {
-      return apiClient.getFlamingoLivedataClaimsLatest();
-    }
-    else {
-      return apiClient.getFlamingoLivedataClaimsHistory(pageCount.current - pageIndex);
-    }
+  const options = {
+    queryKey: 'live-data-claims',
+    fetchLatest: apiClient.getFlamingoLivedataClaimsLatest,
+    fetchHistory: apiClient.getFlamingoLivedataClaimsHistory,
+    transformData: transformData,
   }
 
-  const selectData = (data: HistoryResponse<LiveDataClaim> | LatestResponse<LiveDataClaim>) => {    
-    if (pageIndex === 0) {
-      data = (data as LatestResponse<LiveDataClaim>);
-      pageCount.current = data.pages;
-      data = data.data;
-    } else {
-      data = (data as HistoryResponse<LiveDataClaim>);
-    }
-
-    return data.map(claim => {
-      const token = tokenHashToData(claim.token);
-      const pool = poolHashToData(claim.pool);
-      return {
-        ...claim,
-        pool: pool?.symbol || 'unknown',
-        token: token?.symbol || 'unknown',
-      }
-    })
-  }
-
-  const { isPending, isError, data } = useQuery({
-    queryKey: ['live-data-claims', pageIndex],
-    queryFn: fetchData,
-    select: selectData,
-  })
-
-  if (isPending) {
-    return <div>Loading...</div>;
-  }
-
-  if (isError) {
-    return <div>Error loading data</div>;
-  }
+  const {
+    data,
+    pageIndex,
+    setPageIndex,
+    pageCount,
+    isPending,
+    isError,
+  } = usePaginatedData<LiveDataClaim, TransformedLiveDataClaim>(options);
 
   return (
     <TableWrapper
-      columns={columns}
       data={data}
-      pageCount={pageCount.current}
+      columns={columns}
+      pageCount={pageCount}
       pageIndex={pageIndex}
       setPageIndex={setPageIndex}
+      isPending={isPending}
+      isError={isError}
     />
   )
 }

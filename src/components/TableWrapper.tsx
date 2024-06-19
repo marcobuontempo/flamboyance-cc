@@ -2,11 +2,13 @@ import { ColumnDef, flexRender, getCoreRowModel, useReactTable } from '@tanstack
 import { Dispatch } from 'react';
 
 type Props<T> = {
-  data: T[];
+  data: T[] | undefined;
   columns: ColumnDef<T>[];
   pageCount: number;
   pageIndex: number;
   setPageIndex: Dispatch<number>;
+  isPending: boolean;
+  isError: boolean;
 }
 
 export default function TableWrapper<T>({
@@ -15,7 +17,21 @@ export default function TableWrapper<T>({
   pageCount,
   pageIndex,
   setPageIndex,
+  isPending,
+  isError,
 }: Props<T>) {
+
+  if (isPending) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return <div>Error loading data</div>;
+  }
+
+  if (!data) {
+    return null;
+  }
 
   const table = useReactTable({
     data,
