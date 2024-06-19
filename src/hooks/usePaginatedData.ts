@@ -6,7 +6,7 @@ type PaginatedDataHookParamas<RawType, TransformedData> = {
   queryKey: string;
   fetchLatest: () => Promise<LatestResponse<RawType>>;
   fetchHistory: (page: number) => Promise<HistoryResponse<RawType>>;
-  transformData: (data: RawType) => TransformedData;
+  transformData: (entry: RawType) => TransformedData;
 }
 
 export default function usePaginatedData<RawType, TransformedData>({

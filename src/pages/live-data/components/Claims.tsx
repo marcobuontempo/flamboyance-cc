@@ -5,23 +5,33 @@ import { LiveDataClaim } from '../../../types';
 import usePaginatedData from '../../../hooks/usePaginatedData';
 import apiClient from '../../../services/api-client';
 
-type Props = {}
-
 type TransformedLiveDataClaim =
   Omit<LiveDataClaim, 'pool' | 'token'> &
   {
-    pool: string;
-    token: string;
+    pool: string | undefined;
+    token: string | undefined;
   };
 
 const columns: ColumnDef<TransformedLiveDataClaim>[] = [
   {
-    header: 'User',
-    accessorKey: 'user',
+    header: 'Unique ID',
+    accessorKey: 'unique_id',
+  },
+  {
+    header: 'Transaction Hash',
+    accessorKey: 'transaction_hash',
+  },
+  {
+    header: 'Time',
+    accessorKey: 'time',
   },
   {
     header: 'Index',
     accessorKey: 'index',
+  },
+  {
+    header: 'User',
+    accessorKey: 'user',
   },
   {
     header: 'Pool',
@@ -39,31 +49,19 @@ const columns: ColumnDef<TransformedLiveDataClaim>[] = [
     header: 'Amount (USD)',
     accessorKey: 'amount_usd',
   },
-  {
-    header: 'Transaction Hash',
-    accessorKey: 'transaction_hash',
-  },
-  {
-    header: 'Unique ID',
-    accessorKey: 'unique_id',
-  },
-  {
-    header: 'Time',
-    accessorKey: 'time',
-  },
 ];
 
-const transformData = (claim: LiveDataClaim) => {
-  const token = tokenHashToData(claim.token);
-  const pool = poolHashToData(claim.pool);
+const transformData = (entry: LiveDataClaim) => {
+  const token = tokenHashToData(entry.token);
+  const pool = poolHashToData(entry.pool);
   return {
-    ...claim,
-    pool: pool?.symbol || 'unknown',
-    token: token?.symbol || 'unknown',
+    ...entry,
+    pool: pool?.symbol,
+    token: token?.symbol,
   }
 };
 
-export default function Claims({ }: Props) {
+export default function Claims() {
   const options = {
     queryKey: 'live-data-claims',
     fetchLatest: apiClient.getFlamingoLivedataClaimsLatest,

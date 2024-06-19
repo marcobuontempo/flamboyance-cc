@@ -174,13 +174,14 @@ export type WalletLend = {
   unique_id: HexString,
   time: number,
   block: number,
-  collateral_usd_price: number,
-  f_token_usd_price: number,
-  collateral_hash: HexString,
   address: HexString,
+  collateral_hash: HexString,
+  collateral_usd_price: number,
+  collateral_total: string,
+  f_token_hash: HexString,
+  f_token_usd_price: number,
   f_token_total: string,
   f_token_repay: string,
-  collateral_total: string,
 };
 
 export type WalletTransfer = {

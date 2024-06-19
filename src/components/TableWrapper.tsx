@@ -42,9 +42,8 @@ export default function TableWrapper<T>({
   })
 
   return (
-    <div className='w-full overflow-x-scroll'>
+    <div className='w-full h-full overflow-x-scroll'>
       <table className='w-full'>
-
         <thead>
           {table.getHeaderGroups().map(header => {
             return <tr key={header.id} className='sticky top-0'>{header.headers.map(cell => {
@@ -70,34 +69,38 @@ export default function TableWrapper<T>({
         </tbody>
       </table>
 
-      <button
-        onClick={() => setPageIndex(0)}
-        disabled={pageIndex === 0}
-      >
-        {'|<<|'}
-      </button>
-      <button
-        onClick={() => setPageIndex(pageIndex - 1)}
-        disabled={pageIndex === 0}
-      >
-        {'|<|'}
-      </button>
-      <button
-        onClick={() => setPageIndex(pageIndex + 1)}
-        disabled={pageIndex === pageCount - 1}
-      >
-        {'|>|'}
-      </button>
-      <button
-        onClick={() => setPageIndex(pageCount - 1)}
-        disabled={pageIndex === pageCount - 1}
-      >
-        {'|>>|'}
-      </button>
+      <div>
 
-      <p>
-        Page: {pageIndex + 1} of {pageCount}
-      </p>
+        <button
+          onClick={() => setPageIndex(0)}
+          disabled={pageIndex === 0}
+        >
+          {'|<<|'}
+        </button>
+        <button
+          onClick={() => setPageIndex(pageIndex - 1)}
+          disabled={pageIndex === 0}
+        >
+          {'|<|'}
+        </button>
+        <button
+          onClick={() => setPageIndex(pageIndex + 1)}
+          disabled={pageIndex === pageCount - 1}
+        >
+          {'|>|'}
+        </button>
+        <button
+          onClick={() => setPageIndex(pageCount - 1)}
+          disabled={pageIndex === pageCount - 1}
+        >
+          {'|>>|'}
+        </button>
+
+        <p>
+          Page: {pageIndex + 1} of {pageCount}
+        </p>
+      </div>
+
     </div>
   )
 }
