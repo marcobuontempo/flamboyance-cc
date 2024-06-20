@@ -1,12 +1,14 @@
-import { ColumnDef } from "@tanstack/react-table";
-import { LiveDataLiquidityPool } from "../../../types";
-import apiClient from "../../../services/api-client";
-import usePaginatedData from "../../../hooks/usePaginatedData";
-import TableWrapper from "../../../components/TableWrapper";
+import TableWrapper from '../../../components/TableWrapper';
+import { ColumnDef } from '@tanstack/react-table';
+import { WalletLiquidityPool } from '../../../types';
+import usePaginatedData from '../../../hooks/usePaginatedData';
+import apiClient from '../../../services/api-client';
+import { useContext } from 'react';
+import { UserContext } from '../../../App';
 
-type TransformedLiveDataLiquidityPool = LiveDataLiquidityPool;
+type TransformedWalletLiquidityPool = WalletLiquidityPool;
 
-const columns: ColumnDef<TransformedLiveDataLiquidityPool>[] = [
+const columns: ColumnDef<TransformedWalletLiquidityPool>[] = [
   {
     header: 'Index',
     accessorKey: 'index',
@@ -65,15 +67,17 @@ const columns: ColumnDef<TransformedLiveDataLiquidityPool>[] = [
   },
 ];
 
-const transformData = (entry: LiveDataLiquidityPool) => {
+const transformData = (entry: WalletLiquidityPool) => {
   return entry;
 };
 
 export default function LiquidityPools() {
+  const user = useContext(UserContext);
+
   const options = {
-    queryKey: 'live-data-liquidity-pools',
-    fetchLatest: () => apiClient.getFlamingoLivedataLpLatest(),
-    fetchHistory: (page: number) => apiClient.getFlamingoLivedataLpHistory(page),
+    queryKey: 'wallet-liquidity-pools',
+    fetchLatest: () => apiClient.getWalletLpLatest(user.currentWallet),
+    fetchHistory: (page: number) => apiClient.getWalletLpHistory(user.currentWallet, page),
     transformData: transformData,
   }
 
@@ -84,7 +88,7 @@ export default function LiquidityPools() {
     pageCount,
     isPending,
     isError,
-  } = usePaginatedData<LiveDataLiquidityPool, TransformedLiveDataLiquidityPool>(options);
+  } = usePaginatedData<WalletLiquidityPool, TransformedWalletLiquidityPool>(options);
 
   return (
     <TableWrapper

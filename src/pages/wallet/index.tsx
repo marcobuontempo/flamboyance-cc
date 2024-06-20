@@ -1,3 +1,4 @@
+import { Outlet } from "react-router-dom";
 import MainWrapper from "../../components/MainWrapper"
 import { SidebarLinks } from "../../types";
 
@@ -34,10 +35,10 @@ const links: SidebarLinks = [
 
 type Props = {}
 
-export default function WalletPage({}: Props) {
+export default function WalletPage({ }: Props) {
   return (
     <MainWrapper links={links}>
-      Wallet
+      <Outlet />
     </MainWrapper>
   )
 }

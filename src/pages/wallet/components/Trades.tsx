@@ -1,12 +1,14 @@
-import { ColumnDef } from "@tanstack/react-table";
-import { LiveDataTrade } from "../../../types";
-import apiClient from "../../../services/api-client";
-import usePaginatedData from "../../../hooks/usePaginatedData";
-import TableWrapper from "../../../components/TableWrapper";
+import TableWrapper from '../../../components/TableWrapper';
+import { ColumnDef } from '@tanstack/react-table';
+import { WalletTrade } from '../../../types';
+import usePaginatedData from '../../../hooks/usePaginatedData';
+import apiClient from '../../../services/api-client';
+import { useContext } from 'react';
+import { UserContext } from '../../../App';
 
-type TransformedLiveDataTrade = LiveDataTrade;
+type TransformedWalletTradeWalletTrade = WalletTrade;
 
-const columns: ColumnDef<TransformedLiveDataTrade>[] = [
+const columns: ColumnDef<TransformedWalletTradeWalletTrade>[] = [
   {
     header: 'Transaction Hash',
     accessorKey: 'transaction_hash',
@@ -53,15 +55,17 @@ const columns: ColumnDef<TransformedLiveDataTrade>[] = [
   },
 ];
 
-const transformData = (entry: LiveDataTrade) => {
+const transformData = (entry: WalletTrade) => {
   return entry;
 };
 
 export default function Trades() {
+  const user = useContext(UserContext);
+
   const options = {
-    queryKey: 'live-data-trades',
-    fetchLatest: () => apiClient.getFlamingoLivedataTradeLatest(),
-    fetchHistory: (page: number) => apiClient.getFlamingoLivedataTradeHistory(page),
+    queryKey: 'wallet-trades',
+    fetchLatest: () => apiClient.getWalletTradeLatest(user.currentWallet),
+    fetchHistory: (page: number) => apiClient.getWalletTradeHistory(user.currentWallet, page),
     transformData: transformData,
   }
 
@@ -72,7 +76,7 @@ export default function Trades() {
     pageCount,
     isPending,
     isError,
-  } = usePaginatedData<LiveDataTrade, TransformedLiveDataTrade>(options);
+  } = usePaginatedData<WalletTrade, TransformedWalletTradeWalletTrade>(options);
 
   return (
     <TableWrapper

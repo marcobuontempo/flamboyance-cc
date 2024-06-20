@@ -1,12 +1,14 @@
-import { ColumnDef } from "@tanstack/react-table";
-import { LiveDataTransfer } from "../../../types";
-import apiClient from "../../../services/api-client";
-import usePaginatedData from "../../../hooks/usePaginatedData";
-import TableWrapper from "../../../components/TableWrapper";
+import TableWrapper from '../../../components/TableWrapper';
+import { ColumnDef } from '@tanstack/react-table';
+import { WalletTransfer } from '../../../types';
+import usePaginatedData from '../../../hooks/usePaginatedData';
+import apiClient from '../../../services/api-client';
+import { useContext } from 'react';
+import { UserContext } from '../../../App';
 
-type TransformedLiveDataTransfer = LiveDataTransfer;
+type TransformedWalletTransfer = WalletTransfer;
 
-const columns: ColumnDef<TransformedLiveDataTransfer>[] = [
+const columns: ColumnDef<TransformedWalletTransfer>[] = [
   {
     header: 'Time',
     accessorKey: 'time',
@@ -45,15 +47,17 @@ const columns: ColumnDef<TransformedLiveDataTransfer>[] = [
   },
 ];
 
-const transformData = (entry: LiveDataTransfer) => {
+const transformData = (entry: WalletTransfer) => {
   return entry;
 };
 
 export default function Transfers() {
+  const user = useContext(UserContext);
+
   const options = {
-    queryKey: 'live-data-transfers',
-    fetchLatest: () => apiClient.getFlamingoLivedataTransferLatest(),
-    fetchHistory: (page: number) => apiClient.getFlamingoLivedataTransferHistory(page),
+    queryKey: 'wallet-transfers',
+    fetchLatest: () => apiClient.getWalletTransferLatest(user.currentWallet),
+    fetchHistory: (page: number) => apiClient.getWalletTransferHistory(user.currentWallet, page),
     transformData: transformData,
   }
 
@@ -64,7 +68,7 @@ export default function Transfers() {
     pageCount,
     isPending,
     isError,
-  } = usePaginatedData<LiveDataTransfer, TransformedLiveDataTransfer>(options);
+  } = usePaginatedData<WalletTransfer, TransformedWalletTransfer>(options);
 
   return (
     <TableWrapper

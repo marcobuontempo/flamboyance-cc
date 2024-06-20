@@ -1,12 +1,14 @@
-import { ColumnDef } from "@tanstack/react-table";
-import { LiveDataLend } from "../../../types";
-import apiClient from "../../../services/api-client";
-import usePaginatedData from "../../../hooks/usePaginatedData";
-import TableWrapper from "../../../components/TableWrapper";
+import TableWrapper from '../../../components/TableWrapper';
+import { ColumnDef } from '@tanstack/react-table';
+import { WalletLend } from '../../../types';
+import usePaginatedData from '../../../hooks/usePaginatedData';
+import apiClient from '../../../services/api-client';
+import { useContext } from 'react';
+import { UserContext } from '../../../App';
 
-type TransformedLiveDataLend = LiveDataLend;
+type TransformedWalletLend = WalletLend;
 
-const columns: ColumnDef<TransformedLiveDataLend>[] = [
+const columns: ColumnDef<TransformedWalletLend>[] = [
   {
     header: 'Type',
     accessorKey: 'type',
@@ -61,15 +63,17 @@ const columns: ColumnDef<TransformedLiveDataLend>[] = [
   },
 ];
 
-const transformData = (entry: LiveDataLend) => {
+const transformData = (entry: WalletLend) => {
   return entry;
 };
 
 export default function Lending() {
+  const user = useContext(UserContext);
+
   const options = {
-    queryKey: 'live-data-lending',
-    fetchLatest: () => apiClient.getFlamingoLivedataLendLatest(),
-    fetchHistory: (page: number) => apiClient.getFlamingoLivedataLendHistory(page),
+    queryKey: 'wallet-lending',
+    fetchLatest: () => apiClient.getWalletLendLatest(user.currentWallet),
+    fetchHistory: (page: number) => apiClient.getWalletLendHistory(user.currentWallet, page),
     transformData: transformData,
   }
 
@@ -80,7 +84,7 @@ export default function Lending() {
     pageCount,
     isPending,
     isError,
-  } = usePaginatedData<LiveDataLend, TransformedLiveDataLend>(options);
+  } = usePaginatedData<WalletLend, TransformedWalletLend>(options);
 
   return (
     <TableWrapper

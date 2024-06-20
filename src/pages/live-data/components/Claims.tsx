@@ -64,8 +64,8 @@ const transformData = (entry: LiveDataClaim) => {
 export default function Claims() {
   const options = {
     queryKey: 'live-data-claims',
-    fetchLatest: apiClient.getFlamingoLivedataClaimsLatest,
-    fetchHistory: apiClient.getFlamingoLivedataClaimsHistory,
+    fetchLatest: () => apiClient.getFlamingoLivedataClaimsLatest(),
+    fetchHistory: (page: number) => apiClient.getFlamingoLivedataClaimsHistory(page),
     transformData: transformData,
   }
 

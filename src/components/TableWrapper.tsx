@@ -73,32 +73,35 @@ export default function TableWrapper<T>({
 
         <button
           onClick={() => setPageIndex(0)}
-          disabled={pageIndex === 0}
+          disabled={pageIndex <= 0}
         >
           {'|<<|'}
         </button>
         <button
           onClick={() => setPageIndex(pageIndex - 1)}
-          disabled={pageIndex === 0}
+          disabled={pageIndex <= 0}
         >
           {'|<|'}
         </button>
         <button
           onClick={() => setPageIndex(pageIndex + 1)}
-          disabled={pageIndex === pageCount - 1}
+          disabled={pageIndex >= pageCount - 1}
         >
           {'|>|'}
         </button>
         <button
           onClick={() => setPageIndex(pageCount - 1)}
-          disabled={pageIndex === pageCount - 1}
+          disabled={pageIndex >= pageCount - 1}
         >
           {'|>>|'}
         </button>
 
-        <p>
-          Page: {pageIndex + 1} of {pageCount}
-        </p>
+        <p>Page: {pageIndex + (pageCount === 0 ? 0 : 1)} of {pageCount}</p>
+        <form>
+          <label>Go To Page:</label>
+          <input min={1} max={pageCount} type='number'></input>
+          <button type='submit'>Go</button>
+        </form>
       </div>
 
     </div>

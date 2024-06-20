@@ -4,8 +4,8 @@ import { useQuery } from '@tanstack/react-query';
 
 type PaginatedDataHookParamas<RawType, TransformedData> = {
   queryKey: string;
-  fetchLatest: () => Promise<LatestResponse<RawType>>;
-  fetchHistory: (page: number) => Promise<HistoryResponse<RawType>>;
+  fetchLatest: (...args: any[]) => Promise<LatestResponse<RawType>>;
+  fetchHistory: (...args: any[]) => Promise<HistoryResponse<RawType>>;
   transformData: (entry: RawType) => TransformedData;
 }
 

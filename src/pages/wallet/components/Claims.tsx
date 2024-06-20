@@ -1,12 +1,18 @@
-import { ColumnDef } from "@tanstack/react-table";
-import { LiveDataTrade } from "../../../types";
-import apiClient from "../../../services/api-client";
-import usePaginatedData from "../../../hooks/usePaginatedData";
-import TableWrapper from "../../../components/TableWrapper";
+import TableWrapper from '../../../components/TableWrapper';
+import { ColumnDef } from '@tanstack/react-table';
+import { WalletClaim } from '../../../types';
+import usePaginatedData from '../../../hooks/usePaginatedData';
+import apiClient from '../../../services/api-client';
+import { useContext } from 'react';
+import { UserContext } from '../../../App';
 
-type TransformedLiveDataTrade = LiveDataTrade;
+type TransformedWalletClaim = WalletClaim;
 
-const columns: ColumnDef<TransformedLiveDataTrade>[] = [
+const columns: ColumnDef<TransformedWalletClaim>[] = [
+  {
+    header: 'Unique ID',
+    accessorKey: 'unique_id',
+  },
   {
     header: 'Transaction Hash',
     accessorKey: 'transaction_hash',
@@ -53,15 +59,17 @@ const columns: ColumnDef<TransformedLiveDataTrade>[] = [
   },
 ];
 
-const transformData = (entry: LiveDataTrade) => {
+const transformData = (entry: WalletClaim) => {
   return entry;
 };
 
-export default function Trades() {
+export default function Claims() {
+  const user = useContext(UserContext);
+
   const options = {
-    queryKey: 'live-data-trades',
-    fetchLatest: () => apiClient.getFlamingoLivedataTradeLatest(),
-    fetchHistory: (page: number) => apiClient.getFlamingoLivedataTradeHistory(page),
+    queryKey: 'wallet-claims',
+    fetchLatest: () => apiClient.getWalletClaimsLatest(user.currentWallet),
+    fetchHistory: (page: number) => apiClient.getWalletClaimsHistory(user.currentWallet, page),
     transformData: transformData,
   }
 
@@ -72,7 +80,7 @@ export default function Trades() {
     pageCount,
     isPending,
     isError,
-  } = usePaginatedData<LiveDataTrade, TransformedLiveDataTrade>(options);
+  } = usePaginatedData<WalletClaim, TransformedWalletClaim>(options);
 
   return (
     <TableWrapper

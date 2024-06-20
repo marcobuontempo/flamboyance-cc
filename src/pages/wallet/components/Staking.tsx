@@ -1,12 +1,14 @@
-import { ColumnDef } from "@tanstack/react-table";
-import { LiveDataStake } from "../../../types";
-import apiClient from "../../../services/api-client";
-import usePaginatedData from "../../../hooks/usePaginatedData";
-import TableWrapper from "../../../components/TableWrapper";
+import TableWrapper from '../../../components/TableWrapper';
+import { ColumnDef } from '@tanstack/react-table';
+import { WalletStake } from '../../../types';
+import usePaginatedData from '../../../hooks/usePaginatedData';
+import apiClient from '../../../services/api-client';
+import { useContext } from 'react';
+import { UserContext } from '../../../App';
 
-type TransformedLiveDataStake = LiveDataStake;
+type TransformedWalletStake = WalletStake;
 
-const columns: ColumnDef<TransformedLiveDataStake>[] = [
+const columns: ColumnDef<TransformedWalletStake>[] = [
   {
     header: 'Time',
     accessorKey: 'time',
@@ -49,15 +51,17 @@ const columns: ColumnDef<TransformedLiveDataStake>[] = [
   },
 ];
 
-const transformData = (entry: LiveDataStake) => {
+const transformData = (entry: WalletStake) => {
   return entry;
 };
 
 export default function Staking() {
+  const user = useContext(UserContext);
+
   const options = {
-    queryKey: 'live-data-staking',
-    fetchLatest: () => apiClient.getFlamingoLivedataStakingLatest(),
-    fetchHistory: (page: number) => apiClient.getFlamingoLivedataStakingHistory(page),
+    queryKey: 'wallet-staking',
+    fetchLatest: () => apiClient.getWalletStakingLatest(user.currentWallet),
+    fetchHistory: (page: number) => apiClient.getWalletStakingHistory(user.currentWallet, page),
     transformData: transformData,
   }
 
@@ -68,7 +72,7 @@ export default function Staking() {
     pageCount,
     isPending,
     isError,
-  } = usePaginatedData<LiveDataStake, TransformedLiveDataStake>(options);
+  } = usePaginatedData<WalletStake, TransformedWalletStake>(options);
 
   return (
     <TableWrapper
