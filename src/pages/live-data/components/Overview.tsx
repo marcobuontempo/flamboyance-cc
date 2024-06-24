@@ -1,16 +1,22 @@
 import { useQuery } from '@tanstack/react-query';
 import apiClient from '../../../services/api-client';
+import { LiveDataPrice } from '../../../types';
 
 type Props = {}
 
-export default function Overview({ }: Props) {
-  const fetchData = async () => {
-    return apiClient.getFlamingoLivedataPricesLatest();
-  }
+const fetchData = async () => {
+  return apiClient.getFlamingoLivedataPricesLatest();
+}
 
+const selectData = (data: LiveDataPrice[]) => {
+  return data;
+}
+
+export default function Overview({ }: Props) {
   const { isPending, isError, data } = useQuery({
     queryKey: ['live-data-prices'],
-    queryFn: fetchData,
+    queryFn: () => fetchData(),
+    select: selectData,
   })
 
   if (isPending) {

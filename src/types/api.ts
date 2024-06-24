@@ -33,20 +33,19 @@ export type HistoryResponse<T> = T[];
 /* Wallet Data */
 
 export type WalletWallet = {
-  address: HexString,
-  created_at_block: number,
-  created_at_time: number,
-  last_snapshot: number,
-  last_seen_block: number,
-  last_seen_time: number,
-  balances: {
+  address?: HexString,
+  created_at_block?: number,
+  created_at_time?: number,
+  last_snapshot?: number,
+  last_seen_block?: number,
+  last_seen_time?: number,
+  balances?: {
     [token: HexString]: string,
   },
-  stats: {
-    gas_claimed: string,
-    gas_burned: string,
-    transactions: string,
-
+  stats?: {
+    gas_claimed?: string,
+    gas_burned?: string,
+    transactions?: string,
     total_liquidity_added_usd?: string,
     total_times_liquidity_added?: string,
     total_times_liquidity_removed?: string,

@@ -5,13 +5,12 @@ import { createContext, useState } from 'react';
 
 const defaultUserContext = {
   currentWallet: '',
-  storedWallets: [],
   localCurrency: 'USD',
 };
 
 export const UserContext = createContext(defaultUserContext);
 
-const placeholderAddress = 'NanYZRm6m6sa6Z6F3RBRYSXqdpg5rZqxdZ';
+const placeholderAddress = 'NbQkpNXCAzUhjGgfP4yGXDFkXQaHCwH2Zx';
 
 function App() {
   const [user, setUser] = useState({
