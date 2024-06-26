@@ -3,8 +3,8 @@ import { ColumnDef } from '@tanstack/react-table';
 import { WalletTransfer } from '../../../types';
 import usePaginatedData from '../../../hooks/usePaginatedData';
 import apiClient from '../../../services/api-client';
-import { useContext } from 'react';
-import { WalletContext } from '../../../contexts/WalletContext';
+import { useOutletContext } from 'react-router-dom';
+import { WalletContextType } from '..';
 
 type TransformedWalletTransfer = WalletTransfer;
 
@@ -52,14 +52,12 @@ const transformData = (entry: WalletTransfer) => {
 };
 
 export default function Transfers() {
-  const wallet = useContext(WalletContext);
-
-  if (!wallet?.current) return null;
+  const [address] = useOutletContext<WalletContextType>();
 
   const options = {
     queryKey: 'wallet-transfers',
-    fetchLatest: () => apiClient.getWalletTransferLatest(wallet.current!),
-    fetchHistory: (page: number) => apiClient.getWalletTransferHistory(wallet.current!, page),
+    fetchLatest: () => apiClient.getWalletTransferLatest(address),
+    fetchHistory: (page: number) => apiClient.getWalletTransferHistory(address, page),
     transformData: transformData,
   }
 

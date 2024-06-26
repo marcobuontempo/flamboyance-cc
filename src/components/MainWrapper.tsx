@@ -5,9 +5,10 @@ import { SidebarLinks } from '../types';
 type Props = {
   children: ReactNode;
   links?: SidebarLinks;
+  preserveParams?: string[];
 }
 
-export default function MainWrapper({ children, links }: Props) {
+export default function MainWrapper({ children, links, preserveParams }: Props) {
   return (
     <main className='w-full flex flex-wrap justify-center items-stretch flex-1 p-5 bg-blue-100'>
       {
@@ -15,6 +16,7 @@ export default function MainWrapper({ children, links }: Props) {
         <div className='w-full sm:w-1/5 p-2'>
           <Sidebar
             links={links}
+            preserveParams={preserveParams}
           />
         </div>
       }

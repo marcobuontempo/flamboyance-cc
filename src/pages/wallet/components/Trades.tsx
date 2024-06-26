@@ -3,8 +3,8 @@ import { ColumnDef } from '@tanstack/react-table';
 import { WalletTrade } from '../../../types';
 import usePaginatedData from '../../../hooks/usePaginatedData';
 import apiClient from '../../../services/api-client';
-import { useContext } from 'react';
-import { WalletContext } from '../../../contexts/WalletContext';
+import { useOutletContext } from 'react-router-dom';
+import { WalletContextType } from '..';
 
 type TransformedWalletTradeWalletTrade = WalletTrade;
 
@@ -60,14 +60,11 @@ const transformData = (entry: WalletTrade) => {
 };
 
 export default function Trades() {
-  const wallet = useContext(WalletContext);
-
-  if (!wallet?.current) return null;
-
+  const [address] = useOutletContext<WalletContextType>();
   const options = {
     queryKey: 'wallet-trades',
-    fetchLatest: () => apiClient.getWalletTradeLatest(wallet.current!),
-    fetchHistory: (page: number) => apiClient.getWalletTradeHistory(wallet.current!, page),
+    fetchLatest: () => apiClient.getWalletTradeLatest(address),
+    fetchHistory: (page: number) => apiClient.getWalletTradeHistory(address, page),
     transformData: transformData,
   }
 

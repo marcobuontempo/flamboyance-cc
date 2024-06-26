@@ -1,10 +1,10 @@
-import { useContext } from "react";
 import apiClient from "../../../services/api-client";
 import { useQueries } from "@tanstack/react-query";
 import { HexString, LatestResponse, LiveDataPrice, WalletWallet } from "../../../types";
 import { tokenHashToData } from "../../../utils/helpers";
 import { Cell, Pie, PieChart, ResponsiveContainer } from "recharts";
-import { WalletContext } from "../../../contexts/WalletContext";
+import { useOutletContext } from "react-router-dom";
+import { WalletContextType } from "..";
 
 type Props = {}
 
@@ -37,9 +37,7 @@ const selectPricesData = (data: LiveDataPrice[]) => {
 }
 
 export default function Overview({ }: Props) {
-  const wallet = useContext(WalletContext);
-
-  if (!wallet?.current) return null;
+  const [address] = useOutletContext<WalletContextType>();
 
   const currentTime = Date.now();
 
@@ -47,7 +45,7 @@ export default function Overview({ }: Props) {
     queries: [
       {
         queryKey: ['wallet-overview'],
-        queryFn: () => fetchWalletData(wallet.current!),
+        queryFn: () => fetchWalletData(address),
         select: selectWalletData,
       },
       {
@@ -90,7 +88,7 @@ export default function Overview({ }: Props) {
 
 
   const stats = {
-    walletAddress: walletQuery.data?.address || wallet.current!,
+    walletAddress: walletQuery.data?.address,
     walletAge: (walletQuery.data?.created_at_time) ? (currentTime - walletQuery.data?.created_at_time) : 'unopened account',
     walletLastSeen: (walletQuery.data?.last_seen_time) ? (currentTime - walletQuery.data?.last_seen_time) : 'unopened account',
     gasBurned: walletQuery.data?.stats?.gas_burned || 0,

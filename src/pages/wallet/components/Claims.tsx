@@ -3,8 +3,8 @@ import { ColumnDef } from '@tanstack/react-table';
 import { WalletClaim } from '../../../types';
 import usePaginatedData from '../../../hooks/usePaginatedData';
 import apiClient from '../../../services/api-client';
-import { useContext } from 'react';
-import { WalletContext } from '../../../contexts/WalletContext';
+import { useOutletContext } from 'react-router-dom';
+import { WalletContextType } from '..';
 
 type TransformedWalletClaim = WalletClaim;
 
@@ -64,14 +64,12 @@ const transformData = (entry: WalletClaim) => {
 };
 
 export default function Claims() {
-  const wallet = useContext(WalletContext);
-
-  if (!wallet?.current) return null;
+  const [address] = useOutletContext<WalletContextType>();
 
   const options = {
     queryKey: 'wallet-claims',
-    fetchLatest: () => apiClient.getWalletClaimsLatest(wallet.current!),
-    fetchHistory: (page: number) => apiClient.getWalletClaimsHistory(wallet.current!, page),
+    fetchLatest: () => apiClient.getWalletClaimsLatest(address),
+    fetchHistory: (page: number) => apiClient.getWalletClaimsHistory(address, page),
     transformData: transformData,
   }
 

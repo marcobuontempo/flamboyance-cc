@@ -3,8 +3,8 @@ import { ColumnDef } from '@tanstack/react-table';
 import { WalletLend } from '../../../types';
 import usePaginatedData from '../../../hooks/usePaginatedData';
 import apiClient from '../../../services/api-client';
-import { useContext } from 'react';
-import { WalletContext } from '../../../contexts/WalletContext';
+import { useOutletContext } from 'react-router-dom';
+import { WalletContextType } from '..';
 
 type TransformedWalletLend = WalletLend;
 
@@ -68,14 +68,12 @@ const transformData = (entry: WalletLend) => {
 };
 
 export default function Lending() {
-  const wallet = useContext(WalletContext);
-
-  if (!wallet?.current) return null;
+  const [address] = useOutletContext<WalletContextType>();
 
   const options = {
     queryKey: 'wallet-lending',
-    fetchLatest: () => apiClient.getWalletLendLatest(wallet.current!),
-    fetchHistory: (page: number) => apiClient.getWalletLendHistory(wallet.current!, page),
+    fetchLatest: () => apiClient.getWalletLendLatest(address),
+    fetchHistory: (page: number) => apiClient.getWalletLendHistory(address, page),
     transformData: transformData,
   }
 

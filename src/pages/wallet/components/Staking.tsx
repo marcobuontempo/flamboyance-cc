@@ -3,8 +3,8 @@ import { ColumnDef } from '@tanstack/react-table';
 import { WalletStake } from '../../../types';
 import usePaginatedData from '../../../hooks/usePaginatedData';
 import apiClient from '../../../services/api-client';
-import { useContext } from 'react';
-import { WalletContext } from '../../../contexts/WalletContext';
+import { useOutletContext } from 'react-router-dom';
+import { WalletContextType } from '..';
 
 type TransformedWalletStake = WalletStake;
 
@@ -56,14 +56,12 @@ const transformData = (entry: WalletStake) => {
 };
 
 export default function Staking() {
-  const wallet = useContext(WalletContext);
-
-  if (!wallet?.current) return null;
+  const [address] = useOutletContext<WalletContextType>();
 
   const options = {
     queryKey: 'wallet-staking',
-    fetchLatest: () => apiClient.getWalletStakingLatest(wallet.current!),
-    fetchHistory: (page: number) => apiClient.getWalletStakingHistory(wallet.current!, page),
+    fetchLatest: () => apiClient.getWalletStakingLatest(address),
+    fetchHistory: (page: number) => apiClient.getWalletStakingHistory(address, page),
     transformData: transformData,
   }
 
