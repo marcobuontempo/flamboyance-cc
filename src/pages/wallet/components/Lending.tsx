@@ -4,7 +4,7 @@ import { WalletLend } from '../../../types';
 import usePaginatedData from '../../../hooks/usePaginatedData';
 import apiClient from '../../../services/api-client';
 import { useContext } from 'react';
-import { UserContext } from '../../../App';
+import { WalletContext } from '../../../contexts/WalletContext';
 
 type TransformedWalletLend = WalletLend;
 
@@ -68,12 +68,14 @@ const transformData = (entry: WalletLend) => {
 };
 
 export default function Lending() {
-  const user = useContext(UserContext);
+  const wallet = useContext(WalletContext);
+
+  if (!wallet?.current) return null;
 
   const options = {
     queryKey: 'wallet-lending',
-    fetchLatest: () => apiClient.getWalletLendLatest(user.currentWallet),
-    fetchHistory: (page: number) => apiClient.getWalletLendHistory(user.currentWallet, page),
+    fetchLatest: () => apiClient.getWalletLendLatest(wallet.current!),
+    fetchHistory: (page: number) => apiClient.getWalletLendHistory(wallet.current!, page),
     transformData: transformData,
   }
 

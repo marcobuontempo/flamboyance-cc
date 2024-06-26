@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import MainWrapper from "../../components/MainWrapper"
 import { SidebarLinks } from "../../types";
+import { useEffect } from "react";
 
 const links: SidebarLinks = [
   {
@@ -36,6 +37,14 @@ const links: SidebarLinks = [
 type Props = {}
 
 export default function WalletPage({ }: Props) {
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const queryWallet = params.get('address');
+    if (queryWallet) {
+      // set query wallet address
+    }
+  }, [])
+
   return (
     <MainWrapper links={links}>
       <Outlet />

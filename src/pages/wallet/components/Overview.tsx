@@ -1,10 +1,10 @@
 import { useContext } from "react";
 import apiClient from "../../../services/api-client";
-import { UserContext } from "../../../App";
 import { useQueries } from "@tanstack/react-query";
 import { HexString, LatestResponse, LiveDataPrice, WalletWallet } from "../../../types";
 import { tokenHashToData } from "../../../utils/helpers";
 import { Cell, Pie, PieChart, ResponsiveContainer } from "recharts";
+import { WalletContext } from "../../../contexts/WalletContext";
 
 type Props = {}
 
@@ -37,14 +37,17 @@ const selectPricesData = (data: LiveDataPrice[]) => {
 }
 
 export default function Overview({ }: Props) {
-  const user = useContext(UserContext);
+  const wallet = useContext(WalletContext);
+
+  if (!wallet?.current) return null;
+
   const currentTime = Date.now();
 
   const [walletQuery, pricesQuery] = useQueries({
     queries: [
       {
         queryKey: ['wallet-overview'],
-        queryFn: () => fetchWalletData(user.currentWallet),
+        queryFn: () => fetchWalletData(wallet.current!),
         select: selectWalletData,
       },
       {
@@ -87,7 +90,7 @@ export default function Overview({ }: Props) {
 
 
   const stats = {
-    walletAddress: walletQuery.data?.address || user.currentWallet,
+    walletAddress: walletQuery.data?.address || wallet.current!,
     walletAge: (walletQuery.data?.created_at_time) ? (currentTime - walletQuery.data?.created_at_time) : 'unopened account',
     walletLastSeen: (walletQuery.data?.last_seen_time) ? (currentTime - walletQuery.data?.last_seen_time) : 'unopened account',
     gasBurned: walletQuery.data?.stats?.gas_burned || 0,
@@ -152,11 +155,11 @@ export default function Overview({ }: Props) {
                 balances.map((entry, index) => {
                   return <Cell
                     key={`cell-${index}`}
-                    fill={COLOURS[index % COLOURS.length]} 
+                    fill={COLOURS[index % COLOURS.length]}
                     style={{
                       outline: 'none',
                     }}
-                    />
+                  />
                 })
               }
             </Pie>

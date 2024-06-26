@@ -4,7 +4,7 @@ import { WalletLiquidityPool } from '../../../types';
 import usePaginatedData from '../../../hooks/usePaginatedData';
 import apiClient from '../../../services/api-client';
 import { useContext } from 'react';
-import { UserContext } from '../../../App';
+import { WalletContext } from '../../../contexts/WalletContext';
 
 type TransformedWalletLiquidityPool = WalletLiquidityPool;
 
@@ -72,12 +72,14 @@ const transformData = (entry: WalletLiquidityPool) => {
 };
 
 export default function LiquidityPools() {
-  const user = useContext(UserContext);
+  const wallet = useContext(WalletContext);
+
+  if (!wallet?.current) return null;
 
   const options = {
     queryKey: 'wallet-liquidity-pools',
-    fetchLatest: () => apiClient.getWalletLpLatest(user.currentWallet),
-    fetchHistory: (page: number) => apiClient.getWalletLpHistory(user.currentWallet, page),
+    fetchLatest: () => apiClient.getWalletLpLatest(wallet.current!),
+    fetchHistory: (page: number) => apiClient.getWalletLpHistory(wallet.current!, page),
     transformData: transformData,
   }
 

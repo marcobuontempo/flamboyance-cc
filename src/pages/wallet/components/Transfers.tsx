@@ -4,7 +4,7 @@ import { WalletTransfer } from '../../../types';
 import usePaginatedData from '../../../hooks/usePaginatedData';
 import apiClient from '../../../services/api-client';
 import { useContext } from 'react';
-import { UserContext } from '../../../App';
+import { WalletContext } from '../../../contexts/WalletContext';
 
 type TransformedWalletTransfer = WalletTransfer;
 
@@ -52,12 +52,14 @@ const transformData = (entry: WalletTransfer) => {
 };
 
 export default function Transfers() {
-  const user = useContext(UserContext);
+  const wallet = useContext(WalletContext);
+
+  if (!wallet?.current) return null;
 
   const options = {
     queryKey: 'wallet-transfers',
-    fetchLatest: () => apiClient.getWalletTransferLatest(user.currentWallet),
-    fetchHistory: (page: number) => apiClient.getWalletTransferHistory(user.currentWallet, page),
+    fetchLatest: () => apiClient.getWalletTransferLatest(wallet.current!),
+    fetchHistory: (page: number) => apiClient.getWalletTransferHistory(wallet.current!, page),
     transformData: transformData,
   }
 

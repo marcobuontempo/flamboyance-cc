@@ -4,7 +4,7 @@ import { WalletStake } from '../../../types';
 import usePaginatedData from '../../../hooks/usePaginatedData';
 import apiClient from '../../../services/api-client';
 import { useContext } from 'react';
-import { UserContext } from '../../../App';
+import { WalletContext } from '../../../contexts/WalletContext';
 
 type TransformedWalletStake = WalletStake;
 
@@ -56,12 +56,14 @@ const transformData = (entry: WalletStake) => {
 };
 
 export default function Staking() {
-  const user = useContext(UserContext);
+  const wallet = useContext(WalletContext);
+
+  if (!wallet?.current) return null;
 
   const options = {
     queryKey: 'wallet-staking',
-    fetchLatest: () => apiClient.getWalletStakingLatest(user.currentWallet),
-    fetchHistory: (page: number) => apiClient.getWalletStakingHistory(user.currentWallet, page),
+    fetchLatest: () => apiClient.getWalletStakingLatest(wallet.current!),
+    fetchHistory: (page: number) => apiClient.getWalletStakingHistory(wallet.current!, page),
     transformData: transformData,
   }
 

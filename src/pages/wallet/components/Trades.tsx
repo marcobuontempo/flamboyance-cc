@@ -4,7 +4,7 @@ import { WalletTrade } from '../../../types';
 import usePaginatedData from '../../../hooks/usePaginatedData';
 import apiClient from '../../../services/api-client';
 import { useContext } from 'react';
-import { UserContext } from '../../../App';
+import { WalletContext } from '../../../contexts/WalletContext';
 
 type TransformedWalletTradeWalletTrade = WalletTrade;
 
@@ -60,12 +60,14 @@ const transformData = (entry: WalletTrade) => {
 };
 
 export default function Trades() {
-  const user = useContext(UserContext);
+  const wallet = useContext(WalletContext);
+
+  if (!wallet?.current) return null;
 
   const options = {
     queryKey: 'wallet-trades',
-    fetchLatest: () => apiClient.getWalletTradeLatest(user.currentWallet),
-    fetchHistory: (page: number) => apiClient.getWalletTradeHistory(user.currentWallet, page),
+    fetchLatest: () => apiClient.getWalletTradeLatest(wallet.current!),
+    fetchHistory: (page: number) => apiClient.getWalletTradeHistory(wallet.current!, page),
     transformData: transformData,
   }
 

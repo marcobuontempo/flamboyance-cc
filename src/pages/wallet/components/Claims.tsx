@@ -4,7 +4,7 @@ import { WalletClaim } from '../../../types';
 import usePaginatedData from '../../../hooks/usePaginatedData';
 import apiClient from '../../../services/api-client';
 import { useContext } from 'react';
-import { UserContext } from '../../../App';
+import { WalletContext } from '../../../contexts/WalletContext';
 
 type TransformedWalletClaim = WalletClaim;
 
@@ -64,12 +64,14 @@ const transformData = (entry: WalletClaim) => {
 };
 
 export default function Claims() {
-  const user = useContext(UserContext);
+  const wallet = useContext(WalletContext);
+
+  if (!wallet?.current) return null;
 
   const options = {
     queryKey: 'wallet-claims',
-    fetchLatest: () => apiClient.getWalletClaimsLatest(user.currentWallet),
-    fetchHistory: (page: number) => apiClient.getWalletClaimsHistory(user.currentWallet, page),
+    fetchLatest: () => apiClient.getWalletClaimsLatest(wallet.current!),
+    fetchHistory: (page: number) => apiClient.getWalletClaimsHistory(wallet.current!, page),
     transformData: transformData,
   }
 
