@@ -28,7 +28,7 @@ type Props = {}
 
 export default function AnalyticsPage({ }: Props) {
   return (
-    <MainWrapper links={links}>
+    <MainWrapper navLinks={links}>
       AnalyticsPage
     </MainWrapper>
   )

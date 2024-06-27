@@ -7,37 +7,37 @@ type Props = {}
 const links: SidebarLinks = [
   {
     text: 'Overview',
-    to: '',
+    to: '/live-data/',
   },
   {
     text: 'Claims',
-    to: 'claims',
+    to: '/live-data/claims',
   },
   {
     text: 'Lending',
-    to: 'lending',
+    to: '/live-data/lending',
   },
   {
     text: 'Liquidity Pools',
-    to: 'liquidity-pools',
+    to: '/live-data/liquidity-pools',
   },
   {
     text: 'Staking',
-    to: 'staking',
+    to: '/live-data/staking',
   },
   {
     text: 'Trades',
-    to: 'trades',
+    to: '/live-data/trades',
   },
   {
     text: 'Transfers',
-    to: 'transfers',
+    to: '/live-data/transfers',
   },
 ];
 
 export default function LiveDataPage({ }: Props) {
   return (
-    <MainWrapper links={links}>
+    <MainWrapper navLinks={links}>
       <Outlet />
     </MainWrapper>
   )

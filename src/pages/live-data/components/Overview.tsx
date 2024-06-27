@@ -27,7 +27,6 @@ export default function Overview({ }: Props) {
     return <div>Error loading data</div>;
   }
 
-  console.log(data);
   return (
     <table className='m-2 table border border-solid border-black'>
       <thead>

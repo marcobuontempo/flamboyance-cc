@@ -4,23 +4,27 @@ import { SidebarLinks } from '../types';
 
 type Props = {
   children: ReactNode;
-  links?: SidebarLinks;
+  navHeader?: ReactNode;
+  navFooter?: ReactNode;
+  navLinks?: SidebarLinks;
   preserveParams?: string[];
 }
 
-export default function MainWrapper({ children, links, preserveParams }: Props) {
+export default function MainWrapper({ children, navHeader, navFooter, navLinks, preserveParams }: Props) {
   return (
     <main className='w-full flex flex-wrap justify-center items-stretch flex-1 p-5 bg-blue-100'>
       {
-        links &&
+        navLinks &&
         <div className='w-full sm:w-1/5 p-2'>
           <Sidebar
-            links={links}
+            header={navHeader}
+            footer={navFooter}
+            links={navLinks}
             preserveParams={preserveParams}
           />
         </div>
       }
-      <div className={`w-full p-2 ${links ? 'sm:w-4/5' : null}`}>
+      <div className={`w-full p-2 ${navLinks ? 'sm:w-4/5' : null}`}>
         <div className='w-full h-full border-2 border-solid border-black flex flex-col justify-center items-center'>
           {children}
         </div>

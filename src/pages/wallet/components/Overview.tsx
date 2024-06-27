@@ -27,7 +27,6 @@ const selectWalletData = (data: LatestResponse<WalletWallet>) => {
   return walletData;
 }
 
-
 const fetchPricesData = async () => {
   return apiClient.getFlamingoLivedataPricesLatest();
 }

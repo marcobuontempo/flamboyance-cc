@@ -15,7 +15,7 @@ export default function Sidebar({ links, header, footer, className, preservePara
     return null;
   }
 
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
 
   const generateLink = (linkTo: string) => {
     if (preserveParams === undefined || preserveParams.length === 0) {
