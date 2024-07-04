@@ -1,9 +1,8 @@
-import { HexString } from '../types';
 import bs58 from 'bs58';
 import tokens from '../flamingo-data/tokens';
 import pools from '../flamingo-data/pools';
 
-export const poolHashToData = (hash: HexString) => {
+export const poolHashToData = (hash: string) => {
   for (let key in pools) {
     const pool = pools[key];
     if (pool.hash === hash) {
@@ -13,7 +12,7 @@ export const poolHashToData = (hash: HexString) => {
   return null;
 }
 
-export const tokenHashToData = (hash: HexString) => {
+export const tokenHashToData = (hash: string) => {
   for (let key in tokens) {
     const token = tokens[key];
     if (token.hash === hash) {

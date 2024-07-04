@@ -1,6 +1,3 @@
-import { HexString } from './';
-
-
 /* Queries */
 
 export type CollectionType = 'claim_data' | 'tvl_data' | 'f_token_data' | 'pool_data' | 'token_data' | 'total_data';
@@ -33,14 +30,14 @@ export type HistoryResponse<T> = T[];
 /* Wallet Data */
 
 export type WalletWallet = {
-  address?: HexString,
+  address?: string,
   created_at_block?: number,
   created_at_time?: number,
   last_snapshot?: number,
   last_seen_block?: number,
   last_seen_time?: number,
   balances?: {
-    [token: HexString]: string,
+    [token: string]: string,
   },
   stats?: {
     gas_claimed?: string,
@@ -53,7 +50,7 @@ export type WalletWallet = {
     total_trading_fees_usd?: string,
   },
   trading?: {
-    [token: HexString]: {
+    [token: string]: {
       token_a: string,
       token_b: string,
       from_b: string,
@@ -72,12 +69,12 @@ export type WalletWallet = {
     }
   },
   internal_balances?: {
-    [key: HexString]: {
-      [key: HexString]: string,
+    [key: string]: {
+      [key: string]: string,
     },
   },
   liquidity?: {
-    [pool: HexString]: {
+    [pool: string]: {
       token_1: string,
       token_2: string,
       token_1_amount_current: string,
@@ -97,26 +94,26 @@ export type WalletWallet = {
 };
 
 export type WalletClaim = {
-  unique_id: HexString,
-  transaction_hash: HexString,
+  unique_id: string,
+  transaction_hash: string,
   time: number,
   index: number,
-  user: HexString,
-  from_token: HexString,
+  user: string,
+  from_token: string,
   from_amount: string,
   from_amount_usd: number,
-  to_token: HexString,
+  to_token: string,
   to_amount: string,
   to_amount_usd: number,
   total_usd_fees: number,
 };
 
 export type WalletTrade = {
-  transaction_hash: HexString,
+  transaction_hash: string,
   time: number,
   index: number,
-  user: HexString,
-  from_token: HexString,
+  user: string,
+  from_token: string,
   from_amount: string,
   from_amount_usd: number,
   to_token: string,
@@ -124,9 +121,9 @@ export type WalletTrade = {
   to_amount_usd: number,
   total_usd_fees: number,
   swaps: {
-    unique_id: HexString,
-    pool_hash: HexString,
-    from_token: HexString,
+    unique_id: string,
+    pool_hash: string,
+    from_token: string,
     from_amount: string,
     from_amount_usd: number,
     to_token: string,
@@ -140,16 +137,16 @@ export type WalletTrade = {
 export type WalletLiquidityPool = {
   index: number,
   time: number,
-  hash: HexString,
-  user: HexString,
-  lp_token: HexString,
+  hash: string,
+  user: string,
+  lp_token: string,
   type: 'removeLiquidity' | 'addLiquidity',
   lp_amount: string,
   lp_usd_amount: number,
-  token_1_hash: HexString,
+  token_1_hash: string,
   token_1_amount: string,
   token_1_usd_amount: number,
-  token_2_hash: HexString,
+  token_2_hash: string,
   token_2_amount: string,
   token_2_usd_amount: number,
 };
@@ -157,27 +154,27 @@ export type WalletLiquidityPool = {
 export type WalletStake = {
   time: number,
   index: number,
-  unique_id: HexString,
+  unique_id: string,
   type: 'stake' | 'unstake',
-  user: HexString,
-  contract: HexString,
-  pool: HexString,
+  user: string,
+  contract: string,
+  pool: string,
   amount: string,
   usd_amount: number,
-  hash: HexString,
+  hash: string,
 };
 
 export type WalletLend = {
   type: 'RepayFToken' | 'WithdrawCollateral' | 'DepositCollateral' | 'MintFToken',
-  tx_id: HexString,
-  unique_id: HexString,
+  tx_id: string,
+  unique_id: string,
   time: number,
   block: number,
-  address: HexString,
-  collateral_hash: HexString,
+  address: string,
+  collateral_hash: string,
   collateral_usd_price: number,
   collateral_total: string,
-  f_token_hash: HexString,
+  f_token_hash: string,
   f_token_usd_price: number,
   f_token_total: string,
   f_token_repay: string,
@@ -186,12 +183,12 @@ export type WalletLend = {
 export type WalletTransfer = {
   time: number,
   index: number,
-  hash: HexString,
-  unique_id: HexString,
-  contract: HexString,
+  hash: string,
+  unique_id: string,
+  contract: string,
   amount: string,
-  sender: HexString | 'Mint',
-  receiver: HexString,
+  sender: string | 'Mint',
+  receiver: string,
   type: 'Transfer' | 'Mint/Burn',
 };
 
@@ -201,20 +198,20 @@ export type WalletTransfer = {
 export type LiveDataPrice = {
   symbol: string,
   unwrappedSymbol: string,
-  hash: HexString,
+  hash: string,
   usd_price: number,
 };
 
 export type LiveDataFiatExchangeRate = number;
 
 export type LiveDataClaim = {
-  unique_id: HexString,
-  transaction_hash: HexString,
+  unique_id: string,
+  transaction_hash: string,
   time: number,
   index: number,
-  user: HexString,
-  pool: HexString,
-  token: HexString,
+  user: string,
+  pool: string,
+  token: string,
   amount: string,
   amount_usd: number,
 };
@@ -237,11 +234,11 @@ export type AnalyticsClaim = {
   claim_data: {
     claims: string,
     claims_usd: string,
-    [key: HexString]: {
+    [key: string]: {
       claims: string,
       claims_usd: string,
       total_amount: string,
-    },
+    } | string,
   },
 };
 
@@ -252,7 +249,7 @@ export type AnalyticsTotalValueLocked = {
     flund_usd: string,
     lend_usd: string,
     tokens: {
-      [key: HexString]: string,
+      [key: string]: string,
     },
   },
 };
@@ -260,7 +257,7 @@ export type AnalyticsTotalValueLocked = {
 export type AnalyticsFToken = {
   date: string,
   f_token_data: {
-    [key: HexString]: {
+    [key: string]: {
       deposit_count?: string,
       deposited_collateral?: string,
       withdraw_count?: string,
@@ -279,9 +276,9 @@ export type AnalyticsFToken = {
 export type AnalyticsPool = {
   date: string,
   pool_data: {
-    [key: HexString]: {
+    [key: string]: {
       tokens: {
-        [key: HexString]: {
+        [key: string]: {
           from_amount_total?: string,
           from_amounnt_usd_total?: string,
           fee_amount_usd_total?: string,
@@ -321,7 +318,7 @@ export type AnalyticsPool = {
 export type AnalyticsToken = {
   date: string,
   token_data: {
-    [key: HexString]: {
+    [key: string]: {
       from_amount_total?: string,
       from_amount_usd_total?: string,
       fee_amount_usd_total?: string,

@@ -19,6 +19,11 @@ import LiveDataStaking from '../pages/live-data/components/Staking';
 import LiveDataLending from '../pages/live-data/components/Lending';
 import LiveDataTransfers from '../pages/live-data/components/Transfers';
 import AnalyticsPage from '../pages/analytics';
+import AnalyticsOverview from '../pages/analytics/components/Overview';
+import AnalyticsClaims from '../pages/analytics/components/Claims';
+import AnalyticsTotalValueLocked from '../pages/analytics/components/TotalValueLocked';
+import AnalyticsFToken from '../pages/analytics/components/FToken';
+import AnalyticsPools from '../pages/analytics/components/Pools';
 import SettingsPage from '../pages/settings';
 
 const router = createBrowserRouter([
@@ -102,6 +107,28 @@ const router = createBrowserRouter([
       {
         path: '/analytics',
         element: <AnalyticsPage />,
+        children: [
+          {
+            path: '/analytics',
+            element: <AnalyticsOverview />,
+          },
+          {
+            path: '/analytics/claims',
+            element: <AnalyticsClaims />,
+          },
+          {
+            path: '/analytics/total-value-locked',
+            element: <AnalyticsTotalValueLocked />,
+          },
+          {
+            path: '/analytics/f-token',
+            element: <AnalyticsFToken />,
+          },
+          {
+            path: '/analytics/pools',
+            element: <AnalyticsPools />,
+          },
+        ],
       },
       {
         path: '/settings',

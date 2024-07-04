@@ -1,26 +1,27 @@
+import { Outlet } from 'react-router-dom';
 import MainWrapper from '../../components/MainWrapper';
 import { SidebarLinks } from '../../types';
 
 const links: SidebarLinks = [
   {
     text: 'Overview',
-    to: '',
+    to: '/analytics',
   },
   {
     text: 'Claims',
-    to: 'claims',
+    to: '/analytics/claims',
   },
   {
     text: 'Total Value Locked',
-    to: 'total-value-locked',
+    to: '/analytics/total-value-locked',
   },
   {
     text: 'F Token',
-    to: 'f-token',
+    to: '/analytics/f-token',
   },
   {
     text: 'Pools',
-    to: 'pools',
+    to: '/analytics/pools',
   },
 ];
 
@@ -29,7 +30,7 @@ type Props = {}
 export default function AnalyticsPage({ }: Props) {
   return (
     <MainWrapper navLinks={links}>
-      AnalyticsPage
+      <Outlet />
     </MainWrapper>
   )
 }

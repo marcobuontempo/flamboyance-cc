@@ -1,7 +1,7 @@
 import { FlamingoPool } from "../types/flamingo-data";
 import tokens from "./tokens";
 
-const pools: { [key: string]: FlamingoPool } = {
+const pools: Record<string, FlamingoPool> = {
   "FLP-FLM-bNEO": {
     symbol: "FLP-FLM-bNEO",
     decimals: 8,

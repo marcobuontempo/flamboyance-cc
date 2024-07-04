@@ -10,6 +10,9 @@ type Props = {
   preserveParams?: string[];
 }
 
+const SIDELINK_DEFAULT_STYLE = '';
+const SIDELINK_ACTIVE_STYLE = SIDELINK_DEFAULT_STYLE + ' font-bold'
+
 export default function Sidebar({ links, header, footer, className, preserveParams }: Props) {
   if (!links) {
     return null;
@@ -39,7 +42,7 @@ export default function Sidebar({ links, header, footer, className, preservePara
 
       <ul>
         {links.map(link => {
-          return <li className='py-2' key={link.to}><NavLink to={generateLink(link.to)}>{link.text}</NavLink></li>
+          return <li className='py-2' key={link.to}><NavLink className={({ isActive }) => isActive ? SIDELINK_ACTIVE_STYLE : SIDELINK_DEFAULT_STYLE} to={generateLink(link.to)}>{link.text}</NavLink></li>
         })}
       </ul>
 

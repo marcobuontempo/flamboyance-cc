@@ -1,15 +1,14 @@
-import { HexString } from "./common"
-
 export type FlamingoToken = {
   symbol: string,
   decimals: number,
-  hash: HexString,
+  hash: string,
+  colour: string,
 }
 
 export type FlamingoPool = {
   symbol: string,
   decimals: number,
-  hash: HexString,
+  hash: string,
   internalPrice: boolean,
   reversePool: boolean,
   targetedIncentivesPool: boolean,
@@ -28,6 +27,6 @@ export type FlamingoPool = {
   displayName?: string,
   rewardTokenHomepage?: string,
   liquidityDisabled?: boolean,
-  stakingContract?: HexString,
+  stakingContract?: string,
   stakingDisabled?: boolean,
 }

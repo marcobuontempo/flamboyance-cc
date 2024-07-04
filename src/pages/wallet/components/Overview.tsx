@@ -1,6 +1,6 @@
 import apiClient from "../../../services/api-client";
 import { useQueries } from "@tanstack/react-query";
-import { HexString, LatestResponse, LiveDataPrice, WalletWallet } from "../../../types";
+import { LatestResponse, LiveDataPrice, WalletWallet } from "../../../types";
 import { tokenHashToData } from "../../../utils/helpers";
 import { Cell, Pie, PieChart, ResponsiveContainer } from "recharts";
 import { useOutletContext } from "react-router-dom";
@@ -67,7 +67,7 @@ export default function Overview({ }: Props) {
     ? Object.entries(walletQuery.data.balances).reduce<BalanceItem[]>((acc, [token, amount]) => {
       if (!token.startsWith('0x')) return acc;
 
-      const tokenInfo = tokenHashToData(token as HexString);
+      const tokenInfo = tokenHashToData(token);
       const price = pricesQuery.data.find((entry) => entry.hash === token)?.usd_price || 0;
       if (!tokenInfo || !price) return acc;
 
@@ -132,7 +132,8 @@ export default function Overview({ }: Props) {
 
         {/* DONUT CHART */}
         <ResponsiveContainer
-          className='min-h-full'
+          height={'100%'}
+          width={'100%'}
         >
           <PieChart
             width={250}

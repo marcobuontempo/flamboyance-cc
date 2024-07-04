@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
-import { AnalyticsDailyMap, AnalyticsMonthlyMap, AnalyticsRollingMap, AnalyticsTotalSupply, AnalyticsUSDValueLocked, CollectionType, DateTimeQuery, HistoryResponse, LatestResponse, LiveDataClaim, LiveDataFiatExchangeRate, LiveDataLend, LiveDataLiquidityPool, LiveDataPrice, LiveDataStake, LiveDataTrade, LiveDataTransfer, MonthQuery, WalletClaim, WalletLend, WalletLiquidityPool, WalletStake, WalletTrade, WalletTransfer, WalletWallet } from '../types';
+import { AnalyticsClaim, AnalyticsDailyMap, AnalyticsFToken, AnalyticsMonthlyMap, AnalyticsPool, AnalyticsRollingMap, AnalyticsToken, AnalyticsTotal, AnalyticsTotalSupply, AnalyticsTotalValueLocked, AnalyticsUSDValueLocked, CollectionType, DateTimeQuery, HistoryResponse, LatestResponse, LiveDataClaim, LiveDataFiatExchangeRate, LiveDataLend, LiveDataLiquidityPool, LiveDataPrice, LiveDataStake, LiveDataTrade, LiveDataTransfer, MonthQuery, WalletClaim, WalletLend, WalletLiquidityPool, WalletStake, WalletTrade, WalletTransfer, WalletWallet } from '../types';
 
 export class ApiClient {
   private api: AxiosInstance;
@@ -9,10 +9,10 @@ export class ApiClient {
   }
 
 
-  private async fetchData<T>(endpoint: string, params = {}) {
+  private async fetchData<T>(endpoint: string, params = {}): Promise<T> {
     try {
       const response = await this.api.get(endpoint, { params });
-      return response.data as T;
+      return response.data;
     } catch (error) {
       console.error("Error fetching data from URL:", endpoint, error);
       throw error;
@@ -152,24 +152,24 @@ export class ApiClient {
 
   // Flamingo Analytics Data
 
-  public getFlamingoAnalyticsMonthhistory = async (collection: CollectionType, { year, month }: MonthQuery) => {
-    return this.fetchData<AnalyticsMonthlyMap[typeof collection]>(`/flamingo/analytics/month-history/${collection}`, { year, month });
+  public getFlamingoAnalyticsMonthhistory = async <K extends CollectionType>(collection: K, { year, month }: MonthQuery) => {
+    return this.fetchData<AnalyticsMonthlyMap[K]>(`/flamingo/analytics/month-history/${collection}`, { year, month });
   }
 
-  public getFlamingoAnalyticsMonthlatest = async (collection: CollectionType) => {
-    return this.fetchData<AnalyticsMonthlyMap[typeof collection]>(`/flamingo/analytics/month-latest/${collection}`, {});
+  public getFlamingoAnalyticsMonthlatest = async <K extends CollectionType>(collection: K) => {
+    return this.fetchData<AnalyticsMonthlyMap[K]>(`/flamingo/analytics/month-latest/${collection}`, {});
   }
 
-  public getFlamingoAnalyticsDailyhistory = async (collection: CollectionType, { year, month, day }: DateTimeQuery) => {
-    return this.fetchData<AnalyticsDailyMap[typeof collection]>(`/flamingo/analytics/daily-history/${collection}`, { year, month, day });
+  public getFlamingoAnalyticsDailyhistory = async <K extends CollectionType>(collection: K, { year, month, day }: DateTimeQuery) => {
+    return this.fetchData<AnalyticsDailyMap[K]>(`/flamingo/analytics/daily-history/${collection}`, { year, month, day });
   }
 
-  public getFlamingoAnalyticsDailylatest = async (collection: CollectionType) => {
-    return this.fetchData<AnalyticsDailyMap[typeof collection]>(`/flamingo/analytics/daily-latest/${collection}`, {});
+  public getFlamingoAnalyticsDailylatest = async <K extends CollectionType>(collection: K) => {
+    return this.fetchData<AnalyticsDailyMap[K]>(`/flamingo/analytics/daily-latest/${collection}`, {});
   }
 
-  public getFlamingoAnalyticsRolling30days = async (collection: CollectionType) => {
-    return this.fetchData<AnalyticsRollingMap[typeof collection]>(`/flamingo/analytics/rolling-30-days/${collection}`, {});
+  public getFlamingoAnalyticsRolling30days = async <K extends CollectionType>(collection: K) => {
+    return this.fetchData<AnalyticsRollingMap[K]>(`/flamingo/analytics/rolling-30-days/${collection}`, {});
   }
 
   public getFlamingoAnalyticsFlamingoTotalsupply = async () => {
