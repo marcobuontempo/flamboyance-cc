@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import { HistoryResponse, LatestResponse } from '../types';
 import { useQuery } from '@tanstack/react-query';
 
-type PaginatedDataHookParamas<RawType, TransformedData> = {
+type PaginatedDataHookParams<RawType, TransformedData> = {
   queryKey: string;
   fetchLatest: (...args: any[]) => Promise<LatestResponse<RawType>>;
   fetchHistory: (...args: any[]) => Promise<HistoryResponse<RawType>>;
@@ -14,7 +14,7 @@ export default function usePaginatedData<RawType, TransformedData>({
   fetchLatest,
   fetchHistory,
   transformData,
-}: PaginatedDataHookParamas<RawType, TransformedData>) {
+}: PaginatedDataHookParams<RawType, TransformedData>) {
 
   const [pageIndex, setPageIndex] = useState(0);
   const pageCount = useRef(1);

@@ -1,22 +1,12 @@
-import { useQuery } from "@tanstack/react-query"
-import apiClient from "../../../services/api-client"
 import { AnalyticsClaim } from "../../../types";
 import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { tokenHashToData } from "../../../utils/helpers";
 import { useState } from "react";
 import tokens from "../../../flamingo-data/tokens";
+import useAnalyticsData from "../../../hooks/useAnalyticsData";
+import AnalyticsWrapper from "../../../components/AnalyticsWrapper";
 
 type Props = {}
-
-const fetchData = (timeFilter: string) => {
-  if (timeFilter === 'latest') {
-    return apiClient.getFlamingoAnalyticsMonthlatest('claim_data');
-  } else if (timeFilter === '30days') {
-    return apiClient.getFlamingoAnalyticsRolling30days('claim_data');
-  } else {
-    return apiClient.getFlamingoAnalyticsMonthlatest('claim_data');
-  }
-}
 
 const selectData = (data: AnalyticsClaim[], typeFilter: string) => {
   const selected = data.reduce<Array<Record<string, string | number>>>((acc, current) => {
@@ -47,33 +37,34 @@ const selectData = (data: AnalyticsClaim[], typeFilter: string) => {
 };
 
 export default function Claims({ }: Props) {
-  const [timeFilter, setTimeFilter] = useState('latest');
-  const [typeFilter, setTypeFilter] = useState('claims');
+  const [typeFilter, setTypeFilter] = useState('claims_usd');
 
-  const { data, isPending, isError, } = useQuery({
-    queryKey: ['analytics-claims', timeFilter, typeFilter],
-    queryFn: () => fetchData(timeFilter),
-    select: (fetched) => selectData(fetched, typeFilter),
+  const {
+    data,
+    timeFilter,
+    setTimeFilter,
+    isPending,
+    isError,
+  } = useAnalyticsData<Record<string, string | number>>({
+    queryKey: 'claim_data',
+    transformData: (data) => selectData(data, typeFilter),
+    filters: [typeFilter],
   })
 
-  if (isError) {
-    return <div>Error!</div>
-  }
-
-  if (isPending) {
-    return <div>Loading...</div>
-  }
+  const filterControls = (
+    <div>
+      <button className='px-3 border border-solid border-black' value='claims' onClick={(e) => setTypeFilter(e.currentTarget.value)}>#</button>
+      <button className='px-3 border border-solid border-black' value='claims_usd' onClick={(e) => setTypeFilter(e.currentTarget.value)}>$</button>
+    </div>
+  )
 
   return (
-    <>
-      <div>
-        <button className='px-3 border border-solid border-black' value='latest' onClick={(e) => setTimeFilter(e.currentTarget.value)}>Latest</button>
-        <button className='px-3 border border-solid border-black' value='30days' onClick={(e) => setTimeFilter(e.currentTarget.value)}>30 Days</button>
-      </div>
-      <div>
-        <button className='px-3 border border-solid border-black' value='claims' onClick={(e) => setTypeFilter(e.currentTarget.value)}>#</button>
-        <button className='px-3 border border-solid border-black' value='claims_usd' onClick={(e) => setTypeFilter(e.currentTarget.value)}>$</button>
-      </div>
+    <AnalyticsWrapper
+      setTimeFilter={setTimeFilter}
+      isPending={isPending}
+      isError={isError}
+      filterControls={filterControls}
+    >
       <ResponsiveContainer width={'100%'} height={'100%'}>
         <BarChart
           data={data}
@@ -91,6 +82,7 @@ export default function Claims({ }: Props) {
 
         </BarChart>
       </ResponsiveContainer>
-    </>
+
+    </AnalyticsWrapper>
   )
 }
