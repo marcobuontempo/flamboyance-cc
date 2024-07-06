@@ -8,10 +8,14 @@ import AnalyticsWrapper from "../../../components/AnalyticsWrapper";
 
 type Props = {}
 
-const selectData = (data: AnalyticsClaim[], typeFilter: string) => {
-  const selected = data.reduce<Array<Record<string, string | number>>>((acc, current) => {
+type ClaimEntry = Record<string, string | number>;
+
+type Filters = 'claims' | 'claims_usd';
+
+const selectData = (data: AnalyticsClaim[], typeFilter: Filters) => {
+  const selected = data.reduce<Array<ClaimEntry>>((acc, current) => {
     const dateFormatted = current.date.split('T')[0];
-    const entry: Record<string, string | number> = {
+    const entry: ClaimEntry = {
       date: dateFormatted,
     }
 
@@ -37,15 +41,14 @@ const selectData = (data: AnalyticsClaim[], typeFilter: string) => {
 };
 
 export default function Claims({ }: Props) {
-  const [typeFilter, setTypeFilter] = useState('claims_usd');
+  const [typeFilter, setTypeFilter] = useState<Filters>('claims_usd');
 
   const {
     data,
-    timeFilter,
     setTimeFilter,
     isPending,
     isError,
-  } = useAnalyticsData<Record<string, string | number>>({
+  } = useAnalyticsData<ClaimEntry>({
     queryKey: 'claim_data',
     transformData: (data) => selectData(data, typeFilter),
     filters: [typeFilter],
@@ -53,8 +56,8 @@ export default function Claims({ }: Props) {
 
   const filterControls = (
     <div>
-      <button className='px-3 border border-solid border-black' value='claims' onClick={(e) => setTypeFilter(e.currentTarget.value)}>#</button>
-      <button className='px-3 border border-solid border-black' value='claims_usd' onClick={(e) => setTypeFilter(e.currentTarget.value)}>$</button>
+      <button className='px-3 border border-solid border-black' value='claims' onClick={(e) => setTypeFilter(e.currentTarget.value as Filters)}>#</button>
+      <button className='px-3 border border-solid border-black' value='claims_usd' onClick={(e) => setTypeFilter(e.currentTarget.value as Filters)}>$</button>
     </div>
   )
 
