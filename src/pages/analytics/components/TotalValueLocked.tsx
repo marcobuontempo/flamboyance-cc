@@ -1,7 +1,6 @@
 import { AnalyticsTotalValueLocked } from "../../../types";
-import { Bar, BarChart, CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { useState } from "react";
-import tokens from "../../../flamingo-data/tokens";
 import useAnalyticsData from "../../../hooks/useAnalyticsData";
 import AnalyticsWrapper from "../../../components/AnalyticsWrapper";
 
@@ -31,7 +30,7 @@ const selectData = (data: AnalyticsTotalValueLocked[], typeFilter: Filters) => {
   return sorted;
 };
 
-export default function Claims({ }: Props) {
+export default function TotalValueLocked({ }: Props) {
   const [typeFilter, setTypeFilter] = useState<Filters>('flund_usd');
 
   const {
@@ -54,8 +53,6 @@ export default function Claims({ }: Props) {
     </div>
   )
 
-  console.log(data)
-
   return (
     <AnalyticsWrapper
       setTimeFilter={setTimeFilter}
@@ -67,7 +64,7 @@ export default function Claims({ }: Props) {
         <LineChart
           data={data}
         >
-          <CartesianGrid strokeDasharray={'5 5'} />
+          <CartesianGrid strokeDasharray={'3 3'} />
           <XAxis dataKey='date' />
           <YAxis />
           <Tooltip />

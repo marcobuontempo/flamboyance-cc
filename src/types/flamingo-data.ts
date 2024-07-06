@@ -16,6 +16,7 @@ export type FlamingoPool = {
   rewardToken: FlamingoToken,
   tokens: [FlamingoToken, FlamingoToken],
   mintPrSec: number,
+  colour: string,
   tradingInfo: {
     symbol: string,
     baseToken: string,

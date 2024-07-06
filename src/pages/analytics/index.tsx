@@ -16,10 +16,6 @@ const links: SidebarLinks = [
     to: '/analytics/total-value-locked',
   },
   {
-    text: 'F Token',
-    to: '/analytics/f-token',
-  },
-  {
     text: 'Pools',
     to: '/analytics/pools',
   },

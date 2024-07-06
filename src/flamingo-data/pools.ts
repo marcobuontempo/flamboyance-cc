@@ -21,6 +21,7 @@ const pools: Record<string, FlamingoPool> = {
       maxPriceDecimals: 3,
       priceLevelIntervals: ["0.01", "0.1", "1"],
     },
+    colour: '#ed8777',
   },
   "FLP-FLM-fUSDT": {
     symbol: "FLP-FLM-fUSDT",
@@ -41,6 +42,7 @@ const pools: Record<string, FlamingoPool> = {
       maxPriceDecimals: 4,
       priceLevelIntervals: ["0.0001", "0.001", "0.01", "0.1"],
     },
+    colour: '#9d7fa7',
   },
   "FLP-FLM-fWBTC": {
     symbol: "FLP-FLM-fWBTC",
@@ -61,6 +63,7 @@ const pools: Record<string, FlamingoPool> = {
       maxPriceDecimals: 8,
       priceLevelIntervals: ["0.00000001", "0.0000001", "0.000001", "0.00001"],
     },
+    colour: '#eb736f',
   },
   "FLP-FLM-fWETH": {
     symbol: "FLP-FLM-fWETH",
@@ -81,6 +84,7 @@ const pools: Record<string, FlamingoPool> = {
       maxPriceDecimals: 0,
       priceLevelIntervals: ["1", "10", "100", "1000"],
     },
+    colour: '#b56a9e',
   },
   "FLP-FLM-GAS": {
     symbol: "FLP-FLM-GAS",
@@ -101,6 +105,7 @@ const pools: Record<string, FlamingoPool> = {
       maxPriceDecimals: 3,
       priceLevelIntervals: ["0.001", "0.01", "0.1", "1"],
     },
+    colour: '#b59fc0',
   },
   "FLP-FLM-fBNB": {
     symbol: "FLP-FLM-fBNB",
@@ -121,6 +126,7 @@ const pools: Record<string, FlamingoPool> = {
       maxPriceDecimals: 5,
       priceLevelIntervals: ["0.00001", "0.0001", "0.001", "0.01"],
     },
+    colour: '#e7815e',
   },
   "FLP-FLM-pONT": {
     symbol: "FLP-FLM-pONT",
@@ -141,6 +147,7 @@ const pools: Record<string, FlamingoPool> = {
       maxPriceDecimals: 3,
       priceLevelIntervals: ["0.001", "0.01", "0.1", "1"],
     },
+    colour: '#9376d8',
   },
   "FLP-FLM-WING": {
     symbol: "FLP-FLM-WING",
@@ -161,6 +168,7 @@ const pools: Record<string, FlamingoPool> = {
       maxPriceDecimals: 2,
       priceLevelIntervals: ["0.01", "0.1", "1", "10"],
     },
+    colour: '#6f2559',
   },
   "FLP-FLM-GM": {
     symbol: "FLP-FLM-GM",
@@ -181,6 +189,7 @@ const pools: Record<string, FlamingoPool> = {
       maxPriceDecimals: 4,
       priceLevelIntervals: ["0.0001", "0.001", "0.01", "0.1"],
     },
+    colour: '#a65f9b',
   },
   "FLP-FLM-fCAKE": {
     symbol: "FLP-FLM-fCAKE",
@@ -201,6 +210,7 @@ const pools: Record<string, FlamingoPool> = {
       maxPriceDecimals: 3,
       priceLevelIntervals: ["0.001", "0.01", "0.1", "1"],
     },
+    colour: '#d86980',
   },
   "FLP-FLM-SWTH": {
     symbol: "FLP-FLM-SWTH",
@@ -221,6 +231,7 @@ const pools: Record<string, FlamingoPool> = {
       maxPriceDecimals: 5,
       priceLevelIntervals: ["0.00001", "0.0001", "0.001", "0.01"],
     },
+    colour: '#724380',
   },
   "FLP-bNEO-fUSDT": {
     symbol: "FLP-bNEO-fUSDT",
@@ -241,6 +252,7 @@ const pools: Record<string, FlamingoPool> = {
       maxPriceDecimals: 2,
       priceLevelIntervals: ["0.01", "0.1", "1"],
     },
+    colour: '#acbc6c',
   },
   "FLP-bNEO-fWBTC": {
     symbol: "FLP-bNEO-fWBTC",
@@ -261,6 +273,7 @@ const pools: Record<string, FlamingoPool> = {
       maxPriceDecimals: 6,
       priceLevelIntervals: ["0.000001", "0.00001", "0.0001", "0.001"],
     },
+    colour: '#fab034',
   },
   "FLP-bNEO-fWETH": {
     symbol: "FLP-bNEO-fWETH",
@@ -281,6 +294,7 @@ const pools: Record<string, FlamingoPool> = {
       maxPriceDecimals: 2,
       priceLevelIntervals: ["0.01", "0.1", "1", "10"],
     },
+    colour: '#c4a864',
   },
   "FLP-bNEO-GAS": {
     symbol: "FLP-bNEO-GAS",
@@ -301,6 +315,7 @@ const pools: Record<string, FlamingoPool> = {
       maxPriceDecimals: 4,
       priceLevelIntervals: ["0.0001", "0.001", "0.01", "0.1"],
     },
+    colour: '#c4dc86',
   },
   "FLP-bNEO-fBNB": {
     symbol: "FLP-bNEO-fBNB",
@@ -321,6 +336,7 @@ const pools: Record<string, FlamingoPool> = {
       maxPriceDecimals: 4,
       priceLevelIntervals: ["0.001", "0.01", "0.1"],
     },
+    colour: '#f6bf24',
   },
   "FLP-bNEO-pONT": {
     symbol: "FLP-bNEO-pONT",
@@ -341,6 +357,7 @@ const pools: Record<string, FlamingoPool> = {
       maxPriceDecimals: 2,
       priceLevelIntervals: ["0.01", "0.1", "1", "10"],
     },
+    colour: '#a2b49e',
   },
   "FLP-bNEO-WING": {
     symbol: "FLP-bNEO-WING",
@@ -361,6 +378,7 @@ const pools: Record<string, FlamingoPool> = {
       maxPriceDecimals: 1,
       priceLevelIntervals: ["0.1", "1", "10", "100"],
     },
+    colour: '#7e621e',
   },
   "FLP-bNEO-GM": {
     symbol: "FLP-bNEO-GM",
@@ -381,6 +399,7 @@ const pools: Record<string, FlamingoPool> = {
       maxPriceDecimals: 3,
       priceLevelIntervals: ["0.001", "0.01", "0.1", "1"],
     },
+    colour: '#b59d60',
   },
   "FLP-bNEO-fCAKE": {
     symbol: "FLP-bNEO-fCAKE",
@@ -401,6 +420,7 @@ const pools: Record<string, FlamingoPool> = {
       maxPriceDecimals: 1,
       priceLevelIntervals: ["0.1", "1", "10", "100"],
     },
+    colour: '#e7a646',
   },
   "FLP-bNEO-SWTH": {
     symbol: "FLP-bNEO-SWTH",
@@ -421,6 +441,7 @@ const pools: Record<string, FlamingoPool> = {
       maxPriceDecimals: 5,
       priceLevelIntervals: ["0.00001", "0.0001", "0.001", "0.01"],
     },
+    colour: '#818046',
   },
   "FLP-fWBTC-fUSDT": {
     symbol: "FLP-fWBTC-fUSDT",
@@ -441,6 +462,7 @@ const pools: Record<string, FlamingoPool> = {
       maxPriceDecimals: 2,
       priceLevelIntervals: ["0.01", "0.1", "1", "10", "50", "100"],
     },
+    colour: '#aaa864',
   },
   "FRP-FLM-FDE": {
     symbol: "FRP-FLM-FDE",
@@ -463,6 +485,7 @@ const pools: Record<string, FlamingoPool> = {
       maxPriceDecimals: 6,
       priceLevelIntervals: ["0.000001", "0.00001", "0.0001"],
     },
+    colour: '#ae50b7',
   },
   "FRP-FLM-TIPS": {
     symbol: "FRP-FLM-TIPS",
@@ -486,6 +509,7 @@ const pools: Record<string, FlamingoPool> = {
       maxPriceDecimals: 11,
       priceLevelIntervals: ["0.00000000001", "0.0000000001", "0.000000001"],
     },
+    colour: '#a43ed4',
   },
   "FRP-FLM-CANDY": {
     symbol: "FRP-FLM-CANDY",
@@ -509,6 +533,7 @@ const pools: Record<string, FlamingoPool> = {
       maxPriceDecimals: 6,
       priceLevelIntervals: ["0.000001", "0.00001", "0.0001", "0.001"],
     },
+    colour: '#e338b1',
   },
   "FRP-FLM-DOGEF": {
     symbol: "FRP-FLM-DOGEF",
@@ -532,6 +557,7 @@ const pools: Record<string, FlamingoPool> = {
       maxPriceDecimals: 10,
       priceLevelIntervals: ["0.0000000001", "0.000000001", "0.00000001"],
     },
+    colour: '#d27c76',
   },
   "FRP-FLM-DOGER": {
     symbol: "FRP-FLM-DOGER",
@@ -555,6 +581,7 @@ const pools: Record<string, FlamingoPool> = {
       maxPriceDecimals: 10,
       priceLevelIntervals: ["0.0000000001", "0.000000001", "0.00000001"],
     },
+    colour: '#dd566f',
   },
   "FRP-FLM-SOM": {
     symbol: "FRP-FLM-SOM",
@@ -578,6 +605,7 @@ const pools: Record<string, FlamingoPool> = {
       maxPriceDecimals: 6,
       priceLevelIntervals: ["0.000001", "0.00001", "0.0001"],
     },
+    colour: '#774aad',
   },
   "FRP-bNEO-FDE": {
     symbol: "FRP-bNEO-FDE",
@@ -600,6 +628,7 @@ const pools: Record<string, FlamingoPool> = {
       maxPriceDecimals: 6,
       priceLevelIntervals: ["0.0000001", "0.000001", "0.00001"],
     },
+    colour: '#bd8d7c',
   },
   "FRP-bNEO-TIPS": {
     symbol: "FRP-bNEO-TIPS",
@@ -621,6 +650,7 @@ const pools: Record<string, FlamingoPool> = {
       maxPriceDecimals: 11,
       priceLevelIntervals: ["0.000000000001", "0.00000000001", "0.0000000001"],
     },
+    colour: '#b37b9a',
   },
   "FRP-bNEO-CANDY": {
     symbol: "FRP-bNEO-CANDY",
@@ -642,6 +672,7 @@ const pools: Record<string, FlamingoPool> = {
       maxPriceDecimals: 8,
       priceLevelIntervals: ["0.00000001", "0.0000001", "0.000001", "0.00001"],
     },
+    colour: '#f27576',
   },
   "FRP-bNEO-DOGEF": {
     symbol: "FRP-bNEO-DOGEF",
@@ -663,6 +694,7 @@ const pools: Record<string, FlamingoPool> = {
       maxPriceDecimals: 11,
       priceLevelIntervals: ["0.00000000001", "0.0000000001", "0.000000001"],
     },
+    colour: '#e1b93b',
   },
   "FRP-bNEO-DOGER": {
     symbol: "FRP-bNEO-DOGER",
@@ -684,6 +716,7 @@ const pools: Record<string, FlamingoPool> = {
       maxPriceDecimals: 11,
       priceLevelIntervals: ["0.00000000001", "0.0000000001", "0.000000001"],
     },
+    colour: '#ec9434',
   },
   "FRP-bNEO-SOM": {
     symbol: "FRP-bNEO-SOM",
@@ -705,6 +738,7 @@ const pools: Record<string, FlamingoPool> = {
       maxPriceDecimals: 7,
       priceLevelIntervals: ["0.0000001", "0.000001", "0.00001"],
     },
+    colour: '#868772',
   },
   "FRP-FLM-LRB": {
     symbol: "FRP-FLM-LRB",
@@ -726,6 +760,7 @@ const pools: Record<string, FlamingoPool> = {
       maxPriceDecimals: 5,
       priceLevelIntervals: ["0.00001", "0.0001", "0.001"],
     },
+    colour: '#6d7acf',
   },
   "FRP-FLM-USDL": {
     symbol: "FRP-FLM-USDL",
@@ -747,6 +782,7 @@ const pools: Record<string, FlamingoPool> = {
       maxPriceDecimals: 3,
       priceLevelIntervals: ["0.001", "0.01", "0.1"],
     },
+    colour: '#7440c2',
   },
   "FLP-FLM-FUSD": {
     symbol: "FLP-FLM-FUSD",
@@ -768,6 +804,7 @@ const pools: Record<string, FlamingoPool> = {
       maxPriceDecimals: 4,
       priceLevelIntervals: ["0.0001", "0.001", "0.01", "0.1"],
     },
+    colour: '#e55f97',
   },
   "FLP-bNEO-FUSD": {
     symbol: "FLP-bNEO-FUSD",
@@ -789,6 +826,7 @@ const pools: Record<string, FlamingoPool> = {
       maxPriceDecimals: 2,
       priceLevelIntervals: ["0.01", "0.1", "1"],
     },
+    colour: '#f49d5d',
   },
   "FLP-fWBTC-FUSD": {
     symbol: "FLP-fWBTC-FUSD",
@@ -810,6 +848,7 @@ const pools: Record<string, FlamingoPool> = {
       maxPriceDecimals: 2,
       priceLevelIntervals: ["0.01", "0.1", "1", "10", "50", "100"],
     },
+    colour: '#f28955',
   },
   "FLP-fUSDT-FUSD": {
     symbol: "FLP-fUSDT-FUSD",
@@ -831,6 +870,7 @@ const pools: Record<string, FlamingoPool> = {
       maxPriceDecimals: 2,
       priceLevelIntervals: ["0.0001", "0.001", "0.01", "0.1"],
     },
+    colour: '#a4958d',
   },
 };
 

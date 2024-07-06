@@ -72,7 +72,7 @@ export default function Claims({ }: Props) {
         <BarChart
           data={data}
         >
-          <CartesianGrid strokeDasharray={'5 5'} />
+          <CartesianGrid strokeDasharray={'3 3'} />
           <XAxis dataKey='date' />
           <YAxis />
           <Tooltip />

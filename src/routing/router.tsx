@@ -22,7 +22,6 @@ import AnalyticsPage from '../pages/analytics';
 import AnalyticsOverview from '../pages/analytics/components/Overview';
 import AnalyticsClaims from '../pages/analytics/components/Claims';
 import AnalyticsTotalValueLocked from '../pages/analytics/components/TotalValueLocked';
-import AnalyticsFToken from '../pages/analytics/components/FToken';
 import AnalyticsPools from '../pages/analytics/components/Pools';
 import SettingsPage from '../pages/settings';
 
@@ -119,10 +118,6 @@ const router = createBrowserRouter([
           {
             path: '/analytics/total-value-locked',
             element: <AnalyticsTotalValueLocked />,
-          },
-          {
-            path: '/analytics/f-token',
-            element: <AnalyticsFToken />,
           },
           {
             path: '/analytics/pools',
