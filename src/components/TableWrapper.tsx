@@ -84,13 +84,13 @@ export default function TableWrapper<T>({
 
   return (
     <div className='flex flex-col w-full h-full'>
-      {title && <h2 className='text-2xl uppercase text-center p-2 font-bold'>{title}</h2>}
+      {title && <h2 className='text-2xl uppercase text-center p-2 font-bold font-LexendMega'>{title}</h2>}
       <div className='flex-1 w-full overflow-x-scroll'>
         {content}
       </div>
 
-      <div className='relative w-full flex justify-center p-2'>
-        <div className='flex'>
+      <div className='relative w-full flex sm:flex-row flex-col justify-center items-center sm:text-base text-2xl sm:p-2 p-4'>
+        <div className='flex sm:p-0 pb-4'>
           <button
             className='px-1 disabled:opacity-30'
             onClick={() => setPageIndex(0)}
@@ -124,9 +124,9 @@ export default function TableWrapper<T>({
           </button>
         </div>
 
-        <form className='absolute right-2'>
+        <form className='sm:absolute sm:right-2'>
           <input className='w-16 border border-black border-solid' min={1} max={pageCount} type='number'></input>
-          <button className='ml-2 px-3 bg-cyan-200 font-bold neobrutalist-border-1' type='submit'>Go</button>
+          <button className='ml-2 px-3 bg-cyan-200 font-bold neobrutalist-border-1 font-LexendMega' type='submit'>Go</button>
         </form>
       </div>
     </div>

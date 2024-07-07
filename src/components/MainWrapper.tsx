@@ -32,10 +32,10 @@ export default function MainWrapper({
   }, [location, navigate]);
 
   return (
-    <main className='w-full flex flex-wrap justify-center items-stretch flex-1 p-5 bg-cyan-50'>
+    <main className='w-full flex flex-wrap justify-center items-stretch flex-1 sm:p-5 p-0 bg-cyan-50 font-PublicSans'>
       {
         navLinks &&
-        <div className='w-full sm:w-1/5 p-2'>
+        <div className='w-full sm:w-1/5 sm:p-2 sm:m-0 mb-5'>
           <Sidebar
             header={navHeader}
             footer={navFooter}
@@ -44,7 +44,7 @@ export default function MainWrapper({
           />
         </div>
       }
-      <div className={`w-full p-2 ${navLinks ? 'sm:w-4/5' : null}`}>
+      <div className={`w-full ${navLinks ? 'sm:w-4/5 sm:p-2' : null}`}>
         <div className='w-full h-full flex flex-col justify-center items-center neobrutalist-border-2 bg-purple-100'>
           {children}
         </div>

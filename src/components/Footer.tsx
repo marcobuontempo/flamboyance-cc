@@ -5,7 +5,7 @@ type Props = {}
 
 export default function Footer({ }: Props) {
   return (
-    <footer className='flex justify-between items-center w-full px-5 py-2 text-sm border-black border-solid border-t-2 bg-cyan-600 text-cyan-50'>
+    <footer className='flex justify-between items-center w-full px-5 py-2 text-sm border-black border-solid border-t-2 bg-cyan-600 text-cyan-50 sm:m-0 mt-5'>
       <span>2024 <span className=''>&copy;</span> flamboyance.cc</span>
       <div>
         <p>made with <span className=''>&hearts;</span></p>

@@ -37,7 +37,7 @@ export default function Sidebar({ links, header, footer, className, preservePara
   }
 
   return (
-    <nav className={`w-full h-full px-2 border-2 border-solid border-black bg-purple-50 neobrutalist-border-2 ${className}`}>
+    <nav className={`w-full h-full px-2 border-2 border-solid border-black bg-purple-50 neobrutalist-border-2 font-LexendMega sm:text-sm  ${className}`}>
       {header && <div>{header}</div>}
 
       <ul>

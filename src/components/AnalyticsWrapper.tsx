@@ -14,7 +14,7 @@ type Props = {
   title?: string;
 }
 
-const DEFAULT_FILTER_STYLE = 'px-3 neobrutalist-border-1 bg-cyan-100';
+const DEFAULT_FILTER_STYLE = 'px-3 neobrutalist-border-1 bg-cyan-100 font-LexendMega';
 const ACTIVE_FILTER_STYLE = 'font-bold bg-cyan-300 ' + DEFAULT_FILTER_STYLE;
 
 export default function AnalyticsWrapper({
@@ -38,8 +38,8 @@ export default function AnalyticsWrapper({
 
   return (
     <>
-      {title && <h2 className='text-2xl uppercase text-center p-2 font-bold'>{title}</h2>}
-      <div className='w-full flex justify-between p-2'>
+      {title && <h2 className='text-2xl uppercase text-center p-2 font-bold font-LexendMega'>{title}</h2>}
+      <div className='w-full flex sm:flex-row flex-col items-center sm:gap-0 gap-2 justify-between p-2'>
         <div className='flex justify-center items-center'>
           <button className={(timeFilter === 'daily') ? ACTIVE_FILTER_STYLE : DEFAULT_FILTER_STYLE} value='daily' onClick={() => setTimeFilter('daily')}>Daily</button>
           <button className={(timeFilter === 'monthly') ? ACTIVE_FILTER_STYLE : DEFAULT_FILTER_STYLE} value='monthly' onClick={() => setTimeFilter('monthly')}>Month</button>

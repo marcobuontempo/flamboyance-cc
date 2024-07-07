@@ -38,10 +38,10 @@ export default function WalletSelector({ }: Props) {
 
   return (
     <form className='flex flex-col justify-center items-center neobrutalist-border-1 bg-purple-200'>
-      <fieldset className='flex flex-col justify-center items-center gap-2 p-5'>
+      <fieldset className='flex flex-col justify-center items-center gap-2 p-5 w-full'>
         <label className='font-semibold'>Input NEO N3 Wallet Address:</label>
-        <input className='w-96 px-2' type='text' placeholder='N...' value={newWalletAddress} onChange={(e) => setNewWalletAddress(e.target.value)} />
-        <button className='neobrutalist-border-1 px-2 py-1 bg-purple-50 hover:bg-cyan-400' onClick={handleSubmitNewWallet}>Add Wallet</button>
+        <input className='sm:w-96 w-full px-2' type='text' placeholder='N...' value={newWalletAddress} onChange={(e) => setNewWalletAddress(e.target.value)} />
+        <button className='neobrutalist-border-1 px-2 py-1 bg-purple-50 hover:bg-cyan-400 font-LexendMega' onClick={handleSubmitNewWallet}>Add Wallet</button>
       </fieldset>
 
       {
@@ -50,14 +50,14 @@ export default function WalletSelector({ }: Props) {
           <p className='font-bold'>
             OR
           </p>
-          <fieldset className='flex flex-col justify-center items-center gap-2 p-5'>
+          <fieldset className='flex flex-col justify-center items-center gap-2 p-5 w-full'>
             <label className='font-semibold'>Select existing wallet:</label>
-            <select className='w-96' onChange={(e) => setSelectedWallet(e.target.value)}>
+            <select className='sm:w-96 w-full' onChange={(e) => setSelectedWallet(e.target.value)}>
               {wallets.map(address => {
                 return <option key={address} value={address}>{address}</option>
               })}
             </select>
-            <button className='neobrutalist-border-1 px-2 py-1 bg-purple-50 hover:bg-cyan-400' onClick={handleSelectExistingWallet}>Select Wallet</button>
+            <button className='neobrutalist-border-1 px-2 py-1 bg-purple-50 hover:bg-cyan-400 font-LexendMega' onClick={handleSelectExistingWallet}>Select Wallet</button>
           </fieldset>
         </>
       }

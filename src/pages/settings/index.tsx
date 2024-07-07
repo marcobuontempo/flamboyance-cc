@@ -48,7 +48,7 @@ export default function SettingsPage({ }: Props) {
 
   return (
     <MainWrapper>
-      <h2 className='text-2xl uppercase text-center p-2 font-bold'>Settings</h2>
+      <h2 className='text-2xl uppercase text-center p-2 font-bold font-LexendMega'>Settings</h2>
       <form className='h-full flex flex-col text-center' onSubmit={handleSaveSettings}>
         <fieldset className='w-full p-3'>
           <label className='block text-lg font-bold text-purple-800' htmlFor='currency'>Currency</label>
@@ -67,8 +67,8 @@ export default function SettingsPage({ }: Props) {
         </fieldset>
 
         <div className='flex flex-col justify-center gap-2 pt-5'>
-          <button className='neobrutalist-border-1 font-bold px-2 py-1 bg-cyan-300 hover:bg-purple-50' type='submit'>Save Settings</button>
-          <button className='neobrutalist-border-1 font-bold px-2 py-1 bg-red-500 hover:bg-red-700' id='clear-wallets' type='button' onClick={handleClearLocalData}>Clear Local Data</button>
+          <button className='neobrutalist-border-1 font-bold px-2 py-1 bg-cyan-300 hover:bg-purple-50 font-LexendMega' type='submit'>Save Settings</button>
+          <button className='neobrutalist-border-1 font-bold px-2 py-1 bg-red-500 hover:bg-red-700 font-LexendMega' id='clear-wallets' type='button' onClick={handleClearLocalData}>Clear Local Data</button>
         </div>
       </form>
     </MainWrapper>

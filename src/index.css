@@ -2,6 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "Space Mono";
+  src: local("Space Mono"),
+    url(/fonts/Space_Mono/SpaceMono-Regular.ttf) format("truetype");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Space Mono";
+  src: local("Space Mono Bold"),
+    url(/fonts/Space_Mono/SpaceMono-Bold.ttf) format("truetype");
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "Lexend Mega";
+  src: local("Lexend Mega"),
+    url(/fonts/Lexend_Mega/LexendMega-VariableFont_wght.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "Public Sans";
+  src: local("Public Sans"),
+    url(/fonts/Public_Sans/PublicSans-VariableFont_wght.ttf) format("truetype");
+}
+
 html,
 body,
 #root {
@@ -41,4 +67,16 @@ a {
 .neobrutalist-border-2 {
   border: 2px solid black;
   box-shadow: 4px 4px 0px black;
+}
+
+.font-SpaceMono {
+  font-family: "Space Mono", monospace;
+}
+
+.font-LexendMega {
+  font-family: "Lexend Mega", sans-serif;
+}
+
+.font-PublicSans {
+  font-family: "Public Sans", sans-serif;
 }

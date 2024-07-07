@@ -79,7 +79,7 @@ export default function WalletPage({ }: Props) {
       {
         address &&
         <button className='w-full text-center hover:cursor-default'>
-          <FontAwesomeIcon icon={faRotate} className='hover:cursor-pointer hover:scale-125' onClick={handleChangeWallet} />
+          <FontAwesomeIcon icon={faRotate} className='text-2xl p-2 sm:p-0 sm:text-base hover:cursor-pointer hover:scale-125' onClick={handleChangeWallet} />
         </button>
       }
     </div>

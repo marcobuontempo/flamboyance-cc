@@ -49,7 +49,7 @@ export default function Overview({ }: Props) {
           <th className='p-1 border border-solid border-black'>Price ({sessionContext?.currency})</th>
         </tr>
       </thead>
-      <tbody className='bg-purple-50'>
+      <tbody className='bg-purple-50 font-SpaceMono'>
         {
           data.map(token => {
             return (

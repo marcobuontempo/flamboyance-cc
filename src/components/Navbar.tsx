@@ -5,17 +5,17 @@ import { Link, NavLink } from 'react-router-dom';
 type Props = {}
 
 
-const NAVLINK_DEFAULT_STYLE = 'inline-block text-sm sm:w-24 w-18 py-1 text-center neobrutalist-border-1 bg-cyan-100 hover:bg-cyan-200';
+const NAVLINK_DEFAULT_STYLE = 'inline-block sm:text-sm text-xs px-2 py-1 sm:w-28 w-18 text-center neobrutalist-border-1 bg-cyan-100 hover:bg-cyan-200';
 const NAVLINK_ACTIVE_STYLE = NAVLINK_DEFAULT_STYLE + ' font-bold border-2 bg-purple-100 hover:bg-purple-200'
 
 export default function Navbar({ }: Props) {
   return (
-    <nav className='relative mx-auto flex h-16 items-center justify-between sm:px-5 px-2 border-black border-b-2 bg-cyan-300'>
+    <nav className='relative mx-auto flex sm:flex-row flex-col sm:h-16 h-26 items-center justify-between sm:px-5 px-2 border-black border-b-2 bg-cyan-300 sm:m-0 mb-5 font-LexendMega'>
       <Link to='/' className='h-full flex items-end z-10 hover:contrast-125'>
-        <img src='images/logo.png' className='h-full py-2 px-1 object-contain' alt='Flamboyance Logo' />
+        <img src='images/logo.png' className='sm:h-full h-16 py-2 px-1 object-contain' alt='Flamboyance Logo' />
       </Link>
 
-      <ul className='flex items-center z-10 gap-1 sm:gap-5'>
+      <ul className='flex sm:w-auto w-full items-center justify-center z-10 gap-1 sm:gap-5 sm:p-0 pb-2'>
         <li>
           <NavLink
             to='/'

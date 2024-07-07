@@ -111,16 +111,16 @@ export default function Overview({ }: Props) {
   return (
     <div className='w-full h-full flex flex-col justify-between'>
       <div className='p-2 text-center neobrutalist-border-1 m-2 bg-cyan-100'>
-        <p><b>Address:</b> <span>{stats.walletAddress}</span></p>
+        <p className='break-words'><b>Address:</b> <span>{stats.walletAddress}</span></p>
         <div className='flex w-full justify-center gap-2 text-xs'>
-          <p><b>Wallet Age:</b> <span>{stats.walletAge === 0 ? 'unopened account' : `${(stats.walletAge / 1000 / 60 / 60 / 24).toFixed(2)} days old`}</span></p>
-          <p><b>Last Seen:</b> <span>{stats.walletLastSeen === 0 ? 'unopened account' : `${(stats.walletLastSeen / 1000 / 60 / 60 / 24).toFixed(2)} days ago`}</span></p>
+          <p><b>Wallet Age:</b> <span className='font-SpaceMono'>{stats.walletAge === 0 ? 'unopened account' : `${(stats.walletAge / 1000 / 60 / 60 / 24).toFixed(2)} days old`}</span></p>
+          <p><b>Last Seen:</b> <span className='font-SpaceMono'>{stats.walletLastSeen === 0 ? 'unopened account' : `${(stats.walletLastSeen / 1000 / 60 / 60 / 24).toFixed(2)} days ago`}</span></p>
         </div>
       </div>
 
       {
         balances.length > 0 ?
-          <div className='flex min-h-64'>
+          <div className='flex min-h-64 sm:flex-row flex-col'>
             <table className='m-2 table neobrutalist-border-1'>
               <thead>
                 <tr className='bg-cyan-100 border-b-2 border-black border-solid'>
@@ -129,7 +129,7 @@ export default function Overview({ }: Props) {
                   <th className='p-1 border border-solid border-black'>Value ({sessionContext?.currency})</th>
                 </tr>
               </thead>
-              <tbody className='bg-purple-50'>
+              <tbody className='bg-purple-50 font-SpaceMono'>
                 {
                   balances.map(balance => {
                     return (
@@ -184,12 +184,12 @@ export default function Overview({ }: Props) {
 
       <div className='p-2 text-center neobrutalist-border-1 m-2 bg-cyan-100'>
         <div className='flex w-full justify-center gap-5'>
-          <p><b>Gas Burned:</b> <span>{convertRawAmountToDecimals(stats.gasBurned, gasData.decimals, 4)}</span></p>
-          <p><b>Gas Claimed:</b> <span>{convertRawAmountToDecimals(stats.gasClaimed, gasData.decimals, 4)}</span></p>
+          <p><b>Gas Burned:</b> <span className='font-SpaceMono'>{convertRawAmountToDecimals(stats.gasBurned, gasData.decimals, 4)}</span></p>
+          <p><b>Gas Claimed:</b> <span className='font-SpaceMono'>{convertRawAmountToDecimals(stats.gasClaimed, gasData.decimals, 4)}</span></p>
         </div>
         <div className='flex w-full justify-center gap-5'>
-          <p><b>Total Trades:</b> <span>{stats.totalTrades}</span></p>
-          <p><b>Total Transactions:</b> <span>{stats.totalTransactions}</span></p>
+          <p><b>Total Trades:</b> <span className='font-SpaceMono'>{stats.totalTrades}</span></p>
+          <p><b>Total Transactions:</b> <span className='font-SpaceMono'>{stats.totalTransactions}</span></p>
         </div>
       </div>
     </div>
