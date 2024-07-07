@@ -15,7 +15,7 @@ export default function ErrorPage({ }: Props) {
         <div className='p-8'>
           <p className='text-4xl p-5 font-bold'>Oops!</p>
           <p className='sm:text-3xl text-xl'>something is wrong.</p>
-          <p className='pt-5 italic'>{error.statusText || error.message}</p>
+          <p className='pt-5 italic'>{error.statusText}</p>
         </div>
         <Link to='/' className='border-2 border-solid border-black px-5 py-2 text-lg font-bold bg-purple-100 hover:bg-purple-200'>Go to Home</Link>
       </div>
