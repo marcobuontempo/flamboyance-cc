@@ -36,10 +36,6 @@ export default function HomePage({ }: Props) {
     ],
   })
 
-  if (totalSupplyQuery.isPending || valueLockedQuery.isPending) {
-    return <LoadingSpinner />;
-  }
-
   if (totalSupplyQuery.isError) {
     return <RetryFetch refetch={totalSupplyQuery.refetch} />;
   }
@@ -50,11 +46,17 @@ export default function HomePage({ }: Props) {
 
   return (
     <MainWrapper>
-      <h1 className='sm:text-6xl text-4xl pb-10 font-LexendMega'>Flamboyance</h1>
-      <div className='neobrutalist-border-1 p-5 text-2xl bg-cyan-50'>
-        <p className='p-2'><b>Total FLM Supply: </b><span className='font-SpaceMono'>{totalSupplyQuery.data}</span></p>
-        <p className='p-2'><b>Total Value Locked ({sessionContext?.currency}): </b><span className='font-SpaceMono'>{valueLockedQuery.data}</span></p>
-      </div>
+      {
+        (totalSupplyQuery.isPending || valueLockedQuery.isPending) ?
+          <LoadingSpinner /> :
+          <>
+            <h1 className='sm:text-6xl text-4xl pb-10 font-LexendMega'>Flamboyance</h1>
+            <div className='neobrutalist-border-1 sm:p-20 p-10 text-2xl bg-cyan-50'>
+              <p className='p-2'><b>Total FLM Supply: </b><span className='font-SpaceMono'>{totalSupplyQuery.data}</span></p>
+              <p className='p-2'><b>Total Value Locked ({sessionContext?.currency}): </b><span className='font-SpaceMono'>{valueLockedQuery.data}</span></p>
+            </div>
+          </>
+      }
     </MainWrapper>
   )
 }
