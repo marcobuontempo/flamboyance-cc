@@ -1,8 +1,10 @@
 import { AnalyticsTotalValueLocked } from "../../../types";
 import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import useAnalyticsData from "../../../hooks/useAnalyticsData";
 import AnalyticsWrapper from "../../../components/AnalyticsWrapper";
+import { convertFiatCurrency } from "../../../utils/helpers";
+import { UserSessionContext } from "../../../contexts/UserSessionContext";
 
 type Props = {}
 
@@ -13,11 +15,11 @@ type Filters = 'pool_usd' | 'flund_usd' | 'lend_usd';
 const DEFAULT_FILTER_STYLE = 'px-3 border border-solid border-black';
 const ACTIVE_FILTER_STYLE = DEFAULT_FILTER_STYLE + ' font-bold';
 
-const selectData = (data: AnalyticsTotalValueLocked[], typeFilter: Filters) => {
+const selectData = (data: AnalyticsTotalValueLocked[], typeFilter: Filters, exchangeRate: number | undefined) => {
   const selected = data.reduce<Array<TVLEntry>>((acc, current) => {
     const entry: Record<string, string | number> = {
       date: current.date.split('T')[0],
-      value: parseInt(current.tvl_data[typeFilter]),
+      value: convertFiatCurrency(parseInt(current.tvl_data[typeFilter]), exchangeRate, 4),
     }
 
     acc.push(entry);
@@ -34,6 +36,7 @@ const selectData = (data: AnalyticsTotalValueLocked[], typeFilter: Filters) => {
 };
 
 export default function TotalValueLocked({ }: Props) {
+  const sessionContext = useContext(UserSessionContext);
   const [typeFilter, setTypeFilter] = useState<Filters>('flund_usd');
 
   const {
@@ -44,7 +47,7 @@ export default function TotalValueLocked({ }: Props) {
     isError,
   } = useAnalyticsData<TVLEntry>({
     queryKey: 'tvl_data',
-    transformData: (data) => selectData(data, typeFilter),
+    transformData: (data) => selectData(data, typeFilter, sessionContext?.exchangeRate),
     filters: [typeFilter],
   })
 
@@ -63,7 +66,7 @@ export default function TotalValueLocked({ }: Props) {
       isPending={isPending}
       isError={isError}
       filterControls={filterControls}
-      title='Total Value Locked'
+      title={`Total Value Locked (${sessionContext?.currency})`}
     >
       <ResponsiveContainer width={'100%'} height={'100%'}>
         <LineChart

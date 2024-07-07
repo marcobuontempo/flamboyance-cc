@@ -1,10 +1,12 @@
 import apiClient from "../../../services/api-client";
 import { useQueries } from "@tanstack/react-query";
 import { LatestResponse, LiveDataPrice, WalletWallet } from "../../../types";
-import { tokenHashToData } from "../../../utils/helpers";
-import { Cell, Pie, PieChart, ResponsiveContainer } from "recharts";
+import { convertFiatCurrency, tokenHashToData } from "../../../utils/helpers";
+import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 import { useOutletContext } from "react-router-dom";
 import { WalletContextType } from "..";
+import { useContext } from "react";
+import { UserSessionContext } from "../../../contexts/UserSessionContext";
 
 type Props = {}
 
@@ -36,6 +38,7 @@ const selectPricesData = (data: LiveDataPrice[]) => {
 
 export default function Overview({ }: Props) {
   const [address] = useOutletContext<WalletContextType>();
+  const sessionContext = useContext(UserSessionContext);
 
   const currentTime = Date.now();
 
@@ -77,7 +80,7 @@ export default function Overview({ }: Props) {
         image: tokenData.image,
         symbol: tokenData.symbol,
         wholeAmount: amountAdjusted,
-        value: amountAdjusted * price,
+        value: parseFloat(convertFiatCurrency(amountAdjusted * price, sessionContext?.exchangeRate, 4)),
         colour: tokenData.colour,
       });
 
@@ -110,7 +113,7 @@ export default function Overview({ }: Props) {
             <tr className='bg-blue-300'>
               <th className='p-1 border border-solid border-black' colSpan={2}>Token</th>
               <th className='p-1 border border-solid border-black'>Amount</th>
-              <th className='p-1 border border-solid border-black'>Value (USD)</th>
+              <th className='p-1 border border-solid border-black'>Value ({sessionContext?.currency})</th>
             </tr>
           </thead>
           <tbody>
@@ -120,8 +123,8 @@ export default function Overview({ }: Props) {
                   <tr key={balance.hash}>
                     <td className='border border-solid border-black p-2'><img src={balance.image} width={50} height={50} className='object-contain max-w-fit p-2' /></td>
                     <td className='border border-solid border-black p-2'>{balance.symbol}</td>
-                    <td className='border border-solid border-black text-right p-2'>{balance.wholeAmount.toFixed(8)}</td>
-                    <td className='border border-solid border-black text-right p-2'>{balance.value.toFixed(8)}</td>
+                    <td className='border border-solid border-black text-right p-2'>{balance.wholeAmount.toFixed(4)}</td>
+                    <td className='border border-solid border-black text-right p-2'>{balance.value.toFixed(4)}</td>
                   </tr>
                 )
               })
@@ -135,6 +138,7 @@ export default function Overview({ }: Props) {
           width={'100%'}
         >
           <PieChart>
+            <Tooltip />
             <Pie
               data={balances}
               dataKey='value'
@@ -142,8 +146,7 @@ export default function Overview({ }: Props) {
               cx='50%'
               cy='50%'
               innerRadius={60}
-              outerRadius={80}
-              label
+              outerRadius={100}
             >
               {
                 balances.map((entry, index) => {

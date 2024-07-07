@@ -1,5 +1,5 @@
 import { ReactNode } from 'react'
-import UserSettingsProvider from './UserSettingsContext';
+import UserSessionProvider from './UserSessionContext';
 
 type Props = {
   children: ReactNode;
@@ -7,8 +7,8 @@ type Props = {
 
 export default function GlobalProvider({ children }: Props) {
   return (
-    <UserSettingsProvider>
+    <UserSessionProvider>
       {children}
-    </UserSettingsProvider>
+    </UserSessionProvider>
   )
 }

@@ -1,10 +1,11 @@
 import { AnalyticsPool } from "../../../types";
 import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { poolHashToData } from "../../../utils/helpers";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import useAnalyticsData from "../../../hooks/useAnalyticsData";
 import AnalyticsWrapper from "../../../components/AnalyticsWrapper";
 import pools from "../../../flamingo-data/pools";
+import { UserSessionContext } from "../../../contexts/UserSessionContext";
 
 type Props = {}
 
@@ -47,6 +48,7 @@ const selectData = (data: AnalyticsPool[], typeFilter: Filters) => {
 };
 
 export default function Pools({ }: Props) {
+  const sessionContext = useContext(UserSessionContext);
   const [typeFilter, setTypeFilter] = useState<Filters>('volume_usd_total');
 
   const {
@@ -63,8 +65,8 @@ export default function Pools({ }: Props) {
 
   const filterControls = (
     <div>
-      <button className={(typeFilter === 'swaps') ? ACTIVE_FILTER_STYLE : DEFAULT_FILTER_STYLE} value='swaps' onClick={(e) => setTypeFilter(e.currentTarget.value as Filters)}>Swaps</button>
-      <button className={(typeFilter === 'volume_usd_total') ? ACTIVE_FILTER_STYLE : DEFAULT_FILTER_STYLE} value='volume_usd_total' onClick={(e) => setTypeFilter(e.currentTarget.value as Filters)}>Volume $</button>
+      <button className={(typeFilter === 'swaps') ? ACTIVE_FILTER_STYLE : DEFAULT_FILTER_STYLE} value='swaps' onClick={(e) => setTypeFilter(e.currentTarget.value as Filters)}>Swaps #</button>
+      <button className={(typeFilter === 'volume_usd_total') ? ACTIVE_FILTER_STYLE : DEFAULT_FILTER_STYLE} value='volume_usd_total' onClick={(e) => setTypeFilter(e.currentTarget.value as Filters)}>Volume ({sessionContext?.currency})</button>
     </div>
   )
 

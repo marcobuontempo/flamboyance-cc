@@ -3,53 +3,63 @@ import { LiveDataTransfer } from "../../../types";
 import apiClient from "../../../services/api-client";
 import usePaginatedData from "../../../hooks/usePaginatedData";
 import TableWrapper from "../../../components/TableWrapper";
+import { convertRawAmountToDecimals, tokenHashToData } from "../../../utils/helpers";
 
-type TransformedLiveDataTransfer = LiveDataTransfer;
-
-const columns: ColumnDef<TransformedLiveDataTransfer>[] = [
-  {
-    header: 'Time',
-    accessorKey: 'time',
-  },
-  {
-    header: 'Index',
-    accessorKey: 'index',
-  },
-  {
-    header: 'Hash',
-    accessorKey: 'hash',
-  },
-  {
-    header: 'Unique ID',
-    accessorKey: 'unique_id',
-  },
-  {
-    header: 'Contract',
-    accessorKey: 'contract',
-  },
-  {
-    header: 'Amount',
-    accessorKey: 'amount',
-  },
-  {
-    header: 'Sender',
-    accessorKey: 'sender',
-  },
-  {
-    header: 'Receiver',
-    accessorKey: 'receiver',
-  },
-  {
-    header: 'Type',
-    accessorKey: 'type',
-  },
-];
-
-const transformData = (entry: LiveDataTransfer) => {
-  return entry;
+type TransformedLiveDataTransfer = LiveDataTransfer |
+{
+  time: string;
 };
 
 export default function Transfers() {
+  const columns: ColumnDef<TransformedLiveDataTransfer>[] = [
+    {
+      header: 'Time',
+      accessorKey: 'time',
+    },
+    {
+      header: 'Index',
+      accessorKey: 'index',
+    },
+    {
+      header: 'Hash',
+      accessorKey: 'hash',
+    },
+    {
+      header: 'Unique ID',
+      accessorKey: 'unique_id',
+    },
+    {
+      header: 'Contract',
+      accessorKey: 'contract',
+    },
+    {
+      header: 'Amount',
+      accessorKey: 'amount',
+    },
+    {
+      header: 'Sender',
+      accessorKey: 'sender',
+    },
+    {
+      header: 'Receiver',
+      accessorKey: 'receiver',
+    },
+    {
+      header: 'Type',
+      accessorKey: 'type',
+    },
+  ];
+
+  const transformData = (entry: LiveDataTransfer): TransformedLiveDataTransfer => {
+    const token = tokenHashToData(entry.contract);
+
+    return {
+      ...entry,
+      time: new Date(entry.time).toUTCString(),
+      amount: convertRawAmountToDecimals(entry.amount, token?.decimals, 4),
+    };
+  };
+
   const options = {
     queryKey: 'live-data-transfers',
     fetchLatest: () => apiClient.getFlamingoLivedataTransferLatest(),

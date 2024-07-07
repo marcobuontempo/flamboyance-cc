@@ -1,10 +1,11 @@
 import { AnalyticsClaim } from "../../../types";
 import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { tokenHashToData } from "../../../utils/helpers";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import tokens from "../../../flamingo-data/tokens";
 import useAnalyticsData from "../../../hooks/useAnalyticsData";
 import AnalyticsWrapper from "../../../components/AnalyticsWrapper";
+import { UserSessionContext } from "../../../contexts/UserSessionContext";
 
 type Props = {}
 
@@ -44,6 +45,7 @@ const selectData = (data: AnalyticsClaim[], typeFilter: Filters) => {
 };
 
 export default function Claims({ }: Props) {
+  const sessionContext = useContext(UserSessionContext);
   const [typeFilter, setTypeFilter] = useState<Filters>('claims_usd');
 
   const {
@@ -61,7 +63,7 @@ export default function Claims({ }: Props) {
   const filterControls = (
     <div>
       <button className={(typeFilter === 'claims') ? ACTIVE_FILTER_STYLE : DEFAULT_FILTER_STYLE} value='claims' onClick={(e) => setTypeFilter(e.currentTarget.value as Filters)}>#</button>
-      <button className={(typeFilter === 'claims_usd') ? ACTIVE_FILTER_STYLE : DEFAULT_FILTER_STYLE} value='claims_usd' onClick={(e) => setTypeFilter(e.currentTarget.value as Filters)}>$</button>
+      <button className={(typeFilter === 'claims_usd') ? ACTIVE_FILTER_STYLE : DEFAULT_FILTER_STYLE} value='claims_usd' onClick={(e) => setTypeFilter(e.currentTarget.value as Filters)}>{sessionContext?.currency}</button>
     </div>
   )
 

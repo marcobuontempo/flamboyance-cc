@@ -1,6 +1,7 @@
 import bs58 from 'bs58';
 import tokens from '../flamingo-data/tokens';
 import pools from '../flamingo-data/pools';
+import { LocalStorageSettings } from '../types';
 
 export const poolHashToData = (hash: string) => {
   for (let key in pools) {
@@ -65,4 +66,34 @@ export const addWalletToLocalStorage = (address: string) => {
   }
   const updatedWalletsJSON = JSON.stringify(wallets);
   localStorage.setItem('wallets', updatedWalletsJSON);
+}
+
+export const getLocalStorageSettings = () => {
+  let settings: LocalStorageSettings | null = null;
+  const storedSettings = localStorage.getItem('settings');
+  if (storedSettings) {
+    settings = JSON.parse(storedSettings);
+  }
+  return settings;
+}
+
+export const setLocalStorageSettings = (settings: LocalStorageSettings) => {
+  localStorage.setItem('settings', JSON.stringify(settings));
+}
+
+export const convertFiatCurrency = (amount: number | undefined, exchangeRate: number | undefined, outputDecimals: number) => {
+  if (!amount) return '';
+  exchangeRate = exchangeRate || 1;
+  return (exchangeRate * amount).toFixed(outputDecimals).toString();
+}
+
+export const convertRawAmountToDecimals = (amount: number | string | undefined, tokenDecimals: number | undefined, outputDecimals: number) => {
+  if (!amount) return '';
+  if (!tokenDecimals) return amount.toString();
+
+  amount = amount.toString();
+  const prefix = parseInt(amount.slice(0, -1 * tokenDecimals)) || 0;
+  const suffix = amount.slice(-1 * tokenDecimals, -1 * tokenDecimals + outputDecimals) || '0'.repeat(outputDecimals);
+
+  return `${prefix}${outputDecimals > 0 ? '.' : ''}${suffix}`;
 }

@@ -1,8 +1,9 @@
 import { Outlet, useSearchParams } from "react-router-dom";
 import MainWrapper from "../../components/MainWrapper"
 import { SidebarLinks } from "../../types";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import WalletSelector from "../../components/WalletSelector";
+import { UserSessionContext } from "../../contexts/UserSessionContext";
 
 const links: SidebarLinks = [
   {
@@ -40,13 +41,22 @@ export type WalletContextType = [string,];
 type Props = {}
 
 export default function WalletPage({ }: Props) {
+  const sessionContext = useContext(UserSessionContext);
   const [address, setAddress] = useState<string | null>(null);
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
     const queryAddress = searchParams.get('address');
     if (queryAddress) {
       setAddress(queryAddress);
+      sessionContext?.setUserSession({
+        ...sessionContext,
+        selectedWallet: queryAddress,
+      })
+    } else if (sessionContext?.selectedWallet) {
+      setAddress(sessionContext.selectedWallet);
+      searchParams.set('address', sessionContext.selectedWallet);
+      setSearchParams(searchParams);
     }
   }, [searchParams])
 
