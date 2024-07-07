@@ -7,7 +7,7 @@ type Props = {}
 const links: SidebarLinks = [
   {
     text: 'Overview',
-    to: '/live-data/',
+    to: '/live-data/overview',
   },
   {
     text: 'Claims',
@@ -37,7 +37,7 @@ const links: SidebarLinks = [
 
 export default function LiveDataPage({ }: Props) {
   return (
-    <MainWrapper navLinks={links}>
+    <MainWrapper navLinks={links} baseURL='live-data' redirectURL='overview'>
       <Outlet />
     </MainWrapper>
   )

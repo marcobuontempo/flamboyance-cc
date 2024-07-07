@@ -10,6 +10,9 @@ type TVLEntry = Record<string, string | number>;
 
 type Filters = 'pool_usd' | 'flund_usd' | 'lend_usd';
 
+const DEFAULT_FILTER_STYLE = 'px-3 border border-solid border-black';
+const ACTIVE_FILTER_STYLE = DEFAULT_FILTER_STYLE + ' font-bold';
+
 const selectData = (data: AnalyticsTotalValueLocked[], typeFilter: Filters) => {
   const selected = data.reduce<Array<TVLEntry>>((acc, current) => {
     const entry: Record<string, string | number> = {
@@ -47,18 +50,20 @@ export default function TotalValueLocked({ }: Props) {
 
   const filterControls = (
     <div>
-      <button className='px-3 border border-solid border-black' value='pool_usd' onClick={(e) => setTypeFilter(e.currentTarget.value as Filters)}>Pool</button>
-      <button className='px-3 border border-solid border-black' value='flund_usd' onClick={(e) => setTypeFilter(e.currentTarget.value as Filters)}>FLUND</button>
-      <button className='px-3 border border-solid border-black' value='lend_usd' onClick={(e) => setTypeFilter(e.currentTarget.value as Filters)}>Lend</button>
+      <button className={(typeFilter === 'pool_usd') ? ACTIVE_FILTER_STYLE : DEFAULT_FILTER_STYLE} value='pool_usd' onClick={(e) => setTypeFilter(e.currentTarget.value as Filters)}>Pool</button>
+      <button className={(typeFilter === 'flund_usd') ? ACTIVE_FILTER_STYLE : DEFAULT_FILTER_STYLE} value='flund_usd' onClick={(e) => setTypeFilter(e.currentTarget.value as Filters)}>FLUND</button>
+      <button className={(typeFilter === 'lend_usd') ? ACTIVE_FILTER_STYLE : DEFAULT_FILTER_STYLE} value='lend_usd' onClick={(e) => setTypeFilter(e.currentTarget.value as Filters)}>Lend</button>
     </div>
   )
 
   return (
     <AnalyticsWrapper
+      timeFilter={timeFilter}
       setTimeFilter={setTimeFilter}
       isPending={isPending}
       isError={isError}
       filterControls={filterControls}
+      title='Total Value Locked'
     >
       <ResponsiveContainer width={'100%'} height={'100%'}>
         <LineChart

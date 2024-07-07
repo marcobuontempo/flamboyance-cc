@@ -12,6 +12,9 @@ type ClaimEntry = Record<string, string | number>;
 
 type Filters = 'claims' | 'claims_usd';
 
+const DEFAULT_FILTER_STYLE = 'px-3 border border-solid border-black';
+const ACTIVE_FILTER_STYLE = DEFAULT_FILTER_STYLE + ' font-bold';
+
 const selectData = (data: AnalyticsClaim[], typeFilter: Filters) => {
   const selected = data.reduce<Array<ClaimEntry>>((acc, current) => {
     const dateFormatted = current.date.split('T')[0];
@@ -45,6 +48,7 @@ export default function Claims({ }: Props) {
 
   const {
     data,
+    timeFilter,
     setTimeFilter,
     isPending,
     isError,
@@ -56,17 +60,19 @@ export default function Claims({ }: Props) {
 
   const filterControls = (
     <div>
-      <button className='px-3 border border-solid border-black' value='claims' onClick={(e) => setTypeFilter(e.currentTarget.value as Filters)}>#</button>
-      <button className='px-3 border border-solid border-black' value='claims_usd' onClick={(e) => setTypeFilter(e.currentTarget.value as Filters)}>$</button>
+      <button className={(typeFilter === 'claims') ? ACTIVE_FILTER_STYLE : DEFAULT_FILTER_STYLE} value='claims' onClick={(e) => setTypeFilter(e.currentTarget.value as Filters)}>#</button>
+      <button className={(typeFilter === 'claims_usd') ? ACTIVE_FILTER_STYLE : DEFAULT_FILTER_STYLE} value='claims_usd' onClick={(e) => setTypeFilter(e.currentTarget.value as Filters)}>$</button>
     </div>
   )
 
   return (
     <AnalyticsWrapper
+      timeFilter={timeFilter}
       setTimeFilter={setTimeFilter}
       isPending={isPending}
       isError={isError}
       filterControls={filterControls}
+      title='Claims'
     >
       <ResponsiveContainer width={'100%'} height={'100%'}>
         <BarChart

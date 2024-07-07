@@ -7,7 +7,7 @@ import WalletSelector from "../../components/WalletSelector";
 const links: SidebarLinks = [
   {
     text: 'Overview',
-    to: '/wallet',
+    to: '/wallet/overview',
   },
   {
     text: 'Claims',
@@ -35,22 +35,20 @@ const links: SidebarLinks = [
   },
 ];
 
-export type WalletContextType = [
-  string,
-]
+export type WalletContextType = [string,];
 
 type Props = {}
 
 export default function WalletPage({ }: Props) {
   const [address, setAddress] = useState<string | null>(null);
-  const [seearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
 
   useEffect(() => {
-    const queryAddress = seearchParams.get('address');
+    const queryAddress = searchParams.get('address');
     if (queryAddress) {
       setAddress(queryAddress);
     }
-  }, [seearchParams])
+  }, [searchParams])
 
   const sidebarHeader = <>
     <p className='text-xs break-words'>Address: {address || 'none'}</p>
@@ -61,6 +59,8 @@ export default function WalletPage({ }: Props) {
       navHeader={sidebarHeader}
       navLinks={links}
       preserveParams={['address']}
+      baseURL='wallet'
+      redirectURL='overview'
     >
       {
         address ?

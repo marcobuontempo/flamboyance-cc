@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import apiClient from '../../../services/api-client';
 import { LiveDataPrice } from '../../../types';
+import { tokenHashToData } from '../../../utils/helpers';
 
 type Props = {}
 
@@ -9,7 +10,13 @@ const fetchData = async () => {
 }
 
 const selectData = (data: LiveDataPrice[]) => {
-  return data;
+  return data.map(token => {
+    const tokenData = tokenHashToData(token.hash);
+    return {
+      image: tokenData?.image,
+      ...token,
+    }
+  });
 }
 
 export default function Overview({ }: Props) {
@@ -28,11 +35,10 @@ export default function Overview({ }: Props) {
   }
 
   return (
-    <table className='m-2 table border border-solid border-black'>
+    <table className='m-2 table'>
       <thead>
         <tr className='bg-blue-300'>
-          <th></th>
-          <th className='p-1 border border-solid border-black'>Token</th>
+          <th className='p-1 border border-solid border-black' colSpan={2}>Token</th>
           <th className='p-1 border border-solid border-black'>Price</th>
         </tr>
       </thead>
@@ -41,12 +47,12 @@ export default function Overview({ }: Props) {
           data.map(token => {
             return (
               <tr key={token.hash} className='border border-solid border-black'>
-                <td className='p-1 border border-solid border-black'>IMG</td>
-                <td className='p-1 border border-solid border-black'>
+                <td className='p-1 border border-solid border-black'><img src={token.image} width={50} height={50} className='object-contain max-w-fit p-2' /></td>
+                <td className='p-1 border border-solid border-black text-center'>
                   <p>{token.symbol}</p>
                   <p className='text-xs italic'>({token.unwrappedSymbol})</p>
                 </td>
-                <td className='p-1 border border-solid border-black'>{token.usd_price}</td>
+                <td className='p-2 border border-solid border-black text-right'>{token.usd_price.toFixed(8)}</td>
               </tr>
             )
           })

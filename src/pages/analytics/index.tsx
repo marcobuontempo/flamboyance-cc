@@ -5,7 +5,7 @@ import { SidebarLinks } from '../../types';
 const links: SidebarLinks = [
   {
     text: 'Overview',
-    to: '/analytics',
+    to: '/analytics/overview',
   },
   {
     text: 'Claims',
@@ -25,7 +25,7 @@ type Props = {}
 
 export default function AnalyticsPage({ }: Props) {
   return (
-    <MainWrapper navLinks={links}>
+    <MainWrapper navLinks={links} baseURL='analytics' redirectURL='overview'>
       <Outlet />
     </MainWrapper>
   )

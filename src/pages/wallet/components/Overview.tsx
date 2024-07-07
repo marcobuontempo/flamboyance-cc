@@ -14,9 +14,8 @@ type BalanceItem = {
   symbol: string;
   wholeAmount: number;
   value: number;
+  colour: string;
 }
-
-const COLOURS = ["#FF0000", "#FF00FF", "#FFFF00", "#00FF00", "#00FFFF", "#0000FF", "#000000", "#FFFFFF"];
 
 const fetchWalletData = async (address: string) => {
   return apiClient.getWalletWalletLatest(address);
@@ -67,18 +66,19 @@ export default function Overview({ }: Props) {
     ? Object.entries(walletQuery.data.balances).reduce<BalanceItem[]>((acc, [token, amount]) => {
       if (!token.startsWith('0x')) return acc;
 
-      const tokenInfo = tokenHashToData(token);
+      const tokenData = tokenHashToData(token);
       const price = pricesQuery.data.find((entry) => entry.hash === token)?.usd_price || 0;
-      if (!tokenInfo || !price) return acc;
+      if (!tokenData || !price) return acc;
 
-      const amountAdjusted = parseInt(amount) / Math.pow(10, tokenInfo.decimals);
+      const amountAdjusted = parseInt(amount) / Math.pow(10, tokenData.decimals);
 
       acc.push({
         hash: token,
-        image: 'IMG',
-        symbol: tokenInfo.symbol,
+        image: tokenData.image,
+        symbol: tokenData.symbol,
         wholeAmount: amountAdjusted,
         value: amountAdjusted * price,
+        colour: tokenData.colour,
       });
 
       return acc;
@@ -97,7 +97,7 @@ export default function Overview({ }: Props) {
   };
 
   return (
-    <div className='w-full h-full flex flex-col'>
+    <div className='w-full h-full flex flex-col justify-between'>
       <div>
         <p>Address: <span>{stats.walletAddress}</span></p>
         <p>Wallet Age: <span>{stats.walletAge}</span></p>
@@ -105,11 +105,10 @@ export default function Overview({ }: Props) {
       </div>
 
       <div className='flex min-h-64'>
-        <table className='m-2 table border border-solid border-black'>
+        <table className='m-2 table'>
           <thead>
             <tr className='bg-blue-300'>
-              <th></th>
-              <th className='p-1 border border-solid border-black'>Token</th>
+              <th className='p-1 border border-solid border-black' colSpan={2}>Token</th>
               <th className='p-1 border border-solid border-black'>Amount</th>
               <th className='p-1 border border-solid border-black'>Value (USD)</th>
             </tr>
@@ -119,10 +118,10 @@ export default function Overview({ }: Props) {
               balances.map(balance => {
                 return (
                   <tr key={balance.hash}>
-                    <td className='border border-solid border-black'><img src={balance.image} /></td>
-                    <td className='border border-solid border-black'>{balance.symbol}</td>
-                    <td className='border border-solid border-black'>{balance.wholeAmount}</td>
-                    <td className='border border-solid border-black'>{balance.value}</td>
+                    <td className='border border-solid border-black p-2'><img src={balance.image} width={50} height={50} className='object-contain max-w-fit p-2' /></td>
+                    <td className='border border-solid border-black p-2'>{balance.symbol}</td>
+                    <td className='border border-solid border-black text-right p-2'>{balance.wholeAmount.toFixed(8)}</td>
+                    <td className='border border-solid border-black text-right p-2'>{balance.value.toFixed(8)}</td>
                   </tr>
                 )
               })
@@ -135,10 +134,7 @@ export default function Overview({ }: Props) {
           height={'100%'}
           width={'100%'}
         >
-          <PieChart
-            width={250}
-            height={250}
-          >
+          <PieChart>
             <Pie
               data={balances}
               dataKey='value'
@@ -153,7 +149,7 @@ export default function Overview({ }: Props) {
                 balances.map((entry, index) => {
                   return <Cell
                     key={`cell-${index}`}
-                    fill={COLOURS[index % COLOURS.length]}
+                    fill={entry.colour}
                     style={{
                       outline: 'none',
                     }}

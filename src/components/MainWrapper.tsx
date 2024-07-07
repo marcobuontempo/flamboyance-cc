@@ -1,6 +1,7 @@
-import { ReactNode } from 'react';
+import { ReactNode, useEffect } from 'react';
 import Sidebar from "./Sidebar";
 import { SidebarLinks } from '../types';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 type Props = {
   children: ReactNode;
@@ -8,9 +9,28 @@ type Props = {
   navFooter?: ReactNode;
   navLinks?: SidebarLinks;
   preserveParams?: string[];
+  baseURL?: string;
+  redirectURL?: string;
 }
 
-export default function MainWrapper({ children, navHeader, navFooter, navLinks, preserveParams }: Props) {
+export default function MainWrapper({
+  children,
+  navHeader,
+  navFooter,
+  navLinks,
+  preserveParams,
+  baseURL,
+  redirectURL,
+}: Props) {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (redirectURL && location.pathname === `/${baseURL}`) {
+      navigate(`/${baseURL}/${redirectURL}`);
+    }
+  }, [location, navigate]);
+
   return (
     <main className='w-full flex flex-wrap justify-center items-stretch flex-1 p-5 bg-blue-100'>
       {

@@ -15,7 +15,7 @@ export default function useAnalyticsData<TransformedData>({
   filters = [],
 }: AnalyticsDataHookParams<TransformedData>) {
 
-  const [timeFilter, setTimeFilter] = useState('monthly');
+  const [timeFilter, setTimeFilter] = useState<'daily' | 'monthly' | '30-rolling'>('monthly');
 
   const fetchData = async () => {
     let data;

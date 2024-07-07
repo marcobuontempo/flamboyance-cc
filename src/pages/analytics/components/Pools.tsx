@@ -1,8 +1,7 @@
-import { AnalyticsClaim, AnalyticsPool } from "../../../types";
+import { AnalyticsPool } from "../../../types";
 import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
-import { poolHashToData, tokenHashToData } from "../../../utils/helpers";
+import { poolHashToData } from "../../../utils/helpers";
 import { useState } from "react";
-import tokens from "../../../flamingo-data/tokens";
 import useAnalyticsData from "../../../hooks/useAnalyticsData";
 import AnalyticsWrapper from "../../../components/AnalyticsWrapper";
 import pools from "../../../flamingo-data/pools";
@@ -13,8 +12,10 @@ type PoolEntry = Record<string, string | number>;
 
 type Filters = 'swaps' | 'volume_usd_total';
 
+const DEFAULT_FILTER_STYLE = 'px-3 border border-solid border-black';
+const ACTIVE_FILTER_STYLE = DEFAULT_FILTER_STYLE + ' font-bold';
+
 const selectData = (data: AnalyticsPool[], typeFilter: Filters) => {
-  console.log(data);
   const selected = data.reduce<Array<PoolEntry>>((acc, current) => {
     const dateFormatted = current.date.split('T')[0];
     const entry: PoolEntry = {
@@ -42,8 +43,6 @@ const selectData = (data: AnalyticsPool[], typeFilter: Filters) => {
     return aDate.localeCompare(bDate);
   })
 
-  console.log(sorted)
-
   return sorted;
 };
 
@@ -52,6 +51,7 @@ export default function Pools({ }: Props) {
 
   const {
     data,
+    timeFilter,
     setTimeFilter,
     isPending,
     isError,
@@ -63,17 +63,19 @@ export default function Pools({ }: Props) {
 
   const filterControls = (
     <div>
-      <button className='px-3 border border-solid border-black' value='swaps' onClick={(e) => setTypeFilter(e.currentTarget.value as Filters)}>Swaps</button>
-      <button className='px-3 border border-solid border-black' value='volume_usd_total' onClick={(e) => setTypeFilter(e.currentTarget.value as Filters)}>Volume $</button>
+      <button className={(typeFilter === 'swaps') ? ACTIVE_FILTER_STYLE : DEFAULT_FILTER_STYLE} value='swaps' onClick={(e) => setTypeFilter(e.currentTarget.value as Filters)}>Swaps</button>
+      <button className={(typeFilter === 'volume_usd_total') ? ACTIVE_FILTER_STYLE : DEFAULT_FILTER_STYLE} value='volume_usd_total' onClick={(e) => setTypeFilter(e.currentTarget.value as Filters)}>Volume $</button>
     </div>
   )
 
   return (
     <AnalyticsWrapper
+      timeFilter={timeFilter}
       setTimeFilter={setTimeFilter}
       isPending={isPending}
       isError={isError}
       filterControls={filterControls}
+      title='Pools'
     >
       <ResponsiveContainer width={'100%'} height={'100%'}>
         <BarChart

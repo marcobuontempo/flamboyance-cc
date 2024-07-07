@@ -40,7 +40,7 @@ const router = createBrowserRouter([
         element: <WalletPage />,
         children: [
           {
-            path: '/wallet',
+            path: '/wallet/overview',
             element: <WalletOverview />,
           },
           {
@@ -74,7 +74,7 @@ const router = createBrowserRouter([
         element: <LiveDataPage />,
         children: [
           {
-            path: '/live-data',
+            path: '/live-data/overview',
             element: <LiveDataOverview />,
           },
           {
@@ -108,7 +108,7 @@ const router = createBrowserRouter([
         element: <AnalyticsPage />,
         children: [
           {
-            path: '/analytics',
+            path: '/analytics/overview',
             element: <AnalyticsOverview />,
           },
           {
