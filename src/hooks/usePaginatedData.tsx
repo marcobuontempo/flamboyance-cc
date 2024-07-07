@@ -39,7 +39,7 @@ export default function usePaginatedData<RawType, TransformedData>({
     return data.map(transformData);
   }
 
-  const { data, isPending, isError } = useQuery({
+  const { data, isPending, isError, refetch } = useQuery({
     queryKey: [queryKey, pageIndex],
     queryFn: fetchData,
     select: selectData,
@@ -52,5 +52,6 @@ export default function usePaginatedData<RawType, TransformedData>({
     pageCount: pageCount.current,
     isPending,
     isError,
+    refetch,
   }
 }

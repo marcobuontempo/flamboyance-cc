@@ -4,6 +4,8 @@ import { LiveDataPrice } from '../../../types';
 import { convertFiatCurrency, tokenHashToData } from '../../../utils/helpers';
 import { useContext } from 'react';
 import { UserSessionContext } from '../../../contexts/UserSessionContext';
+import LoadingSpinner from '../../../components/LoadingSpinner';
+import RetryFetch from '../../../components/RetryFetch';
 
 type Props = {}
 
@@ -25,29 +27,29 @@ const selectData = (data: LiveDataPrice[], exchangeRate: number | undefined) => 
 export default function Overview({ }: Props) {
   const sessionContext = useContext(UserSessionContext);
 
-  const { isPending, isError, data } = useQuery({
+  const { isPending, isError, data, refetch } = useQuery({
     queryKey: ['live-data-prices'],
     queryFn: () => fetchData(),
     select: (d) => selectData(d, sessionContext?.exchangeRate),
   })
 
   if (isPending) {
-    return <div>Loading...</div>;
+    return <LoadingSpinner />;
   }
 
   if (isError) {
-    return <div>Error loading data</div>;
+    return <RetryFetch refetch={refetch} />;
   }
 
   return (
-    <table className='m-2 table'>
+    <table className='m-2 table neobrutalist-border-1'>
       <thead>
-        <tr className='bg-blue-300'>
+        <tr className='bg-cyan-100 border-b-2 border-black border-solid'>
           <th className='p-1 border border-solid border-black' colSpan={2}>Token</th>
           <th className='p-1 border border-solid border-black'>Price ({sessionContext?.currency})</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody className='bg-purple-50'>
         {
           data.map(token => {
             return (
@@ -55,7 +57,7 @@ export default function Overview({ }: Props) {
                 <td className='p-1 border border-solid border-black'><img src={token.image} width={50} height={50} className='object-contain max-w-fit p-2' /></td>
                 <td className='p-1 border border-solid border-black text-center'>
                   <p>{token.symbol}</p>
-                  <p className='text-xs italic'>({token.unwrappedSymbol})</p>
+                  <p className='text-xs italic contrast-50'>({token.unwrappedSymbol})</p>
                 </td>
                 <td className='p-2 border border-solid border-black text-right'>{token.fiat_price}</td>
               </tr>

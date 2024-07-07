@@ -101,6 +101,7 @@ export default function Claims() {
     pageCount,
     isPending,
     isError,
+    refetch,
   } = usePaginatedData<WalletClaim, TransformedWalletClaim>(options);
 
   return (
@@ -112,6 +113,8 @@ export default function Claims() {
       setPageIndex={setPageIndex}
       isPending={isPending}
       isError={isError}
+      refetch={refetch}
+      title='Claims'
     />
   )
 }

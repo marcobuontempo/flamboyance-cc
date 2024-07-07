@@ -78,6 +78,7 @@ export default function Transfers() {
     pageCount,
     isPending,
     isError,
+    refetch,
   } = usePaginatedData<WalletTransfer, TransformedWalletTransfer>(options);
 
   return (
@@ -89,6 +90,8 @@ export default function Transfers() {
       setPageIndex={setPageIndex}
       isPending={isPending}
       isError={isError}
+      refetch={refetch}
+      title='Transfers'
     />
   )
 }

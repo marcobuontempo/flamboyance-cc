@@ -13,8 +13,8 @@ type PoolEntry = Record<string, string | number>;
 
 type Filters = 'swaps' | 'volume_usd_total';
 
-const DEFAULT_FILTER_STYLE = 'px-3 border border-solid border-black';
-const ACTIVE_FILTER_STYLE = DEFAULT_FILTER_STYLE + ' font-bold';
+const DEFAULT_FILTER_STYLE = 'px-3 neobrutalist-border-1 bg-cyan-100';
+const ACTIVE_FILTER_STYLE = 'font-bold bg-cyan-300 ' + DEFAULT_FILTER_STYLE;
 
 const selectData = (data: AnalyticsPool[], typeFilter: Filters) => {
   const selected = data.reduce<Array<PoolEntry>>((acc, current) => {
@@ -57,6 +57,7 @@ export default function Pools({ }: Props) {
     setTimeFilter,
     isPending,
     isError,
+    refetch,
   } = useAnalyticsData<PoolEntry>({
     queryKey: 'pool_data',
     transformData: (data) => selectData(data, typeFilter),
@@ -76,6 +77,7 @@ export default function Pools({ }: Props) {
       setTimeFilter={setTimeFilter}
       isPending={isPending}
       isError={isError}
+      refetch={refetch}
       filterControls={filterControls}
       title='Pools'
     >
@@ -83,7 +85,7 @@ export default function Pools({ }: Props) {
         <BarChart
           data={data}
         >
-          <CartesianGrid strokeDasharray={'3 3'} />
+          <CartesianGrid strokeDasharray={'3 3'} fill='#faf5ff' />
           <XAxis dataKey='date' />
           <YAxis />
           <Tooltip />

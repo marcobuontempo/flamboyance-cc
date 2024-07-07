@@ -107,6 +107,7 @@ export default function Lending() {
     pageCount,
     isPending,
     isError,
+    refetch,
   } = usePaginatedData<WalletLend, TransformedWalletLend>(options);
 
   return (
@@ -118,6 +119,8 @@ export default function Lending() {
       setPageIndex={setPageIndex}
       isPending={isPending}
       isError={isError}
+      refetch={refetch}
+      title='Lending'
     />
   )
 }

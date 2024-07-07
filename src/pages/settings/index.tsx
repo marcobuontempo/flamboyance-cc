@@ -24,30 +24,34 @@ export default function SettingsPage({ }: Props) {
   const handleSaveSettings = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const settings: LocalStorageSettings = {
-      currency,
+    if (confirm('Save Settings? This will refresh your webpage.')) {
+      const settings: LocalStorageSettings = {
+        currency,
+      }
+      setLocalStorageSettings(settings);
+
+      sessionContext?.setUserSession({
+        ...sessionContext,
+        currency,
+      });
+
+      location.reload();  // simple way to ensure settings are reloaded into session (such as exchange rate fetch, on website load)
     }
-    setLocalStorageSettings(settings);
-
-    sessionContext?.setUserSession({
-      ...sessionContext,
-      currency,
-    });
-
-    location.reload();  // simple way to ensure settings are reloaded into session (such as exchange rate fetch, on website load)
   }
 
   const handleClearLocalData = () => {
-    localStorage.clear();
-    location.reload();
+    if (confirm('Clear all local data?')) {
+      localStorage.clear();
+      location.reload();
+    }
   }
 
   return (
     <MainWrapper>
-      <h2>Settings</h2>
+      <h2 className='text-2xl uppercase text-center p-2 font-bold'>Settings</h2>
       <form className='h-full flex flex-col text-center' onSubmit={handleSaveSettings}>
         <fieldset className='w-full p-3'>
-          <label className='block' htmlFor='currency'>Currency</label>
+          <label className='block text-lg font-bold text-purple-800' htmlFor='currency'>Currency</label>
           <select id='currency' onChange={handleCurrencyChange} value={currency}>
             <option value='USD'>US Dollar (USD)</option>
             <option value='EUR'>Euro (EUR)</option>
@@ -62,9 +66,9 @@ export default function SettingsPage({ }: Props) {
           </select>
         </fieldset>
 
-        <div className='flex flex-col justify-center'>
-          <button className='block' type='submit'>Save Settings</button>
-          <button className='block' id='clear-wallets' type='button' onClick={handleClearLocalData}>Clear Local Data</button>
+        <div className='flex flex-col justify-center gap-2 pt-5'>
+          <button className='neobrutalist-border-1 font-bold px-2 py-1 bg-cyan-300 hover:bg-purple-50' type='submit'>Save Settings</button>
+          <button className='neobrutalist-border-1 font-bold px-2 py-1 bg-red-500 hover:bg-red-700' id='clear-wallets' type='button' onClick={handleClearLocalData}>Clear Local Data</button>
         </div>
       </form>
     </MainWrapper>

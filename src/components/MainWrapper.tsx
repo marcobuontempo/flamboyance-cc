@@ -32,7 +32,7 @@ export default function MainWrapper({
   }, [location, navigate]);
 
   return (
-    <main className='w-full flex flex-wrap justify-center items-stretch flex-1 p-5 bg-blue-100'>
+    <main className='w-full flex flex-wrap justify-center items-stretch flex-1 p-5 bg-cyan-50'>
       {
         navLinks &&
         <div className='w-full sm:w-1/5 p-2'>
@@ -45,7 +45,7 @@ export default function MainWrapper({
         </div>
       }
       <div className={`w-full p-2 ${navLinks ? 'sm:w-4/5' : null}`}>
-        <div className='w-full h-full border-2 border-solid border-black flex flex-col justify-center items-center'>
+        <div className='w-full h-full flex flex-col justify-center items-center neobrutalist-border-2 bg-purple-100'>
           {children}
         </div>
       </div>

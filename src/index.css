@@ -2,8 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-html, 
-body, 
+html,
+body,
 #root {
   min-height: 100dvh;
   cursor: default;
@@ -14,6 +14,31 @@ body,
   flex-direction: column;
 }
 
+/* Scroll Bar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #fafafa;
+}
+::-webkit-scrollbar-thumb {
+  background: #164e63;
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #083344;
+}
+
 a {
   cursor: pointer;
+}
+
+.neobrutalist-border-1 {
+  border: 1px solid black;
+  box-shadow: 2px 2px 0px black;
+}
+
+.neobrutalist-border-2 {
+  border: 2px solid black;
+  box-shadow: 4px 4px 0px black;
 }

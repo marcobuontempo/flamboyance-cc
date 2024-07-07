@@ -12,8 +12,8 @@ type TVLEntry = Record<string, string | number>;
 
 type Filters = 'pool_usd' | 'flund_usd' | 'lend_usd';
 
-const DEFAULT_FILTER_STYLE = 'px-3 border border-solid border-black';
-const ACTIVE_FILTER_STYLE = DEFAULT_FILTER_STYLE + ' font-bold';
+const DEFAULT_FILTER_STYLE = 'px-3 neobrutalist-border-1 bg-cyan-100';
+const ACTIVE_FILTER_STYLE = 'font-bold bg-cyan-300 ' + DEFAULT_FILTER_STYLE;
 
 const selectData = (data: AnalyticsTotalValueLocked[], typeFilter: Filters, exchangeRate: number | undefined) => {
   const selected = data.reduce<Array<TVLEntry>>((acc, current) => {
@@ -45,6 +45,7 @@ export default function TotalValueLocked({ }: Props) {
     setTimeFilter,
     isPending,
     isError,
+    refetch,
   } = useAnalyticsData<TVLEntry>({
     queryKey: 'tvl_data',
     transformData: (data) => selectData(data, typeFilter, sessionContext?.exchangeRate),
@@ -65,6 +66,7 @@ export default function TotalValueLocked({ }: Props) {
       setTimeFilter={setTimeFilter}
       isPending={isPending}
       isError={isError}
+      refetch={refetch}
       filterControls={filterControls}
       title={`Total Value Locked (${sessionContext?.currency})`}
     >
@@ -72,11 +74,11 @@ export default function TotalValueLocked({ }: Props) {
         <LineChart
           data={data}
         >
-          <CartesianGrid strokeDasharray={'3 3'} />
+          <CartesianGrid strokeDasharray={'3 3'} fill='#faf5ff' />
           <XAxis dataKey='date' />
           <YAxis />
           <Tooltip />
-          <Line dataKey='value' />
+          <Line dataKey='value' stroke='#06b6d4' strokeWidth={2} />
         </LineChart>
       </ResponsiveContainer>
 

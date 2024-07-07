@@ -5,12 +5,12 @@ import { Link, NavLink } from 'react-router-dom';
 type Props = {}
 
 
-const NAVLINK_DEFAULT_STYLE = 'inline-block text-sm sm:w-24 w-16 py-1 text-center';
-const NAVLINK_ACTIVE_STYLE = NAVLINK_DEFAULT_STYLE + ' font-bold border-2'
+const NAVLINK_DEFAULT_STYLE = 'inline-block text-sm sm:w-24 w-18 py-1 text-center neobrutalist-border-1 bg-cyan-100 hover:bg-cyan-200';
+const NAVLINK_ACTIVE_STYLE = NAVLINK_DEFAULT_STYLE + ' font-bold border-2 bg-purple-100 hover:bg-purple-200'
 
 export default function Navbar({ }: Props) {
   return (
-    <nav className='relative mx-auto flex h-16 items-center justify-between sm:px-5 px-2'>
+    <nav className='relative mx-auto flex h-16 items-center justify-between sm:px-5 px-2 border-black border-b-2 bg-cyan-300'>
       <Link to='/' className='h-full flex items-end z-10 hover:contrast-125'>
         <img src='images/logo.png' className='h-full py-2 px-1 object-contain' alt='Flamboyance Logo' />
       </Link>
@@ -47,7 +47,7 @@ export default function Navbar({ }: Props) {
         <li>
           <NavLink
             to='/settings'
-            className={({ isActive }) => isActive ? NAVLINK_ACTIVE_STYLE : NAVLINK_DEFAULT_STYLE}>
+            className={({ isActive }) => isActive ? NAVLINK_ACTIVE_STYLE + ' sm:w-fit px-2' : NAVLINK_DEFAULT_STYLE + ' sm:w-fit px-2'}>
             <FontAwesomeIcon icon={faGears} />
           </NavLink>
         </li>

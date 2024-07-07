@@ -2,6 +2,9 @@ import { faBackwardFast, faBackwardStep, faForwardFast, faForwardStep } from '@f
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ColumnDef, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table';
 import { Dispatch } from 'react';
+import LoadingSpinner from './LoadingSpinner';
+import { QueryObserverResult, RefetchOptions } from '@tanstack/react-query';
+import RetryFetch from './RetryFetch';
 
 type Props<T> = {
   data: T[] | undefined;
@@ -11,6 +14,8 @@ type Props<T> = {
   setPageIndex: Dispatch<number>;
   isPending: boolean;
   isError: boolean;
+  refetch: (options?: RefetchOptions) => Promise<QueryObserverResult<any, Error>>;
+  title?: string;
 }
 
 export default function TableWrapper<T>({
@@ -21,18 +26,24 @@ export default function TableWrapper<T>({
   setPageIndex,
   isPending,
   isError,
+  refetch,
+  title,
 }: Props<T>) {
 
   let content;
 
   if (isPending) {
-    content = <div>Loading...</div>;
+    content = <LoadingSpinner />;
   } else if (isError) {
-    content = <div>Error loading data</div>;
+    content = <RetryFetch refetch={refetch} />;
   } else if (!data) {
     content = null;
   } else if (data.length === 0) {
-    content = <div>No data...</div>
+    content = (
+      <div className='w-full h-full text-center flex flex-col justify-center items-center'>
+        No data.
+      </div>
+    )
   } else {
     const table = useReactTable({
       data,
@@ -43,11 +54,11 @@ export default function TableWrapper<T>({
     });
 
     content = (
-      <table className='w-full'>
+      <table className='w-full border-2 border-solid border-black m-2'>
         <thead>
           {table.getHeaderGroups().map(header => {
-            return <tr key={header.id} className='sticky top-0'>{header.headers.map(cell => {
-              return <th key={cell.id} colSpan={cell.colSpan}>
+            return <tr key={header.id} className='sticky top-0 bg-purple-200'>{header.headers.map(cell => {
+              return <th key={cell.id} colSpan={cell.colSpan} className='border-2 border-solid border-black px-2'>
                 {flexRender(cell.column.columnDef.header, cell.getContext())}
               </th>
             })}
@@ -59,7 +70,7 @@ export default function TableWrapper<T>({
           {
             table.getRowModel().rows.map(row => {
               return <tr key={row.id}>{row.getVisibleCells().map(cell => {
-                return <td key={cell.id} className='text-xs'>
+                return <td key={cell.id} className='text-xs border border-solid border-black bg-purple-50'>
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
               })}
@@ -73,11 +84,12 @@ export default function TableWrapper<T>({
 
   return (
     <div className='flex flex-col w-full h-full'>
+      {title && <h2 className='text-2xl uppercase text-center p-2 font-bold'>{title}</h2>}
       <div className='flex-1 w-full overflow-x-scroll'>
         {content}
       </div>
 
-      <div className='relative w-full flex justify-center'>
+      <div className='relative w-full flex justify-center p-2'>
         <div className='flex'>
           <button
             className='px-1 disabled:opacity-30'
@@ -113,8 +125,8 @@ export default function TableWrapper<T>({
         </div>
 
         <form className='absolute right-2'>
-          <input className='w-16' min={1} max={pageCount} type='number'></input>
-          <button className='px-2' type='submit'>Go</button>
+          <input className='w-16 border border-black border-solid' min={1} max={pageCount} type='number'></input>
+          <button className='ml-2 px-3 bg-cyan-200 font-bold neobrutalist-border-1' type='submit'>Go</button>
         </form>
       </div>
     </div>

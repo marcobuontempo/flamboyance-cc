@@ -1,9 +1,11 @@
 import { Outlet, useSearchParams } from "react-router-dom";
 import MainWrapper from "../../components/MainWrapper"
 import { SidebarLinks } from "../../types";
-import { useContext, useEffect, useState } from "react";
+import { MouseEvent, useContext, useEffect, useState } from "react";
 import WalletSelector from "../../components/WalletSelector";
 import { UserSessionContext } from "../../contexts/UserSessionContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faRotate } from "@fortawesome/free-solid-svg-icons";
 
 const links: SidebarLinks = [
   {
@@ -60,9 +62,28 @@ export default function WalletPage({ }: Props) {
     }
   }, [searchParams])
 
-  const sidebarHeader = <>
-    <p className='text-xs break-words'>Address: {address || 'none'}</p>
-  </>
+  const handleChangeWallet = (e: MouseEvent<SVGElement>) => {
+    e.preventDefault();
+    searchParams.delete('address');
+    setSearchParams(searchParams);
+    sessionContext?.setUserSession({
+      ...sessionContext,
+      selectedWallet: null,
+    })
+    setAddress(null);
+  }
+
+  const sidebarHeader = (
+    <div>
+      <p className='flex-1 text-xs break-words text-center'><b>Address:</b> {address || 'none'}</p>
+      {
+        address &&
+        <button className='w-full text-center hover:cursor-default'>
+          <FontAwesomeIcon icon={faRotate} className='hover:cursor-pointer hover:scale-125' onClick={handleChangeWallet} />
+        </button>
+      }
+    </div>
+  );
 
   return (
     <MainWrapper

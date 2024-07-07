@@ -74,6 +74,7 @@ export default function Transfers() {
     pageCount,
     isPending,
     isError,
+    refetch,
   } = usePaginatedData<LiveDataTransfer, TransformedLiveDataTransfer>(options);
 
   return (
@@ -85,6 +86,8 @@ export default function Transfers() {
       setPageIndex={setPageIndex}
       isPending={isPending}
       isError={isError}
+      refetch={refetch}
+      title='Transfers'
     />
   )
 }

@@ -109,6 +109,7 @@ export default function LiquidityPools() {
     pageCount,
     isPending,
     isError,
+    refetch,
   } = usePaginatedData<WalletLiquidityPool, TransformedWalletLiquidityPool>(options);
 
   return (
@@ -120,6 +121,8 @@ export default function LiquidityPools() {
       setPageIndex={setPageIndex}
       isPending={isPending}
       isError={isError}
+      refetch={refetch}
+      title='Liquidity Pools'
     />
   )
 }

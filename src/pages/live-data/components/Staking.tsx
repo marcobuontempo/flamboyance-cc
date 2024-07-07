@@ -83,6 +83,7 @@ export default function Staking() {
     pageCount,
     isPending,
     isError,
+    refetch,
   } = usePaginatedData<LiveDataStake, TransformedLiveDataStake>(options);
 
   return (
@@ -94,6 +95,8 @@ export default function Staking() {
       setPageIndex={setPageIndex}
       isPending={isPending}
       isError={isError}
+      refetch={refetch}
+      title='Staking'
     />
   )
 }

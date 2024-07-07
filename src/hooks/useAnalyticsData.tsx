@@ -31,7 +31,7 @@ export default function useAnalyticsData<TransformedData>({
     return Array.isArray(data) ? data : [data];
   }
 
-  const { data, isPending, isError } = useQuery({
+  const { data, isPending, isError, refetch } = useQuery({
     queryKey: [queryKey, timeFilter, ...filters],
     queryFn: fetchData,
     select: transformData,
@@ -43,5 +43,6 @@ export default function useAnalyticsData<TransformedData>({
     setTimeFilter,
     isPending,
     isError,
+    refetch,
   }
 }

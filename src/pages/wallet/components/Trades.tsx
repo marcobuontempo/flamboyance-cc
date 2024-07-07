@@ -97,6 +97,7 @@ export default function Trades() {
     pageCount,
     isPending,
     isError,
+    refetch,
   } = usePaginatedData<WalletTrade, TransformedWalletTrade>(options);
 
   return (
@@ -108,6 +109,8 @@ export default function Trades() {
       setPageIndex={setPageIndex}
       isPending={isPending}
       isError={isError}
+      refetch={refetch}
+      title='Trades'
     />
   )
 }
