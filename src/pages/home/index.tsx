@@ -76,12 +76,12 @@ export default function HomePage({ }: Props) {
       {
         (totalSupplyQuery.isPending || valueLockedQuery.isPending) ?
           <LoadingSpinner /> :
-          <div className='flex sm:flex-row flex-col justify-center items-center neobrutalist-border-2 sm:p-20 p-10 text-2xl bg-cyan-100'>
-            <div className='p-10 text-center'>
-              <h2 className='text-4xl font-bold text-purple-400 font-LexendMega'>Welcome to Flamboyance</h2>
+          <div className='flex sm:flex-row flex-col justify-center items-center neobrutalist-border-2 md:p-20 sm:p-10 text-2xl bg-cyan-100'>
+            <div className='p-5 sm:p-8 text-center'>
+              <h2 className='text-2xl sm:text-4xl font-bold text-purple-400 font-LexendMega'>Welcome to Flamboyance</h2>
               <p className='italic text-center text-lg'>a <a href='https://flamingo.finance/' target='_blank' className='font-bold text-purple-400'>Flamingo Finance</a> DeFi dashboard & explorer</p>
             </div>
-            <div className='w-fit'>
+            <div className='w-fit sm:text-xl text-lg'>
               <div className='py-2'>
                 <p className='font-bold'>Total FLM Supply:</p>
                 <p className='font-SpaceMono'>{totalSupplyQuery.data.toFixed(2)}</p>

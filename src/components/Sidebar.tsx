@@ -47,7 +47,7 @@ export default function Sidebar({ links, header, footer, className, preservePara
 
   return (
     <nav className={`flex sm:flex-row flex-col border-2 border-solid border-black bg-purple-50 neobrutalist-border-2 font-LexendMega sm:text-sm  ${className}`}>
-      <button className='sm:w-8 w-full bg-purple-200 p-1 text-center sm:border-r-2 border-b-2 border-solid border-black hover:bg-purple-300 overflow-hidden' onClick={handleToggleSidebar}>
+      <button className={`sm:w-8 w-full bg-purple-200 p-1 text-center border-solid border-black hover:bg-purple-300 overflow-hidden ${sidebarVisible ? 'sm:border-r-2 border-b-2' : 'border-0'}`} onClick={handleToggleSidebar}>
         <FontAwesomeIcon icon={faArrowRight} className={`rotate-270 sm:rotate-0 ${sidebarVisible ? 'rotate-90 sm:rotate-180' : null}`} />
       </button>
       {
