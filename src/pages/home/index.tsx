@@ -5,9 +5,37 @@ import { useContext } from "react"
 import { UserSessionContext } from "../../contexts/UserSessionContext"
 import LoadingSpinner from "../../components/LoadingSpinner"
 import RetryFetch from "../../components/RetryFetch"
+import styled, { keyframes } from "styled-components"
 
 type Props = {}
 
+const moveBackground = keyframes`
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
+`;
+
+const BackgroundMain = styled.main`
+  position: relative;
+  z-index: 1;
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url(/images/logo.png);
+    background-repeat: repeat;
+    background-size: 50px 50px;
+    opacity: 0.2;
+    z-index: -1;
+    animation: ${moveBackground} 60s linear infinite;
+  }
+`;
 
 export default function HomePage({ }: Props) {
   const sessionContext = useContext(UserSessionContext);
@@ -44,21 +72,27 @@ export default function HomePage({ }: Props) {
   }
 
   return (
-    <main className='w-full h-full flex-1 flex flex-col justify-center items-center bg-cyan-50'>
+    <BackgroundMain className='w-full h-full flex-1 flex flex-col justify-center items-center bg-cyan-50'>
       {
         (totalSupplyQuery.isPending || valueLockedQuery.isPending) ?
           <LoadingSpinner /> :
-          <div className='neobrutalist-border-2 sm:p-20 p-10 text-2xl bg-cyan-100'>
-            <div className='py-2'>
-              <p className='font-bold'>Total FLM Supply:</p>
-              <p className='font-SpaceMono'>{totalSupplyQuery.data.toFixed(2)}</p>
+          <div className='flex sm:flex-row flex-col justify-center items-center neobrutalist-border-2 sm:p-20 p-10 text-2xl bg-cyan-100'>
+            <div className='p-10 text-center'>
+              <h2 className='text-4xl font-bold text-purple-400 font-LexendMega'>Welcome to Flamboyance</h2>
+              <p className='italic text-center text-lg'>a <a href='https://flamingo.finance/' target='_blank' className='font-bold text-purple-400'>Flamingo Finance</a> DeFi dashboard & explorer</p>
             </div>
-            <div className='py-2'>
-              <p className='font-bold'>Total Value Locked ({sessionContext?.currency}):</p>
-              <p className='font-SpaceMono'>{valueLockedQuery.data}</p>
+            <div className='w-fit'>
+              <div className='py-2'>
+                <p className='font-bold'>Total FLM Supply:</p>
+                <p className='font-SpaceMono'>{totalSupplyQuery.data.toFixed(2)}</p>
+              </div>
+              <div className='py-2'>
+                <p className='font-bold'>Total Value Locked ({sessionContext?.currency}):</p>
+                <p className='font-SpaceMono'>{valueLockedQuery.data}</p>
+              </div>
             </div>
           </div>
       }
-    </main>
+    </BackgroundMain>
   )
 }

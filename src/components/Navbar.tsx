@@ -5,7 +5,7 @@ import { Link, NavLink } from 'react-router-dom';
 type Props = {}
 
 
-const NAVLINK_DEFAULT_STYLE = 'inline-block sm:text-sm text-xs px-2 py-1 sm:w-28 w-18 text-center neobrutalist-border-1 bg-cyan-100 hover:bg-cyan-200';
+const NAVLINK_DEFAULT_STYLE = 'inline-block sm:text-sm text-xs px-2 py-1 sm:w-30 w-18 text-center neobrutalist-border-1 bg-cyan-100 hover:bg-cyan-200';
 const NAVLINK_ACTIVE_STYLE = NAVLINK_DEFAULT_STYLE + ' font-bold border-2 bg-purple-100 hover:bg-purple-200'
 
 export default function Navbar({ }: Props) {
