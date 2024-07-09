@@ -14,7 +14,7 @@ type Props = {
   title?: string;
 }
 
-const DEFAULT_FILTER_STYLE = 'px-3 neobrutalist-border-1 bg-cyan-100 font-LexendMega';
+const DEFAULT_FILTER_STYLE = 'px-3 neobrutalist-border-1 bg-cyan-100 font-LexendMega hover:bg-cyan-200';
 const ACTIVE_FILTER_STYLE = 'font-bold bg-cyan-300 ' + DEFAULT_FILTER_STYLE;
 
 export default function AnalyticsWrapper({

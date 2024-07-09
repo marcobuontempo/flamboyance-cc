@@ -11,6 +11,7 @@ type Props = {
   preserveParams?: string[];
   baseURL?: string;
   redirectURL?: string;
+  className?: string;
 }
 
 export default function MainWrapper({
@@ -21,6 +22,7 @@ export default function MainWrapper({
   preserveParams,
   baseURL,
   redirectURL,
+  className,
 }: Props) {
   const navigate = useNavigate();
   const location = useLocation();
@@ -32,20 +34,21 @@ export default function MainWrapper({
   }, [location, navigate]);
 
   return (
-    <main className='w-full flex flex-wrap justify-center items-stretch flex-1 sm:p-5 p-0 bg-cyan-50 font-PublicSans'>
+    <main className={`w-full flex flex-wrap sm:flex-row flex-col justify-center items-stretch flex-1 sm:p-5 px-0 py-2 bg-cyan-50 font-PublicSans ${className}`}>
       {
-        navLinks &&
-        <div className='w-full sm:w-1/5 sm:p-2 sm:m-0 mb-5'>
+        (navLinks) &&
+        <div className={`flex sm:flex-row flex-col sm:p-2 pb-2 max-w-1/5`}>
           <Sidebar
             header={navHeader}
             footer={navFooter}
             links={navLinks}
             preserveParams={preserveParams}
+            className=''
           />
         </div>
       }
-      <div className={`w-full ${navLinks ? 'sm:w-4/5 sm:p-2' : null}`}>
-        <div className='w-full h-full flex flex-col justify-center items-center neobrutalist-border-2 bg-purple-100'>
+      <div className={`w-full flex-1 flex justify-center sm:items-center items-start sm:p-2 ${navLinks ? 'sm:w-4/5' : ''}`}>
+        <div className={`w-full h-full flex flex-col justify-center items-center neobrutalist-border-2 bg-purple-100 p-2 sm:p-0`}>
           {children}
         </div>
       </div>

@@ -8,11 +8,9 @@ import GlobalProvider from './contexts/GlobalProvider';
 const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  // <React.StrictMode>
   <GlobalProvider>
     <QueryClientProvider client={queryClient}>
       <RouterProvider router={router} />
     </QueryClientProvider>
   </GlobalProvider>
-  // </React.StrictMode>,
 )

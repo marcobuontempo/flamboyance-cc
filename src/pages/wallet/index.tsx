@@ -88,7 +88,7 @@ export default function WalletPage({ }: Props) {
   return (
     <MainWrapper
       navHeader={sidebarHeader}
-      navLinks={links}
+      navLinks={address ? links : undefined}
       preserveParams={['address']}
       baseURL='wallet'
       redirectURL='overview'

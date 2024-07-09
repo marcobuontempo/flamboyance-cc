@@ -28,6 +28,18 @@
     url(/fonts/Public_Sans/PublicSans-VariableFont_wght.ttf) format("truetype");
 }
 
+@layer components {
+  .neobrutalist-border-1 {
+    border: 1px solid black;
+    box-shadow: 2px 2px 0px black;
+  }
+
+  .neobrutalist-border-2 {
+    border: 2px solid black;
+    box-shadow: 4px 4px 0px black;
+  }
+}
+
 html,
 body,
 #root {
@@ -57,16 +69,6 @@ body,
 
 a {
   cursor: pointer;
-}
-
-.neobrutalist-border-1 {
-  border: 1px solid black;
-  box-shadow: 2px 2px 0px black;
-}
-
-.neobrutalist-border-2 {
-  border: 2px solid black;
-  box-shadow: 4px 4px 0px black;
 }
 
 .font-SpaceMono {

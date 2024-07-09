@@ -150,6 +150,7 @@ export default function Overview({ }: Props) {
             <ResponsiveContainer
               height={'100%'}
               width={'100%'}
+              minHeight={300}
             >
               <PieChart>
                 <Tooltip />

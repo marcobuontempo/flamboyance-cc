@@ -1,6 +1,8 @@
-import { ReactNode } from 'react';
+import { MouseEvent, ReactNode, useState } from 'react';
 import { NavLink, useSearchParams } from 'react-router-dom';
 import { SidebarLinks } from '../types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 type Props = {
   links?: SidebarLinks;
@@ -14,6 +16,8 @@ const SIDELINK_DEFAULT_STYLE = 'neobrutalist-border-1 w-full block text-center p
 const SIDELINK_ACTIVE_STYLE = 'font-bold bg-purple-200 ' + SIDELINK_DEFAULT_STYLE
 
 export default function Sidebar({ links, header, footer, className, preserveParams }: Props) {
+  const [sidebarVisible, setSidebarVisible] = useState(true);
+
   if (!links) {
     return null;
   }
@@ -36,17 +40,34 @@ export default function Sidebar({ links, header, footer, className, preservePara
     return linkTo;
   }
 
+  const handleToggleSidebar = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setSidebarVisible(!sidebarVisible);
+  }
+
   return (
-    <nav className={`w-full h-full px-2 border-2 border-solid border-black bg-purple-50 neobrutalist-border-2 font-LexendMega sm:text-sm  ${className}`}>
-      {header && <div>{header}</div>}
+    <nav className={`flex sm:flex-row flex-col border-2 border-solid border-black bg-purple-50 neobrutalist-border-2 font-LexendMega sm:text-sm  ${className}`}>
+      <button className='sm:w-8 w-full bg-purple-200 p-1 text-center sm:border-r-2 border-b-2 border-solid border-black hover:bg-purple-300 overflow-hidden' onClick={handleToggleSidebar}>
+        <FontAwesomeIcon icon={faArrowRight} className={`rotate-270 sm:rotate-0 ${sidebarVisible ? 'rotate-90 sm:rotate-180' : null}`} />
+      </button>
+      {
+        (sidebarVisible) &&
+        <div className='flex-1'>
+          {header && <div className='p-2 w-full'>{header}</div>}
 
-      <ul>
-        {links.map(link => {
-          return <li className='py-2 w-full' key={link.to}><NavLink className={({ isActive }) => isActive ? SIDELINK_ACTIVE_STYLE : SIDELINK_DEFAULT_STYLE} to={generateLink(link.to)}>{link.text}</NavLink></li>
-        })}
-      </ul>
+          <ul className='p-2'>
+            {links.map(link => {
+              return (
+                <li className='py-2 w-full' key={link.to}>
+                  <NavLink className={({ isActive }) => isActive ? SIDELINK_ACTIVE_STYLE : SIDELINK_DEFAULT_STYLE} to={generateLink(link.to)}>{link.text}</NavLink>
+                </li>
+              )
+            })}
+          </ul>
 
-      {footer && <div>{footer}</div>}
+          {footer && <div>{footer}</div>}
+        </div>
+      }
     </nav>
   )
 }

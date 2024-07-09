@@ -13,7 +13,7 @@ type PoolEntry = Record<string, string | number>;
 
 type Filters = 'swaps' | 'volume_usd_total';
 
-const DEFAULT_FILTER_STYLE = 'px-3 neobrutalist-border-1 bg-cyan-100 font-LexendMega';
+const DEFAULT_FILTER_STYLE = 'px-3 neobrutalist-border-1 bg-cyan-100 font-LexendMega hover:bg-cyan-200';
 const ACTIVE_FILTER_STYLE = 'font-bold bg-cyan-300 ' + DEFAULT_FILTER_STYLE;
 
 const selectData = (data: AnalyticsPool[], typeFilter: Filters) => {
@@ -81,7 +81,7 @@ export default function Pools({ }: Props) {
       filterControls={filterControls}
       title='Pools'
     >
-      <ResponsiveContainer width={'100%'} height={'100%'}>
+      <ResponsiveContainer width={'100%'} height={'100%'} minHeight={300}>
         <BarChart
           data={data}
         >
