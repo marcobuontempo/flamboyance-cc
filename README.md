@@ -1,30 +1,50 @@
-# flamboyance-cc
+# React + TypeScript + Vite
 
-## Contents
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-1. [About](#about)
-2. [Contributing](#contributing)
-3. [Future Plans](#future-plans-to-do)
-4. [License](#license)
+Currently, two official plugins are available:
 
-## About
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-[flamboyance.cc](https://www.flamboyance.com/) is an open-source front-end dashboard for [Flamingo Finance](https://flamingo.finance/), created as part of the official ['Dashboard-ATHON'](https://medium.com/flamingo-finance/earn-1-000-gas-in-flamingo-finances-dashboard-athon-9b68f758535e)
+## Expanding the ESLint configuration
 
-## Contributing
+If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
 
-This project is currently open to contributions
+- Configure the top-level `parserOptions` property like this:
 
-## Future Plans (To-Do)
+```js
+export default tseslint.config({
+  languageOptions: {
+    // other options...
+    parserOptions: {
+      project: ['./tsconfig.node.json', './tsconfig.app.json'],
+      tsconfigRootDir: import.meta.dirname,
+    },
+  },
+})
+```
 
-- [ ] format table data for better readability
-- [ ] add modal display to view detailed information about a selected table row
-- [ ] add conversion of hex addresses to NEO N3 'N...' addresses
-- [ ] improve homepage with better content
-- [ ] add more data charts
-- [ ] improve performance, display, and readability of existing charts
-- [ ] add UI themes
+- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
+- Optionally add `...tseslint.configs.stylisticTypeChecked`
+- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
 
-## License
+```js
+// eslint.config.js
+import react from 'eslint-plugin-react'
 
-MIT - refer to the [LICENSE](LICENSE)
+export default tseslint.config({
+  // Set the react version
+  settings: { react: { version: '18.3' } },
+  plugins: {
+    // Add the react plugin
+    react,
+  },
+  rules: {
+    // other rules...
+    // Enable its recommended rules
+    ...react.configs.recommended.rules,
+    ...react.configs['jsx-runtime'].rules,
+  },
+})
+```

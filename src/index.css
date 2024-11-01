@@ -3,82 +3,26 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: "Space Mono";
-  src: local("Space Mono"),
-    url(/fonts/Space_Mono/SpaceMono-Regular.ttf) format("truetype");
-  font-weight: 400;
+  font-family: 'Montserrat Variable';
+  src: url('/fonts/montserrat/Montserrat-VariableFont_wght.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
 }
 
 @font-face {
-  font-family: "Space Mono";
-  src: local("Space Mono Bold"),
-    url(/fonts/Space_Mono/SpaceMono-Bold.ttf) format("truetype");
-  font-weight: 700;
+  font-family: 'Montserrat Variable';
+  src: url('/fonts/montserrat/Montserrat-Italic-VariableFont_wght.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: italic;
 }
 
-@font-face {
-  font-family: "Lexend Mega";
-  src: local("Lexend Mega"),
-    url(/fonts/Lexend_Mega/LexendMega-VariableFont_wght.ttf) format("truetype");
-}
-
-@font-face {
-  font-family: "Public Sans";
-  src: local("Public Sans"),
-    url(/fonts/Public_Sans/PublicSans-VariableFont_wght.ttf) format("truetype");
-}
-
-@layer components {
-  .neobrutalist-border-1 {
-    border: 1px solid black;
-    box-shadow: 2px 2px 0px black;
-  }
-
-  .neobrutalist-border-2 {
-    border: 2px solid black;
-    box-shadow: 4px 4px 0px black;
-  }
-}
-
-html,
-body,
-#root {
-  min-height: 100dvh;
-  cursor: default;
+.font-montserrat {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
 }
 
 #root {
-  display: flex;
-  flex-direction: column;
-}
-
-/* Scroll Bar */
-::-webkit-scrollbar {
-  width: 10px;
-}
-::-webkit-scrollbar-track {
-  background: #fafafa;
-}
-::-webkit-scrollbar-thumb {
-  background: #164e63;
-  border-radius: 5px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #083344;
-}
-
-a {
-  cursor: pointer;
-}
-
-.font-SpaceMono {
-  font-family: "Space Mono", monospace;
-}
-
-.font-LexendMega {
-  font-family: "Lexend Mega", sans-serif;
-}
-
-.font-PublicSans {
-  font-family: "Public Sans", sans-serif;
+  min-height: 100dvh;
+  min-width: 100dvw;
+  background: red;
 }
