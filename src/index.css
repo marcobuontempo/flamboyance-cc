@@ -15,14 +15,3 @@
   font-weight: 100 900;
   font-style: italic;
 }
-
-.font-montserrat {
-  font-family: "Montserrat", sans-serif;
-  font-optical-sizing: auto;
-}
-
-#root {
-  min-height: 100dvh;
-  min-width: 100dvw;
-  background: red;
-}
