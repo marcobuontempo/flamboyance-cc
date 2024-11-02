@@ -1,9 +1,9 @@
 import MainWrapper from "../common/MainWrapper"
 
-export default function HomePage() {
+export default function LiveDataPage() {
   return (
     <MainWrapper>
-      HOME PAGE
+      LIVE DATA PAGE
     </MainWrapper>
   )
 }

@@ -10,7 +10,7 @@ const Button = forwardRef<HTMLButtonElement, Props>(
     return (
       <button
         ref={ref}
-        className={`btn btn-${variant} ${className}`}
+        className={`${className} btn btn-${variant}`}
         {...props}
       >
         {children}

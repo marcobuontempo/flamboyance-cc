@@ -1,9 +1,9 @@
 import MainWrapper from "../common/MainWrapper"
 
-export default function HomePage() {
+export default function AnalyticsPage() {
   return (
     <MainWrapper>
-      HOME PAGE
+      ANALYTICS PAGE
     </MainWrapper>
   )
 }

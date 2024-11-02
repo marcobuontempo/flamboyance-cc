@@ -1,9 +1,9 @@
 import MainWrapper from "../common/MainWrapper"
 
-export default function HomePage() {
+export default function WalletPage() {
   return (
     <MainWrapper>
-      HOME PAGE
+      WALLET PAGE
     </MainWrapper>
   )
 }

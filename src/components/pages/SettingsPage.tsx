@@ -1,9 +1,9 @@
 import MainWrapper from "../common/MainWrapper"
 
-export default function HomePage() {
+export default function SettingsPage() {
   return (
     <MainWrapper>
-      HOME PAGE
+      SETTINGS PAGE
     </MainWrapper>
   )
 }
