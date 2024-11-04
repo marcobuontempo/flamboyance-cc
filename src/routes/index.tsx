@@ -1,13 +1,13 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "@/App";
-import ErrorPage from "@components/pages/ErrorPage";
-import HomePage from "@components/pages/HomePage";
-import LiveDataPage from "@/components/pages/LiveDataPage";
-import AnalyticsPage from "@/components/pages/AnalyticsPage";
-import WalletPage from "@/components/pages/WalletPage";
-import SettingsPage from "@/components/pages/SettingsPage";
+import ErrorPage from "@components/pages/Error";
+import HomePage from "@components/pages/Home";
+import LiveDataPage, { LiveDataOverview, LiveDataClaims } from "@components/pages/LiveData";
+import AnalyticsPage from "@/components/pages/Analytics";
+import WalletPage from "@components/pages/Wallet";
+import SettingsPage from "@components/pages/Settings";
 
-const router = createBrowserRouter([
+export const routes = [
   {
     path: '/',
     element: <App />,
@@ -20,6 +20,16 @@ const router = createBrowserRouter([
       {
         path: '/live-data',
         element: <LiveDataPage />,
+        children: [
+          {
+            path: '/live-data/overview',
+            element: <LiveDataOverview />,
+          },
+          {
+            path: '/live-data/claims',
+            element: <LiveDataClaims />,
+          },
+        ],
       },
       {
         path: '/analytics',
@@ -35,6 +45,8 @@ const router = createBrowserRouter([
       },
     ],
   },
-]);
+];
+
+const router = createBrowserRouter(routes);
 
 export default router;

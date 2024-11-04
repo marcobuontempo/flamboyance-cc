@@ -1,8 +1,8 @@
-import MainWrapper from "../common/MainWrapper"
+import MainWrapper from "@components/common/MainWrapper"
 
 export default function AnalyticsPage() {
   return (
-    <MainWrapper>
+    <MainWrapper title='Analytics'>
       ANALYTICS PAGE
     </MainWrapper>
   )

@@ -1,8 +1,8 @@
-import MainWrapper from "../common/MainWrapper"
+import MainWrapper from "@components/common/MainWrapper"
 
 export default function HomePage() {
   return (
-    <MainWrapper>
+    <MainWrapper title='Home'>
       HOME PAGE
     </MainWrapper>
   )

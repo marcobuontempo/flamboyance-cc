@@ -1,8 +1,8 @@
-import MainWrapper from "../common/MainWrapper"
+import MainWrapper from "@components/common/MainWrapper"
 
 export default function SettingsPage() {
   return (
-    <MainWrapper>
+    <MainWrapper title='Settings'>
       SETTINGS PAGE
     </MainWrapper>
   )
