@@ -1,6 +1,7 @@
 import apiClient from "@/services/api-client"
 import MainWrapper from "@components/common/MainWrapper"
 import { useQueries } from "@tanstack/react-query"
+import { PulseLoader } from "react-spinners";
 
 export default function HomePage() {
 
@@ -29,7 +30,7 @@ export default function HomePage() {
 
   return (
     <MainWrapper title='Home'>
-      <div className='flex flex-wrap gap-6 p-8 text-white/80'>
+      <div className='flex flex-wrap gap-6 text-white/80'>
         <div className='w-full p-6 border border-white rounded-2xl'>
           <h3 className='text-2xl font-bold mb-3'>Welcome to Flamboyance</h3>
           <p>
@@ -47,7 +48,7 @@ export default function HomePage() {
             <p className='rounded-lg py-6 px-4 text-3xl font-ibm-plex-mono text-center font-semibold text-pink-primary bg-pink-secondary/25'>
               {
                 (totalSupplyQuery.isPending || valueLockedQuery.isPending)
-                  ? '...'
+                  ? <PulseLoader color='#D90070' size={10} speedMultiplier={0.35} aria-label='loading spinner' />
                   : totalSupplyQuery.data
               }
             </p>
@@ -57,7 +58,7 @@ export default function HomePage() {
             <p className='rounded-lg py-6 px-4 text-3xl font-ibm-plex-mono text-center font-semibold text-green-primary bg-green-secondary/25'>
               {
                 (totalSupplyQuery.isPending || valueLockedQuery.isPending)
-                  ? '...'
+                  ? <PulseLoader color='#3AD900' size={10} speedMultiplier={0.35} aria-label='loading spinner' />
                   : valueLockedQuery.data
               }
             </p>

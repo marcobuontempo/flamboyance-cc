@@ -12,8 +12,8 @@ export default function MainWrapper({ title, baseURL, redirectURL, className, ch
       className={`w-full flex-1 text-white rounded-2xl ${className}`}
       {...props}
     >
-      <h2 className='text-center text-2xl tracking-widest font-bold py-6 rounded-t-2xl border-2 border-b-0 border-white bg-white/10 overflow-hidden whitespace-nowrap'>{title}</h2>
-      <div className='rounded-b-2xl border-2 border-t-0 border-white'>
+      <h2 className='text-center text-2xl tracking-widest font-bold py-5 rounded-t-2xl border-2 border-b-0 border-white bg-white/10 overflow-hidden whitespace-nowrap'>{title}</h2>
+      <div className='rounded-b-2xl border-2 border-t-0 border-white p-8'>
         {children}
       </div>
     </main>

@@ -8,17 +8,17 @@
     "skipLibCheck": true,
 
     /* Aliases */
-    "baseUrl": ".",
+    "baseUrl": "./",
     "paths": {
-      "@/*": ["src/*"],
-      "@assets/*": ["src/assets/*"],
-      "@components/*": ["src/components/*"],
-      "@flamingo-data/*": ["src/flamingo-data/*"],
-      "@routes/*": ["src/routes/*"],
-      "@services/*": ["src/services/*"],
-      "@styles/*": ["src/styles/*"],
-      "@custom-types/*": ["src/custom-types/*"],
-      "@utils/*": ["src/utils/*"],
+      "@/*": ["./src/*"],
+      "@assets/*": ["./src/assets/*"],
+      "@components/*": ["./src/components/*"],
+      "@flamingo-data/*": ["./src/flamingo-data/*"],
+      "@routes/*": ["./src/routes/*"],
+      "@services/*": ["./src/services/*"],
+      "@styles/*": ["./src/styles/*"],
+      "@custom-types/*": ["./src/custom-types/*"],
+      "@utils/*": ["./src/utils/*"],
     },
 
     /* Bundler mode */
