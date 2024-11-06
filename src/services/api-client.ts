@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
-import {  AnalyticsDailyMap,  AnalyticsMonthlyMap, AnalyticsRollingMap, AnalyticsTotalSupply, AnalyticsUSDValueLocked, CollectionType, DateTimeQuery, HistoryResponse, LatestResponse, LiveDataClaim, LiveDataFiatExchangeRate, LiveDataLend, LiveDataLiquidityPool, LiveDataPrice, LiveDataStake, LiveDataTrade, LiveDataTransfer, MonthQuery, WalletClaim, WalletLend, WalletLiquidityPool, WalletStake, WalletTrade, WalletTransfer, WalletWallet } from '../types';
+import type { AnalyticsDailyMap, AnalyticsMonthlyMap, AnalyticsRollingMap, AnalyticsTotalSupply, AnalyticsUSDValueLocked, CollectionType, DateTimeQuery, HistoryResponse, LatestResponse, LiveDataClaim, LiveDataFiatExchangeRate, LiveDataLend, LiveDataLiquidityPool, LiveDataPrice, LiveDataStake, LiveDataTrade, LiveDataTransfer, MonthQuery, WalletClaim, WalletLend, WalletLiquidityPool, WalletStake, WalletTrade, WalletTransfer, WalletWallet } from '@custom-types/api';
 
 export class ApiClient {
   private api: AxiosInstance;

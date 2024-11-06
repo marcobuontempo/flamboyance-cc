@@ -4,7 +4,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        montserrat: ["Montserrat", "sans-serif"],
+        "montserrat": ["Montserrat", "sans-serif"],
+        "ibm-plex-mono": ["IBM Plex Mono", "monospace"],
       },
       colors: {
         "black-primary": "#111111",

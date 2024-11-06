@@ -12,6 +12,6 @@ export default function HorizontalRule({
   className,
 }: Props) {
   return (
-    <HorizontalRuleGradient className={`${className} h-0.5 my-1 border-none`} />
+    <HorizontalRuleGradient className={`h-0.5 my-1 border-none ${className}`} />
   )
 }

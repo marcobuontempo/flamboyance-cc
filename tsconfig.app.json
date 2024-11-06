@@ -16,7 +16,8 @@
       "@flamingo-data/*": ["src/flamingo-data/*"],
       "@routes/*": ["src/routes/*"],
       "@services/*": ["src/services/*"],
-      "@types/*": ["src/types/*"],
+      "@styles/*": ["src/styles/*"],
+      "@custom-types/*": ["src/custom-types/*"],
       "@utils/*": ["src/utils/*"],
     },
 

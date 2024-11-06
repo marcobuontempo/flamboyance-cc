@@ -5,7 +5,11 @@ import LiveDataClaims from "./Claims";
 
 export default function LiveDataPage() {
   return (
-    <MainWrapper title='Live Data'>
+    <MainWrapper
+      title='Live Data'
+      baseURL='live-data'
+      redirectURL='overview'
+    >
       <Outlet />
     </MainWrapper>
   )
