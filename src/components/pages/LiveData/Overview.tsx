@@ -4,6 +4,7 @@ import { tokenHashToData } from "@/utils/helpers";
 import { useQuery } from "@tanstack/react-query";
 import PlaceholderImage from "@assets/icons/unknown-placeholder.svg";
 import LoadingSpinner from "@/components/common/LoadingSpinner";
+import RetryButton from "@/components/common/RetryButton";
 
 type Props = {}
 
@@ -32,11 +33,9 @@ export default function Overview({ }: Props) {
 
   if (isPending) {
     return <LoadingSpinner />;
-  }
-
-  if (isError) {
-    return; // Retry button
-  }
+  } else if (isError) {
+    return <RetryButton refetch={refetch} />;
+  };
 
   return (
     <table className='border-spacing-0 border-separate border rounded-2xl'>

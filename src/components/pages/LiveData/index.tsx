@@ -1,7 +1,12 @@
 import MainWrapper from "@components/common/MainWrapper";
 import { Outlet } from "react-router-dom";
-import LiveDataOverview from "./Overview";
-import LiveDataClaims from "./Claims";
+import Overview from "./Overview";
+import Claims from "./Claims";
+import Lending from "./Lending";
+import LiquidityPools from "./LiquidityPools";
+import Staking from "./Staking";
+import Trades from "./Trades";
+import Transfers from "./Transfers";
 
 export default function LiveDataPage() {
   return (
@@ -16,6 +21,11 @@ export default function LiveDataPage() {
 }
 
 export {
-  LiveDataOverview,
-  LiveDataClaims,
+  Overview as LiveDataOverview,
+  Claims as LiveDataClaims,
+  Lending as LiveDataLending,
+  LiquidityPools as LiveDataLiquidityPools,
+  Staking as LiveDataStaking,
+  Trades as LiveDataTrades,
+  Transfers as LiveDataTransfers,
 };
