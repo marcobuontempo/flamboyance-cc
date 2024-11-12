@@ -15,6 +15,7 @@
       "@components/*": ["./src/components/*"],
       "@flamingo-data/*": ["./src/flamingo-data/*"],
       "@hooks/*": ["./src/hooks/*"],
+      "@redux/*": ["./src/redux/*"],
       "@routes/*": ["./src/routes/*"],
       "@services/*": ["./src/services/*"],
       "@styles/*": ["./src/styles/*"],
