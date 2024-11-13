@@ -3,14 +3,12 @@ import type { RootState } from "@redux/store";
 
 export interface PreferencesState {
   preferredCurrency: string;
-  preferredCurrencyConversion: number;
   currentWalletAddress: string | null;
   savedWalletAddresses: string[];
 }
 
 const initialState: PreferencesState = {
   preferredCurrency: 'USD',
-  preferredCurrencyConversion: 1,
   currentWalletAddress: null,
   savedWalletAddresses: [],
 }
@@ -21,13 +19,6 @@ export const preferencesSlice = createSlice({
   reducers: {
     setPreferredCurrency: (state, action: PayloadAction<string>) => {
       state.preferredCurrency = action.payload;
-    },
-    setPreferredCurrencyConversion: (state, action: PayloadAction<number>) => {
-      state.preferredCurrencyConversion = action.payload;
-    },
-    resetPreferredCurrency: (state) => {
-      state.preferredCurrency = initialState.preferredCurrency;
-      state.preferredCurrencyConversion = initialState.preferredCurrencyConversion;
     },
     setCurrentWalletAddress: (state, action: PayloadAction<string>) => {
       state.currentWalletAddress = action.payload;
@@ -53,8 +44,6 @@ export const preferencesSlice = createSlice({
 
 export const { 
   setPreferredCurrency,
-  setPreferredCurrencyConversion,
-  resetPreferredCurrency,
   setCurrentWalletAddress, 
   clearCurrentWalletAddress, 
   addSavedWalletAddress, 
@@ -63,7 +52,6 @@ export const {
  } = preferencesSlice.actions;
 
 export const selectPreferredCurrency = (state: RootState) => state.preferences.preferredCurrency;
-export const selectPreferredCurrencyConversion = (state: RootState) => state.preferences.preferredCurrencyConversion;
 export const selectCurrentWalletAddress = (state: RootState) => state.preferences.currentWalletAddress;
 export const selectSavedWalletAddresses = (state: RootState) => state.preferences.savedWalletAddresses;
 
