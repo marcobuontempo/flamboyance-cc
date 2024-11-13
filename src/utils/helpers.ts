@@ -22,6 +22,19 @@ export const tokenHashToData = (hash: string) => {
   return null;
 }
 
+export const formatUnixTimestamp = (datetime: number) => {
+  return new Date(datetime).toLocaleString('en-GB', {
+    day: '2-digit',
+    month: '2-digit',
+    year: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: false,
+    timeZone: 'UTC',
+  }).replace(',', '') + ' GMT';
+}
+
 export const sha256 = async (data: Uint8Array): Promise<Uint8Array> => {
   const hashBuffer = await crypto.subtle.digest('SHA-256', data);
   return new Uint8Array(hashBuffer);
