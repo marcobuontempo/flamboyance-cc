@@ -60,3 +60,8 @@ export const isValidNeoN3Address = async (address: string): Promise<boolean> => 
     return false;
   }
 }
+
+export function formatRawAmountToDecimals(value: number, decimalPosition: number = 0): string {
+  const scaledValue = value / Math.pow(10, decimalPosition);
+  return isNaN(scaledValue) ? '' : scaledValue.toLocaleString('en-US', { minimumFractionDigits: 4, maximumFractionDigits: 4 });
+}

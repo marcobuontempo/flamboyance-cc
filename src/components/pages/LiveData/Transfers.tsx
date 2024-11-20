@@ -1,13 +1,20 @@
 import Table from "@/components/common/Table";
+import TokenAmountCell from "@/components/common/TokenAmountCell";
+import TruncatedTextCell from "@/components/common/TruncatedTextCell";
 import { LiveDataTransfer } from "@/custom-types/api";
+import { FlamingoToken } from "@/custom-types/flamingo-data";
 import usePaginatedData from "@/hooks/usePaginatedData";
 import apiClient from "@/services/api-client";
-import { tokenHashToData } from "@/utils/helpers";
+import { formatRawAmountToDecimals, formatUnixTimestamp, tokenHashToData } from "@/utils/helpers";
 import { ColumnDef } from "@tanstack/react-table";
 
 type TransformedLiveDataTransfer = LiveDataTransfer |
 {
   time: string;
+  type: string;
+  amount: string;
+  token: FlamingoToken | null;
+  block: string;
 };
 
 const columns: ColumnDef<TransformedLiveDataTransfer>[] = [
@@ -16,46 +23,50 @@ const columns: ColumnDef<TransformedLiveDataTransfer>[] = [
     accessorKey: 'time',
   },
   {
-    header: 'Index',
-    accessorKey: 'index',
+    header: 'Type',
+    accessorKey: 'type',
   },
   {
-    header: 'Hash',
-    accessorKey: 'hash',
+    header: 'Token',
+    accessorKey: 'token',
+    cell: info => <TokenAmountCell token={info.getValue() as FlamingoToken} amount={info.row.original.amount} />,
   },
   {
-    header: 'Unique ID',
-    accessorKey: 'unique_id',
-  },
-  {
-    header: 'Contract',
-    accessorKey: 'contract',
-  },
-  {
-    header: 'Amount',
-    accessorKey: 'amount',
+    header: 'Block',
+    accessorKey: 'block',
   },
   {
     header: 'Sender',
     accessorKey: 'sender',
+    cell: info => <TruncatedTextCell value={info.getValue() as string} />,
   },
   {
     header: 'Receiver',
     accessorKey: 'receiver',
+    cell: info => <TruncatedTextCell value={info.getValue() as string} />,
   },
   {
-    header: 'Type',
-    accessorKey: 'type',
+    header: 'TX Hash',
+    accessorKey: 'hash',
+    cell: info => <TruncatedTextCell value={info.getValue() as string} />,
+  },
+  {
+    header: 'Unique ID',
+    accessorKey: 'unique_id',
+    cell: info => <TruncatedTextCell value={info.getValue() as string} />,
   },
 ];
 
 const transformData = (entry: LiveDataTransfer): TransformedLiveDataTransfer => {
-  const token = tokenHashToData(entry.contract);
+  const tokenData = tokenHashToData(entry.contract);
 
   return {
     ...entry,
-    time: new Date(entry.time).toUTCString(),
-    amount: entry.amount,
+    time: formatUnixTimestamp(entry.time),
+    type: entry.type.toLocaleLowerCase('en-US'),
+    block: entry.index.toLocaleString('en-US'),
+    amount: formatRawAmountToDecimals(parseInt(entry.amount), tokenData?.decimals),
+    token: tokenData,
   };
 };
 

@@ -1,15 +1,18 @@
+import GreenTextCell from "@/components/common/GreenTextCell";
 import Table from "@/components/common/Table"
+import TokenAmountCell from "@/components/common/TokenAmountCell";
+import TruncatedTextCell from "@/components/common/TruncatedTextCell";
 import { LiveDataClaim } from "@/custom-types/api";
 import { FlamingoToken } from "@/custom-types/flamingo-data";
 import usePaginatedData from "@/hooks/usePaginatedData";
 import apiClient from "@/services/api-client";
-import { formatUnixTimestamp, poolHashToData, tokenHashToData } from "@/utils/helpers";
+import { formatRawAmountToDecimals, formatUnixTimestamp, poolHashToData, tokenHashToData } from "@/utils/helpers";
 import { ColumnDef } from "@tanstack/react-table";
 
 
-type TransformedLiveDataClaim = Omit<LiveDataClaim, 'index' | 'time' | 'pool'> &
+type TransformedLiveDataClaim = Omit<LiveDataClaim, 'time' | 'pool'> &
 {
-  index: string;
+  block: string;
   time: string;
   pool: string | undefined;
   combined_token: FlamingoToken | null;
@@ -28,58 +31,44 @@ const columns: ColumnDef<TransformedLiveDataClaim>[] = [
   {
     header: 'Token',
     accessorKey: 'combined_token',
-    cell: (info) => {
-      const { symbol, image } = info.getValue() as FlamingoToken;
-      return (
-        <div className="flex flex-nowrap items-center">
-          <img className="max-w-8 w-8 mr-3 object-contain" src={image} alt={`${symbol} token symbol`} width={32} height={32} />
-          <span className="mr-2">{info.row.original.amount}</span>
-          <span>({symbol})</span>
-        </div>
-      );
-    },
+    cell: info => <TokenAmountCell token={info.getValue() as FlamingoToken} amount={info.row.original.amount} />,
   },
   {
     header: `USD Value`,
     accessorKey: 'amount_fiat',
-    cell: (info) => (
-      <span className="text-green-primary">{info.getValue() as string}</span>
-    ),
+    cell: info => <GreenTextCell value={info.getValue() as string} />,
   },
   {
     header: 'Block',
-    accessorKey: 'index',
+    accessorKey: 'block',
   },
   {
     header: 'Address',
     accessorKey: 'user',
-    cell: info => (
-      <p className="truncate w-24">{info.getValue() as string}</p>
-    ),
+    cell: info => <TruncatedTextCell value={info.getValue() as string} />,
   },
   {
     header: 'TX Hash',
     accessorKey: 'transaction_hash',
-    cell: info => (
-      <p className="truncate w-24">{info.getValue() as string}</p>
-    ),
+    cell: info => <TruncatedTextCell value={info.getValue() as string} />,
   },
   {
     header: 'Unique ID',
     accessorKey: 'unique_id',
-    cell: info => (
-      <p className="truncate w-24">{info.getValue() as string}</p>
-    ),
+    cell: info => <TruncatedTextCell value={info.getValue() as string} />,
   },
 ];
 
 const transformData = (entry: LiveDataClaim): TransformedLiveDataClaim => {
+  const poolData = poolHashToData(entry.pool);
+  const tokenData = tokenHashToData(entry.token);
   return {
     ...entry,
-    index: entry.index.toLocaleString('en-US'),
+    amount: formatRawAmountToDecimals(parseInt(entry.amount), tokenData?.decimals),
+    block: entry.index.toLocaleString('en-US'),
     time: formatUnixTimestamp(entry.time),
-    pool: poolHashToData(entry.pool)?.symbol,
-    combined_token: tokenHashToData(entry.token),
+    pool: poolData?.symbol,
+    combined_token: tokenData,
     amount_fiat: entry.amount_usd.toLocaleString('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 4, maximumFractionDigits: 4 }),
   }
 };

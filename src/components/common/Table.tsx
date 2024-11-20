@@ -43,13 +43,13 @@ export default function Table<T>({ columns, data, pageCount, pageIndex, setPageI
 
     content = (
       <>
-        <div className='overflow-x-auto overflow-y-hidden scroll-smooth'>
-          <table className='mb-4'>
+        <div className='w-full h-full overflow-x-auto overflow-y-hidden scroll-smooth'>
+          <table className='w-full h-full mb-4'>
             <thead className='font-montserrat font-bold text-left'>
               {
                 table.getHeaderGroups().map(header => {
                   return <tr key={header.id} className='sticky top-0'>{header.headers.map(cell => {
-                    return <th key={cell.id} colSpan={cell.colSpan} className='whitespace-nowrap pt-4 pb-3.5 bg-white/15 first:rounded-tl-2xl first:pl-6 last:rounded-tr-2xl last:pr-6'>
+                    return <th key={cell.id} colSpan={cell.colSpan} className='whitespace-nowrap pt-4 pb-3.5 bg-white/15 first:rounded-tl-2xl first:pl-6 px-4 last:rounded-tr-2xl last:pr-6'>
                       {flexRender(cell.column.columnDef.header, cell.getContext())}
                     </th>
                   })}
@@ -61,7 +61,7 @@ export default function Table<T>({ columns, data, pageCount, pageIndex, setPageI
             <tbody className='font-ibm-plex-mono'>
               {
                 table.getRowModel().rows.map((row, rowNumber, rows) => (
-                  <tr key={row.id} className='relative text-white/50'>
+                  <tr key={row.id} className='relative h-16 text-white/50'>
                     {
                       row.getVisibleCells().map((cell, cellNumber, cells) => (
                         <td key={cell.id} className={`relative whitespace-nowrap bg-white/10 p-4 first:pl-6 last:pr-6 ${rowNumber === rows.length - 1 && 'first:rounded-bl-2xl last:rounded-br-2xl'}`}>
@@ -93,35 +93,35 @@ export default function Table<T>({ columns, data, pageCount, pageIndex, setPageI
                 onClick={() => setPageIndex(pageIndex - 1)}
                 disabled={pageIndex <= 0 || isPending || isError || !data}
               >
-                <img src={arrow} alt='previous page' />
+                <img src={arrow} alt='previous page arrow' />
               </button>
               <button
                 className='-rotate-90 px-1 disabled:opacity-40'
                 onClick={() => setPageIndex(0)}
                 disabled={pageIndex <= 0 || isPending || isError || !data}
               >
-                <img src={arrow} alt='first page' />
-                <img src={arrow} alt='first page' />
+                <img src={arrow} alt='first page arrow' />
+                <img src={arrow} alt='first page arrow' />
               </button>
               <p
                 className='font-medium text-white/80 px-6'
               >
-                {pageIndex + (pageCount === 0 ? 0 : 1)} <span className='font-normal'>of</span> {pageCount.toLocaleString()}
+                {(pageIndex + (pageCount === 0 ? 0 : 1)).toLocaleString('en-US')} <span className='font-normal'>of</span> {pageCount.toLocaleString('en-US')}
               </p>
               <button
                 className='rotate-90 px-1 disabled:opacity-40'
                 onClick={() => setPageIndex(pageCount - 1)}
                 disabled={pageIndex >= pageCount - 1 || isPending || isError || !data}
               >
-                <img src={arrow} alt='last page' />
-                <img src={arrow} alt='last page' />
+                <img src={arrow} alt='last page arrow' />
+                <img src={arrow} alt='last page arrow' />
               </button>
               <button
                 className='rotate-90 px-1 disabled:opacity-40'
                 onClick={() => setPageIndex(pageIndex + 1)}
                 disabled={pageIndex >= pageCount - 1 || isPending || isError || !data}
               >
-                <img src={arrow} alt='next page' />
+                <img src={arrow} alt='next page arrow' />
               </button>
             </div>
             : null

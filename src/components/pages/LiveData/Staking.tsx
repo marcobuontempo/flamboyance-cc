@@ -1,13 +1,21 @@
+import GreenTextCell from '@/components/common/GreenTextCell';
 import Table from '@/components/common/Table';
+import TokenAmountCell from '@/components/common/TokenAmountCell';
+import TruncatedTextCell from '@/components/common/TruncatedTextCell';
 import { LiveDataStake } from '@/custom-types/api';
+import { FlamingoPool } from '@/custom-types/flamingo-data';
 import usePaginatedData from '@/hooks/usePaginatedData';
 import apiClient from '@/services/api-client';
-import { poolHashToData } from '@/utils/helpers';
+import { formatRawAmountToDecimals, formatUnixTimestamp, poolHashToData } from '@/utils/helpers';
 import { ColumnDef } from '@tanstack/react-table';
 
 type TransformedLiveDataStake = LiveDataStake |
 {
   time: string;
+  type: string;
+  block: string;
+  pool: FlamingoPool | null;
+  amount: string;
   fiat_amount: string;
 };
 
@@ -17,49 +25,54 @@ const columns: ColumnDef<TransformedLiveDataStake>[] = [
     accessorKey: 'time',
   },
   {
-    header: 'Index',
-    accessorKey: 'index',
-  },
-  {
-    header: 'Unique ID',
-    accessorKey: 'unique_id',
-  },
-  {
     header: 'Type',
     accessorKey: 'type',
   },
   {
-    header: 'User',
-    accessorKey: 'user',
-  },
-  {
-    header: 'Contract',
-    accessorKey: 'contract',
-  },
-  {
     header: 'Pool',
     accessorKey: 'pool',
-  },
-  {
-    header: 'Amount',
-    accessorKey: 'amount',
+    cell: info => <TokenAmountCell token={info.getValue() as FlamingoPool} amount={info.row.original.amount} hideImage />,
   },
   {
     header: `Amount (USD)`,
     accessorKey: 'fiat_amount',
+    cell: info => <GreenTextCell value={info.getValue() as string} />,
   },
   {
-    header: 'Hash',
+    header: 'Block',
+    accessorKey: 'block',
+  },
+  {
+    header: 'Contract',
+    accessorKey: 'contract',
+    cell: info => <TruncatedTextCell value={info.getValue() as string} />,
+  },
+  {
+    header: 'Address',
+    accessorKey: 'user',
+    cell: info => <TruncatedTextCell value={info.getValue() as string} />,
+  },
+  {
+    header: 'TX Hash',
     accessorKey: 'hash',
+    cell: info => <TruncatedTextCell value={info.getValue() as string} />,
+  },
+  {
+    header: 'Unique ID',
+    accessorKey: 'unique_id',
+    cell: info => <TruncatedTextCell value={info.getValue() as string} />,
   },
 ];
 
 const transformData = (entry: LiveDataStake): TransformedLiveDataStake => {
-  const pool = poolHashToData(entry.pool);
+  const poolData = poolHashToData(entry.pool);
   return {
     ...entry,
-    time: new Date(entry.time).toUTCString(),
-    amount: entry.amount,
+    time: formatUnixTimestamp(entry.time),
+    type: entry.type.toLocaleLowerCase('en-US'),
+    block: entry.index.toLocaleString('en-US'),
+    pool: poolData,
+    amount: formatRawAmountToDecimals(parseInt(entry.amount), poolData?.decimals),
     fiat_amount: entry.usd_amount.toLocaleString('en-US', { style: 'currency', currency: 'USD' }),
   };
 };
