@@ -1,4 +1,5 @@
-import { HTMLAttributes } from 'react'
+import { HTMLAttributes, useEffect } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom';
 
 interface Props extends HTMLAttributes<HTMLElement> {
   title: string;
@@ -7,6 +8,15 @@ interface Props extends HTMLAttributes<HTMLElement> {
 };
 
 export default function MainWrapper({ title, baseURL, redirectURL, className, children, ...props }: Props) {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (redirectURL && location.pathname === `/${baseURL}`) {
+      navigate(`/${baseURL}/${redirectURL}`);
+    }
+  }, [location, navigate]);
+
   return (
     <main
       className={`min-h-[960px] flex flex-col overflow-x-hidden flex-1 text-white rounded-2xl ${className}`}

@@ -1,11 +1,11 @@
 import { MouseEvent, useState } from "react";
 import HorizontalRule from "@components/common/HorizontalRule"
-import homeIcon from '@assets/icons/home.svg';
-import liveDataIcon from '@assets/icons/live-data.svg';
-import analyticsIcon from '@assets/icons/analytics.svg';
-import walletIcon from '@assets/icons/wallet.svg';
-import settingsIcon from '@assets/icons/settings.svg';
-import arrowIcon from '@assets/icons/arrow.svg';
+import HomeIcon from '@assets/icons/home.svg?react';
+import LiveDataIcon from '@assets/icons/live-data.svg?react';
+import AnalyticsIcon from '@assets/icons/analytics.svg?react';
+import WalletIcon from '@assets/icons/wallet.svg?react';
+import SettingsIcon from '@assets/icons/settings.svg?react';
+import ArrowIcon from '@assets/icons/arrow.svg?react';
 import SidebarLink from "@/components/layout/SidebarLink";
 import SidebarButton from "./SidebarButton";
 import '@styles/sidebar.css';
@@ -40,9 +40,9 @@ export default function Sidebar() {
           aria-label='open navigation menu'
           onClick={toggleSidebar}
         >
-          <img src='/images/logo.svg' width={24} height={24} className='w-6 min-w-6 mr-3' alt='Logo' />
+          <img src='/images/logo.svg' width={24} height={24} className='w-6 min-w-6 mr-3' />
           <p className={`py-3 font-semibold ${isSidebarOpen ? 'opacity-100' : 'opacity-0'}`}>Menu</p>
-          <img src={arrowIcon} width={16} height={16} className={`${isSidebarOpen ? 'opacity-100 -rotate-90' : 'opacity-0 rotate-90'} absolute right-0 w-4 h-4 mr-2 duration-200`} alt='Toggle arrow' />
+          <ArrowIcon className={`${isSidebarOpen ? 'opacity-100 -rotate-90' : 'opacity-0 rotate-90'} absolute right-0 w-4 h-4 mr-2 duration-200`} />
         </button>
 
         <HorizontalRule className='mt-0' />
@@ -52,7 +52,7 @@ export default function Sidebar() {
           <li>
             <SidebarLink
               to={'/'}
-              icon={homeIcon}
+              icon={HomeIcon}
               showContents={isSidebarOpen}
               toggleSubMenu={toggleSubMenu}
             >
@@ -64,7 +64,7 @@ export default function Sidebar() {
           <li>
             <SidebarButton
               path='live-data'
-              icon={liveDataIcon}
+              icon={LiveDataIcon}
               showContents={isSidebarOpen}
               subMenuOpen={subMenuOpen}
               toggleSubMenu={toggleSubMenu}
@@ -145,7 +145,7 @@ export default function Sidebar() {
           <li>
             <SidebarButton
               path='analytics'
-              icon={analyticsIcon}
+              icon={AnalyticsIcon}
               showContents={isSidebarOpen}
               subMenuOpen={subMenuOpen}
               toggleSubMenu={toggleSubMenu}
@@ -190,7 +190,7 @@ export default function Sidebar() {
           <li>
             <SidebarButton
               path='wallet'
-              icon={walletIcon}
+              icon={WalletIcon}
               showContents={isSidebarOpen}
               subMenuOpen={subMenuOpen}
               toggleSubMenu={toggleSubMenu}
@@ -270,7 +270,7 @@ export default function Sidebar() {
           <li>
             <SidebarLink
               to={'/settings'}
-              icon={settingsIcon}
+              icon={SettingsIcon}
               showContents={isSidebarOpen}
               toggleSubMenu={toggleSubMenu}
             >

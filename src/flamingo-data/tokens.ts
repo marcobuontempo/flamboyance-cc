@@ -1,4 +1,4 @@
-import { FlamingoToken } from "@custom-types/flamingo-data";
+import { FlamingoToken } from "@/custom-types/flamingo-data";
 import FLMSymbolImage from '@assets/images/tokens/FLM-Symbol.svg';
 import FLUNDSymbolImage from '@assets/images/tokens/FLUND-Symbol.svg';
 import TIPSSymbolImage from '@assets/images/tokens/TIPS-Symbol.svg';

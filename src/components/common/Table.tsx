@@ -8,7 +8,7 @@ import {
 import LoadingSpinner from './LoadingSpinner';
 import { Dispatch } from 'react';
 import RetryButton from './RetryButton';
-import arrow from '@assets/icons/arrow.svg';
+import ArrowIcon from '@assets/icons/arrow.svg?react';
 
 interface Props<T> {
   data: T[] | undefined;
@@ -93,15 +93,15 @@ export default function Table<T>({ columns, data, pageCount, pageIndex, setPageI
                 onClick={() => setPageIndex(pageIndex - 1)}
                 disabled={pageIndex <= 0 || isPending || isError || !data}
               >
-                <img src={arrow} alt='previous page arrow' />
+                <ArrowIcon />
               </button>
               <button
                 className='-rotate-90 px-1 disabled:opacity-40'
                 onClick={() => setPageIndex(0)}
                 disabled={pageIndex <= 0 || isPending || isError || !data}
               >
-                <img src={arrow} alt='first page arrow' />
-                <img src={arrow} alt='first page arrow' />
+                <ArrowIcon />
+                <ArrowIcon />
               </button>
               <p
                 className='font-medium text-white/80 px-6'
@@ -113,15 +113,15 @@ export default function Table<T>({ columns, data, pageCount, pageIndex, setPageI
                 onClick={() => setPageIndex(pageCount - 1)}
                 disabled={pageIndex >= pageCount - 1 || isPending || isError || !data}
               >
-                <img src={arrow} alt='last page arrow' />
-                <img src={arrow} alt='last page arrow' />
+                <ArrowIcon />
+                <ArrowIcon />
               </button>
               <button
                 className='rotate-90 px-1 disabled:opacity-40'
                 onClick={() => setPageIndex(pageIndex + 1)}
                 disabled={pageIndex >= pageCount - 1 || isPending || isError || !data}
               >
-                <img src={arrow} alt='next page arrow' />
+                <ArrowIcon />
               </button>
             </div>
             : null

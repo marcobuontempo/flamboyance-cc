@@ -1,15 +1,15 @@
-import { ReactNode } from 'react'
+import { ElementType, ReactNode } from 'react'
 import { NavLink, NavLinkProps } from 'react-router-dom'
 
 interface Props extends NavLinkProps {
-  icon?: string;
+  icon?: ElementType;
   showContents?: boolean;
   isSubMenuLink?: boolean;
   toggleSubMenu: any;
   children: ReactNode;
 }
 
-export default function SidebarLink({ icon, showContents = true, isSubMenuLink, toggleSubMenu, to, className, children, ...props }: Props) {
+export default function SidebarLink({ icon: Icon, showContents = true, isSubMenuLink, toggleSubMenu, to, className, children, ...props }: Props) {
   return (
     <NavLink
       to={to}
@@ -26,8 +26,8 @@ export default function SidebarLink({ icon, showContents = true, isSubMenuLink, 
       {...props}
     >
       {
-        icon
-          ? <img src={icon} width={24} height={24} className={`w-6 min-w-6 ${showContents && 'mr-3'}`} alt={`${children} Icon`} />
+        Icon
+          ? <Icon width={24} height={24} className={`w-6 min-w-6 ${showContents && 'mr-3'}`} />
           : <span className="w-6 min-w-6 mr-3 bg-red-500" />
       }
       <p className={`${showContents ? 'opacity-100' : 'opacity-0'} whitespace-nowrap overflow-hidden`}>{children}</p>
