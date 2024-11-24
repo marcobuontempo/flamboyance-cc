@@ -5,22 +5,23 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const Button = forwardRef<HTMLButtonElement, Props>(
-  ({ variant = 'primary', children, className, ...props }, ref) => {
+  ({ variant = 'primary', children, className, disabled, ...props }, ref) => {
 
-    const primaryStyle = 'bg-pink-primary text-white hover:bg-black-primary hover:bg-pink-primary/90';
-    const secondaryStyle = 'bg-black-primary text-pink-primary hover:bg-pink-primary/10';
-    
     let variantStyle = '';
+    let disabledStyle = '';
     if (variant === 'primary') {
-      variantStyle = primaryStyle;
+      variantStyle = 'bg-pink-primary text-white hover:bg-pink-primary/90';
+      disabledStyle = 'border-white/10 text-black-primary bg-white/10 hover:bg-white/10';
     } else if (variant === 'secondary') {
-      variantStyle = secondaryStyle;
+      variantStyle = 'bg-black-primary text-pink-primary hover:bg-pink-primary/10';
+      disabledStyle = 'border-white/10 text-white/10'
     }
 
     return (
       <button
         ref={ref}
-        className={`px-5 py-3 min-h-14 text-xl font-semibold rounded-2xl border-2 border-pink-primary ${variantStyle} ${className}`}
+        disabled={disabled}
+        className={`${className} px-5 py-3 min-h-14 text-xl font-semibold rounded-lg border-2 w-full text-left flex justify-between items-center ${disabled ? `${disabledStyle} cursor-default` : `${variantStyle} border-pink-primary cursor-pointer`}`}
         {...props}
       >
         {children}

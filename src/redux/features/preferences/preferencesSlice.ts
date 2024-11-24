@@ -39,17 +39,23 @@ export const preferencesSlice = createSlice({
     clearSavedWalletAddresses: (state) => {
       state.savedWalletAddresses = initialState.savedWalletAddresses;
     },
+    resetPreferences: (state) => {
+      Object.keys(state).forEach((key) => {
+        (state as any)[key] = initialState[key as keyof PreferencesState];
+      });
+    },
   }
 });
 
-export const { 
+export const {
   setPreferredCurrency,
-  setCurrentWalletAddress, 
-  clearCurrentWalletAddress, 
-  addSavedWalletAddress, 
+  setCurrentWalletAddress,
+  clearCurrentWalletAddress,
+  addSavedWalletAddress,
   removeSavedWalletAddress,
   clearSavedWalletAddresses,
- } = preferencesSlice.actions;
+  resetPreferences,
+} = preferencesSlice.actions;
 
 export const selectPreferredCurrency = (state: RootState) => state.preferences.preferredCurrency;
 export const selectCurrentWalletAddress = (state: RootState) => state.preferences.currentWalletAddress;
