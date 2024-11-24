@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
-import type { AnalyticsDailyMap, AnalyticsMonthlyMap, AnalyticsRollingMap, AnalyticsTotalSupply, AnalyticsUSDValueLocked, CollectionType, DateTimeQuery, HistoryResponse, LatestResponse, LiveDataClaim, LiveDataFiatExchangeRate, LiveDataLend, LiveDataLiquidityPool, LiveDataPrice, LiveDataStake, LiveDataTrade, LiveDataTransfer, MonthQuery, WalletClaim, WalletLend, WalletLiquidityPool, WalletStake, WalletTrade, WalletTransfer, WalletWallet } from '@custom-types/api';
+import type { AnalyticsDailyMap, AnalyticsMonthlyMap, AnalyticsRollingMap, AnalyticsTotalSupply, AnalyticsUSDValueLocked, CollectionType, DateTimeQuery, HistoryResponse, LatestResponse, LiveDataClaim, LiveDataFiatExchangeRate, LiveDataLend, LiveDataLiquidityPool, LiveDataPrice, LiveDataStake, LiveDataTrade, LiveDataTransfer, MonthQuery, WalletData } from '@custom-types/api';
 
 export class ApiClient {
   private api: AxiosInstance;
@@ -22,60 +22,12 @@ export class ApiClient {
 
   // Wallet Data
 
-  public getWalletWalletHistory = async (address: string, page: number) => {
-    return this.fetchData<HistoryResponse<WalletWallet>>("/wallet/wallet/history", { neo_address: address, page });
+  public getWalletHistory = async (address: string, page: number) => {
+    return this.fetchData<HistoryResponse<WalletData>>("/wallet/history", { neo_address: address, page });
   }
 
-  public getWalletWalletLatest = async (address: string) => {
-    return this.fetchData<LatestResponse<WalletWallet>>("/wallet/wallet/latest", { neo_address: address });
-  }
-
-  public getWalletClaimsHistory = async (address: string, page: number) => {
-    return this.fetchData<HistoryResponse<WalletClaim>>("/wallet/claims/history", { neo_address: address, page });
-  }
-
-  public getWalletClaimsLatest = async (address: string) => {
-    return this.fetchData<LatestResponse<WalletClaim>>("/wallet/claims/latest", { neo_address: address });
-  }
-
-  public getWalletTradeHistory = async (address: string, page: number) => {
-    return this.fetchData<HistoryResponse<WalletTrade>>("/wallet/trade/history", { neo_address: address, page });
-  }
-
-  public getWalletTradeLatest = async (address: string) => {
-    return this.fetchData<LatestResponse<WalletTrade>>("/wallet/trade/latest", { neo_address: address });
-  }
-
-  public getWalletLpHistory = async (address: string, page: number) => {
-    return this.fetchData<HistoryResponse<WalletLiquidityPool>>("/wallet/lp/history", { neo_address: address, page });
-  }
-
-  public getWalletLpLatest = async (address: string) => {
-    return this.fetchData<LatestResponse<WalletLiquidityPool>>("/wallet/lp/latest", { neo_address: address });
-  }
-
-  public getWalletStakingHistory = async (address: string, page: number) => {
-    return this.fetchData<HistoryResponse<WalletStake>>("/wallet/staking/history", { neo_address: address, page });
-  }
-
-  public getWalletStakingLatest = async (address: string) => {
-    return this.fetchData<LatestResponse<WalletStake>>("/wallet/staking/latest", { neo_address: address });
-  }
-
-  public getWalletLendHistory = async (address: string, page: number) => {
-    return this.fetchData<HistoryResponse<WalletLend>>("/wallet/lend/history", { neo_address: address, page });
-  }
-
-  public getWalletLendLatest = async (address: string) => {
-    return this.fetchData<LatestResponse<WalletLend>>("/wallet/lend/latest", { neo_address: address });
-  }
-
-  public getWalletTransferHistory = async (address: string, page: number) => {
-    return this.fetchData<HistoryResponse<WalletTransfer>>("/wallet/transfer/history", { neo_address: address, page });
-  }
-
-  public getWalletTransferLatest = async (address: string) => {
-    return this.fetchData<LatestResponse<WalletTransfer>>("/wallet/transfer/latest", { neo_address: address });
+  public getWalletLatest = async (address: string) => {
+    return this.fetchData<LatestResponse<WalletData>>("/wallet/latest", { neo_address: address });
   }
 
 

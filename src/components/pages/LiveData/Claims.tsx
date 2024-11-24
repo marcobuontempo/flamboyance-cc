@@ -69,7 +69,7 @@ const transformData = (entry: LiveDataClaim): TransformedLiveDataClaim => {
     time: formatUnixTimestamp(entry.time),
     pool: poolData?.symbol,
     combined_token: tokenData,
-    amount_fiat: entry.amount_usd.toLocaleString('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 4, maximumFractionDigits: 4 }),
+    amount_fiat: entry.amount_usd.toLocaleString('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 2, maximumFractionDigits: 2 }),
   }
 };
 

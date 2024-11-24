@@ -4,7 +4,7 @@ import ErrorPage from "@components/pages/Error";
 import HomePage from "@components/pages/Home";
 import LiveDataPage, { LiveDataOverview, LiveDataClaims, LiveDataLending, LiveDataLiquidityPools, LiveDataStaking, LiveDataTrades, LiveDataTransfers } from "@components/pages/LiveData";
 import AnalyticsPage from "@/components/pages/Analytics";
-import WalletPage from "@components/pages/Wallet";
+import WalletPage, { WalletOverview } from "@components/pages/Wallet";
 import SettingsPage from "@components/pages/Settings";
 
 export const routes = [
@@ -58,6 +58,37 @@ export const routes = [
       {
         path: '/wallet',
         element: <WalletPage />,
+        children: [
+          {
+            path: '/wallet/overview',
+            element: <WalletOverview />,
+          },
+          /* CURRENT ENDPOINTS NOT AVAILABLE */
+          // {
+          //   path: '/wallet/claims',
+          //   element: <WalletClaims />,
+          // },
+          // {
+          //   path: '/wallet/lending',
+          //   element: <WalletLending />,
+          // },
+          // {
+          //   path: '/wallet/liquidity-pools',
+          //   element: <WalletLiquidityPools />,
+          // },
+          // {
+          //   path: '/wallet/staking',
+          //   element: <WalletStaking />,
+          // },
+          // {
+          //   path: '/wallet/trades',
+          //   element: <WalletTrades />,
+          // },
+          // {
+          //   path: '/wallet/transfers',
+          //   element: <WalletTransfers />,
+          // },
+        ],
       },
       {
         path: '/settings',

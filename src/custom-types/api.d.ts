@@ -29,7 +29,7 @@ export type HistoryResponse<T> = T[];
 
 /* Wallet Data */
 
-export type WalletWallet = {
+export type WalletData = {
   address?: string,
   created_at_block?: number,
   created_at_time?: number,
@@ -92,106 +92,6 @@ export type WalletWallet = {
     },
   },
 };
-
-export type WalletClaim = {
-  unique_id: string,
-  transaction_hash: string,
-  time: number,
-  index: number,
-  user: string,
-  from_token: string,
-  from_amount: string,
-  from_amount_usd: number,
-  to_token: string,
-  to_amount: string,
-  to_amount_usd: number,
-  total_usd_fees: number,
-};
-
-export type WalletTrade = {
-  transaction_hash: string,
-  time: number,
-  index: number,
-  user: string,
-  from_token: string,
-  from_amount: string,
-  from_amount_usd: number,
-  to_token: string,
-  to_amount: string,
-  to_amount_usd: number,
-  total_usd_fees: number,
-  swaps: {
-    unique_id: string,
-    pool_hash: string,
-    from_token: string,
-    from_amount: string,
-    from_amount_usd: number,
-    to_token: string,
-    to_amount: string,
-    to_amount_usd: number,
-    fee_amount: string,
-    fee_amount_usd: number,
-  }[],
-};
-
-export type WalletLiquidityPool = {
-  index: number,
-  time: number,
-  hash: string,
-  user: string,
-  lp_token: string,
-  type: 'removeLiquidity' | 'addLiquidity',
-  lp_amount: string,
-  lp_usd_amount: number,
-  token_1_hash: string,
-  token_1_amount: string,
-  token_1_usd_amount: number,
-  token_2_hash: string,
-  token_2_amount: string,
-  token_2_usd_amount: number,
-};
-
-export type WalletStake = {
-  time: number,
-  index: number,
-  unique_id: string,
-  type: 'stake' | 'unstake',
-  user: string,
-  contract: string,
-  pool: string,
-  amount: string,
-  usd_amount: number,
-  hash: string,
-};
-
-export type WalletLend = {
-  type: 'RepayFToken' | 'WithdrawCollateral' | 'DepositCollateral' | 'MintFToken',
-  tx_id: string,
-  unique_id: string,
-  time: number,
-  block: number,
-  address: string,
-  collateral_hash: string,
-  collateral_usd_price: number,
-  collateral_total: string,
-  f_token_hash: string,
-  f_token_usd_price: number,
-  f_token_total: string,
-  f_token_repay: string,
-};
-
-export type WalletTransfer = {
-  time: number,
-  index: number,
-  hash: string,
-  unique_id: string,
-  contract: string,
-  amount: string,
-  sender: string | 'Mint',
-  receiver: string,
-  type: 'Transfer' | 'Mint/Burn',
-};
-
 
 /* Live Data */
 

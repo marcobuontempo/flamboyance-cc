@@ -9,7 +9,7 @@ import apiClient from '@/services/api-client';
 import { formatRawAmountToDecimals, formatUnixTimestamp, poolHashToData, tokenHashToData } from '@/utils/helpers';
 import { ColumnDef } from '@tanstack/react-table';
 
-type TransformedLiveDataLiquidityPool = Omit<LiveDataLiquidityPool, 'type' | 'lp_total'> |
+type TransformedLiveDataLiquidityPool = Omit<LiveDataLiquidityPool, 'type' | 'lp_total'> &
 {
   time: string;
   block: string;

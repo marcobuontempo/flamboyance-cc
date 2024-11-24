@@ -9,7 +9,7 @@ import apiClient from "@/services/api-client";
 import { formatRawAmountToDecimals, formatUnixTimestamp, tokenHashToData } from "@/utils/helpers";
 import { ColumnDef } from "@tanstack/react-table";
 
-type TransformedLiveDataTrade = LiveDataTrade |
+type TransformedLiveDataTrade = LiveDataTrade &
 {
   time: string;
   block: string;

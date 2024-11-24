@@ -8,7 +8,7 @@ import apiClient from "@/services/api-client";
 import { formatRawAmountToDecimals, formatUnixTimestamp, tokenHashToData } from "@/utils/helpers";
 import { ColumnDef } from "@tanstack/react-table";
 
-type TransformedLiveDataTransfer = LiveDataTransfer |
+type TransformedLiveDataTransfer = LiveDataTransfer &
 {
   time: string;
   type: string;

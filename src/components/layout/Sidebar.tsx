@@ -211,7 +211,8 @@ export default function Sidebar() {
                 Overview
               </SidebarLink>
             </li>
-            <li>
+            {/* WALLET MENUS CURRENTLY NOT ACCESSIBLE */}
+            {/* <li>
               <SidebarLink
                 to={'/wallet/claims'}
                 isSubMenuLink={true}
@@ -264,7 +265,7 @@ export default function Sidebar() {
               >
                 Transfers
               </SidebarLink>
-            </li>
+            </li> */}
           </ul>
 
           <li>
