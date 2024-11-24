@@ -4,14 +4,31 @@ import { selectPreferredCurrency } from "@/redux/features/preferences/preference
 import apiClient from "@services/api-client";
 
 const useExchangeRate = () => {
-  const preferredCurrency = useAppSelector(selectPreferredCurrency);
+  let currentPreferredCurrency = useAppSelector(selectPreferredCurrency);
 
-  return useQuery({
-    queryKey: ["exchange-rate", preferredCurrency],
-    queryFn: () => apiClient.getFlamingoLivedataFiatexchangerate(`USD_${preferredCurrency}`),
+  const { data } = useQuery({
+    queryKey: ['exchange-rate', currentPreferredCurrency],
+    queryFn: () => apiClient.getFlamingoLivedataFiatexchangerate(`USD_${currentPreferredCurrency}`),
     staleTime: 24 * 60 * 60 * 1000,
     retry: 1,
   });
+
+  // Set the values depending whether the fetch was successful. If unsuccessful, use USD with 1 as exchange rate
+ let exchangeRate;
+ let preferredCurrency;
+
+ if (data) {
+  exchangeRate = data;
+  preferredCurrency = currentPreferredCurrency;
+ } else {
+  exchangeRate = 1;
+  preferredCurrency = 'USD';
+ }
+
+  return {
+    preferredCurrency,
+    exchangeRate,
+  }
 };
 
 export default useExchangeRate;

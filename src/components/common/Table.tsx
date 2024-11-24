@@ -83,7 +83,7 @@ export default function Table<T>({ columns, data, pageCount, pageIndex, setPageI
                 ))
               }
             </tbody>
-          </table >
+          </table>
         </div>
         {
           (pageIndex !== undefined && setPageIndex !== undefined && pageCount !== undefined)

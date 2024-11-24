@@ -1,16 +1,18 @@
+import useExchangeRate from "@/hooks/useExchangeRate";
 import apiClient from "@/services/api-client"
 import MainWrapper from "@components/common/MainWrapper"
 import { useQueries } from "@tanstack/react-query"
 import { PulseLoader } from "react-spinners";
 
 export default function HomePage() {
+  const { preferredCurrency, exchangeRate } = useExchangeRate();
 
   const selectTotalSupplyData = (data: number) => {
     return data.toLocaleString('en-US', { maximumFractionDigits: 0 });
   }
 
   const selectTotalValueLocked = (data: string) => {
-    return parseFloat(data).toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 })
+    return (parseFloat(data.replace(',','')) * exchangeRate).toLocaleString('en-US', { style: 'currency', currency: preferredCurrency, maximumFractionDigits: 0 })
   }
 
   const [totalSupplyQuery, valueLockedQuery] = useQueries({
@@ -54,7 +56,7 @@ export default function HomePage() {
             </p>
           </div>
           <div className='w-1/2 border border-white rounded-2xl p-6'>
-            <h4 className='text-center font-bold mb-3'>Total Value Locked (USD)</h4>
+            <h4 className='text-center font-bold mb-3'>Total Value Locked ({preferredCurrency})</h4>
             <p className='rounded-lg py-6 px-4 text-3xl font-ibm-plex-mono text-center font-semibold text-green-primary bg-green-secondary/25'>
               {
                 (totalSupplyQuery.isPending || valueLockedQuery.isPending)

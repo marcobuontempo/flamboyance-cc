@@ -17,67 +17,68 @@ type TransformedLiveDataTransfer = LiveDataTransfer &
   block: string;
 };
 
-const columns: ColumnDef<TransformedLiveDataTransfer>[] = [
-  {
-    header: 'Time',
-    accessorKey: 'time',
-  },
-  {
-    header: 'Type',
-    accessorKey: 'type',
-  },
-  {
-    header: 'Token',
-    accessorKey: 'token',
-    cell: info => <TokenAmountCell token={info.getValue() as FlamingoToken} amount={info.row.original.amount} />,
-  },
-  {
-    header: 'Block',
-    accessorKey: 'block',
-  },
-  {
-    header: 'Sender',
-    accessorKey: 'sender',
-    cell: info => <TruncatedTextCell value={info.getValue() as string} />,
-  },
-  {
-    header: 'Receiver',
-    accessorKey: 'receiver',
-    cell: info => <TruncatedTextCell value={info.getValue() as string} />,
-  },
-  {
-    header: 'TX Hash',
-    accessorKey: 'hash',
-    cell: info => <TruncatedTextCell value={info.getValue() as string} />,
-  },
-  {
-    header: 'Unique ID',
-    accessorKey: 'unique_id',
-    cell: info => <TruncatedTextCell value={info.getValue() as string} />,
-  },
-];
-
-const transformData = (entry: LiveDataTransfer): TransformedLiveDataTransfer => {
-  const tokenData = tokenHashToData(entry.contract);
-
-  return {
-    ...entry,
-    time: formatUnixTimestamp(entry.time),
-    type: entry.type.toLocaleLowerCase('en-US'),
-    block: entry.index.toLocaleString('en-US'),
-    amount: formatRawAmountToDecimals(parseInt(entry.amount), tokenData?.decimals),
-    token: tokenData,
-  };
-};
-
-const options = {
-  queryKey: 'live-data-transfers',
-  fetchLatest: () => apiClient.getFlamingoLivedataTransferLatest(),
-  fetchHistory: (page: number) => apiClient.getFlamingoLivedataTransferHistory(page),
-  transformData: transformData,
-}
-
 export default function Transfers() {
+  const columns: ColumnDef<TransformedLiveDataTransfer>[] = [
+    {
+      header: 'Time',
+      accessorKey: 'time',
+    },
+    {
+      header: 'Type',
+      accessorKey: 'type',
+    },
+    {
+      header: 'Token',
+      accessorKey: 'token',
+      cell: info => <TokenAmountCell token={info.getValue() as FlamingoToken} amount={info.row.original.amount} />,
+    },
+    {
+      header: 'Block',
+      accessorKey: 'block',
+    },
+    {
+      header: 'Sender',
+      accessorKey: 'sender',
+      cell: info => <TruncatedTextCell value={info.getValue() as string} />,
+    },
+    {
+      header: 'Receiver',
+      accessorKey: 'receiver',
+      cell: info => <TruncatedTextCell value={info.getValue() as string} />,
+    },
+    {
+      header: 'TX Hash',
+      accessorKey: 'hash',
+      cell: info => <TruncatedTextCell value={info.getValue() as string} />,
+    },
+    {
+      header: 'Unique ID',
+      accessorKey: 'unique_id',
+      cell: info => <TruncatedTextCell value={info.getValue() as string} />,
+    },
+  ];
+  
+  const transformData = (entry: LiveDataTransfer): TransformedLiveDataTransfer => {
+    const tokenData = tokenHashToData(entry.contract);
+  
+    return {
+      ...entry,
+      time: formatUnixTimestamp(entry.time),
+      type: entry.type.toLocaleLowerCase('en-US'),
+      block: entry.index.toLocaleString('en-US'),
+      amount: formatRawAmountToDecimals(parseInt(entry.amount), tokenData?.decimals),
+      token: tokenData,
+    };
+  };
+  
+  const options = {
+    queryKey: 'live-data-transfers',
+    fetchLatest: () => apiClient.getFlamingoLivedataTransferLatest(),
+    fetchHistory: (page: number) => apiClient.getFlamingoLivedataTransferHistory(page),
+    transformData: transformData,
+  }
+  
+
   const {
     data,
     pageIndex,
