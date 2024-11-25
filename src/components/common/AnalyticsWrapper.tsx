@@ -44,7 +44,7 @@ export default function AnalyticsWrapper({
         {filterControls}
       </div>
 
-      <div className='bg-pink-secondary/20 rounded-lg mt-4'>
+      <div className='bg-pink-secondary/15 rounded-lg mt-4'>
         <div className='bg-white/5 rounded-lg p-4'>
           {children}
         </div>

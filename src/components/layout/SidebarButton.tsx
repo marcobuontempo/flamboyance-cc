@@ -1,5 +1,5 @@
 import { ElementType, MouseEvent, ReactNode, } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import ArrowIcon from "@assets/icons/arrow.svg?react";
 
 interface Props {
@@ -15,10 +15,15 @@ interface Props {
 export default function SidebarButton({ icon: Icon, showContents, subMenuOpen, toggleSubMenu, path, className, children, }: Props) {
   const location = useLocation();
   const isActive = location.pathname.split('/')[1] === path;
+  const navigate = useNavigate();
 
   const handleOnClick = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    toggleSubMenu(path);
+    if (showContents) {
+      toggleSubMenu(path);
+    } else {
+      navigate(`/${path}`);
+    }
   }
 
   return (
@@ -29,6 +34,7 @@ export default function SidebarButton({ icon: Icon, showContents, subMenuOpen, t
           : `sidebar-item sidebar-item-inactive ${className}`
       }
       onClick={handleOnClick}
+      aria-label={showContents ? `Open ${path} sub-menu` : `Navigate to ${path} page`}
     >
       {
         Icon
