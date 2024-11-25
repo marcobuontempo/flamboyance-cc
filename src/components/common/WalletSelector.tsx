@@ -1,7 +1,6 @@
 import { useAppDispatch, useAppSelector } from "@hooks/useReduxHooks";
 import { addSavedWalletAddress, selectSavedWalletAddresses, setCurrentWalletAddress } from "@redux/features/preferences/preferencesSlice";
 import { ChangeEvent, FormEvent, useState } from "react"
-import ArrowIcon from '@assets/icons/arrow.svg?react'
 import PlusIcon from '@assets/icons/plus.svg?react'
 import LoginIcon from '@assets/icons/login.svg?react'
 import Button from "@components/common/Button";
