@@ -25,7 +25,7 @@ const tokens: Record<string, FlamingoToken> = {
     symbol: "FLM",
     decimals: 8,
     hash: "0xf0151f528127558851b39c2cd8aa47da7418ab28",
-    colour: '#de49b1',
+    colour: '#d90070',
     image: FLMSymbolImage,
   },
   FLUND: {
