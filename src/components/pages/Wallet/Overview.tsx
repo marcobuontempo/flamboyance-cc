@@ -49,7 +49,7 @@ export default function Overview() {
       cell: info => <GreenTextCell value={info.getValue() as string} />
     },
   ];
-  
+
   const transformWalletData = (entries: LatestResponse<WalletData>): TransformedWalletData[] | undefined => {
     if (entries.data[0].balances) {
       return Object.entries(entries.data[0].balances)
@@ -67,7 +67,7 @@ export default function Overview() {
     }
     return undefined;
   };
-  
+
   const transformPricesData = (entries: LiveDataPrice[]): LiveDataPrice[] => {
     return entries; // This transformation currently does nothing
   };
@@ -93,9 +93,10 @@ export default function Overview() {
   const refetch = async (options?: RefetchOptions): Promise<QueryObserverResult<any, Error>> => {
     await walletQuery.refetch(options);
     return await pricesQuery.refetch(options);
-  };  
+  };
 
   // Combine data when both queries are successful
+  let combinedValues = 0; // to track the total value of all combined assets
   const data: CombinedData[] =
     walletQuery.data && pricesQuery.data
       ? walletQuery.data.map(walletItem => {
@@ -105,14 +106,26 @@ export default function Overview() {
 
         if (!priceData) return undefined; // Skip if no matching price data
 
+        const totalValue = parseFloat(walletItem.amount.replace(',', '')) * priceData.usd_price * exchangeRate;
+        combinedValues += totalValue;
+
         return {
           ...walletItem,
           ...priceData,
-          fiat_amount: (parseFloat(walletItem.amount.replace(',','')) * priceData.usd_price * exchangeRate).toLocaleString('en-US', { style: 'currency', currency: preferredCurrency, minimumFractionDigits: 2, maximumFractionDigits: 2 }),
+          fiat_amount: totalValue.toLocaleString('en-US', { style: 'currency', currency: preferredCurrency, minimumFractionDigits: 2, maximumFractionDigits: 2 }),
         };
       })
-      .filter((item): item is CombinedData => item !== undefined) // Ensure valid type
+        .filter((item): item is CombinedData => item !== undefined) // Ensure valid type
       : [];
+
+  const tableFooter = (
+    <tr>
+      <td className="py-4 pr-4 rounded-bl-2xl text-right font-ibm-plex-mono" colSpan={2}>Total:</td>
+      <td className="py-4 pl-4 rounded-br-2xl font-ibm-plex-mono">
+        <GreenTextCell value={combinedValues.toLocaleString('en-US', { style: 'currency', currency: preferredCurrency, minimumFractionDigits: 2, maximumFractionDigits: 2 })} />
+      </td>
+    </tr>
+  )
 
   return (
     <div className="flex justify-center items-center">
@@ -123,6 +136,7 @@ export default function Overview() {
         isError={isError}
         refetch={refetch}
         className="w-full max-w-2xl"
+        tableFooter={tableFooter}
       />
     </div>
   );

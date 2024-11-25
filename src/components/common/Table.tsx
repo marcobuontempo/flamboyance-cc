@@ -6,7 +6,7 @@ import {
   getCoreRowModel,
 } from '@tanstack/react-table';
 import LoadingSpinner from './LoadingSpinner';
-import { Dispatch } from 'react';
+import { Dispatch, ReactElement } from 'react';
 import RetryButton from './RetryButton';
 import ArrowIcon from '@assets/icons/arrow.svg?react';
 
@@ -20,9 +20,10 @@ interface Props<T> {
   isError: boolean;
   refetch: (options?: RefetchOptions) => Promise<QueryObserverResult<any, Error>>;
   className?: string;
+  tableFooter?: ReactElement;
 }
 
-export default function Table<T>({ columns, data, pageCount, pageIndex, setPageIndex, isPending, isError, refetch, className }: Props<T>) {
+export default function Table<T>({ columns, data, pageCount, pageIndex, setPageIndex, isPending, isError, refetch, className, tableFooter }: Props<T>) {
 
   let content = null;
 
@@ -64,16 +65,16 @@ export default function Table<T>({ columns, data, pageCount, pageIndex, setPageI
                   <tr key={row.id} className='relative h-16 text-white/50'>
                     {
                       row.getVisibleCells().map((cell, cellNumber, cells) => (
-                        <td key={cell.id} className={`relative whitespace-nowrap bg-white/10 p-4 first:pl-6 last:pr-6 ${rowNumber === rows.length - 1 && 'first:rounded-bl-2xl last:rounded-br-2xl'}`}>
+                        <td key={cell.id} className={`relative whitespace-nowrap bg-white/10 p-4 first:pl-6 last:pr-6 ${(rowNumber === rows.length - 1 && !tableFooter) && 'first:rounded-bl-2xl last:rounded-br-2xl'}`}>
                           {flexRender(cell.column.columnDef.cell, cell.getContext())}
                           {
                             // right border. for every cell except last
-                            cellNumber !== cells.length - 1 &&
+                            (cellNumber !== cells.length - 1) &&
                             <span className='absolute top-0 bottom-0 right-0 w-0.5 h-full py-2 after:block after:w-full after:h-full after:rounded-full after:bg-white/5'></span>
                           }
                           {
                             // bottom border. for every row except last
-                            rowNumber !== rows.length - 1 &&
+                            (rowNumber !== rows.length - (tableFooter ? 0 : 1)) &&
                             <span className={`absolute bottom-0 left-0 right-0 w-full h-0.5 after:block after:w-full after:h-full after:bg-white/5 ${cellNumber === 0 && 'pl-2 after:rounded-l-full'} ${cellNumber === cells.length - 1 && 'pr-2 after:rounded-r-full'} `}></span>
                           }
                         </td>
@@ -83,6 +84,13 @@ export default function Table<T>({ columns, data, pageCount, pageIndex, setPageI
                 ))
               }
             </tbody>
+
+            {
+              tableFooter &&
+              <tfoot className='relative whitespace-nowrap bg-white/10 p-4'>
+                {tableFooter}
+              </tfoot>
+            }
           </table>
         </div>
         {
