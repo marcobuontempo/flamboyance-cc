@@ -3,7 +3,7 @@ import App from "@/App";
 import ErrorPage from "@components/pages/Error";
 import HomePage from "@components/pages/Home";
 import LiveDataPage, { LiveDataOverview, LiveDataClaims, LiveDataLending, LiveDataLiquidityPools, LiveDataStaking, LiveDataTrades, LiveDataTransfers } from "@components/pages/LiveData";
-import AnalyticsPage from "@/components/pages/Analytics";
+import AnalyticsPage, { AnalyticsClaims, AnalyticsPools, AnalyticsTotalValueLocked } from "@/components/pages/Analytics";
 import WalletPage, { WalletOverview } from "@components/pages/Wallet";
 import SettingsPage from "@components/pages/Settings";
 
@@ -54,6 +54,20 @@ export const routes = [
       {
         path: '/analytics',
         element: <AnalyticsPage />,
+        children: [
+          {
+            path: '/analytics/claims',
+            element: <AnalyticsClaims />,
+          },
+          {
+            path: '/analytics/total-value-locked',
+            element: <AnalyticsTotalValueLocked />,
+          },
+          {
+            path: '/analytics/pools',
+            element: <AnalyticsPools />,
+          },
+        ]
       },
       {
         path: '/wallet',
