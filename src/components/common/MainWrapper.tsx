@@ -40,7 +40,7 @@ export default function MainWrapper({ title, baseURL, redirectURL, className, ch
           <span className='font-normal'>{secondaryTitle}</span>
         }
       </h2>
-      <div className='flex-1 overflow-x-auto rounded-b-2xl border-2 border-t-0 border-white p-8'>
+      <div className='flex flex-col flex-1 items-center overflow-x-auto rounded-b-2xl border-2 border-t-0 border-white p-8'>
         {children}
       </div>
     </main>

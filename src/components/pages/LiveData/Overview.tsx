@@ -60,15 +60,13 @@ export default function Overview() {
   });
 
   return (
-    <div className="flex justify-center items-center">
-      <Table
-        data={data}
-        columns={columns}
-        isPending={isPending}
-        isError={isError}
-        refetch={refetch}
-        className="w-full max-w-2xl"
-      />
-    </div>
+    <Table
+      data={data}
+      columns={columns}
+      isPending={isPending}
+      isError={isError}
+      refetch={refetch}
+      className="w-full max-w-2xl"
+    />
   )
 }

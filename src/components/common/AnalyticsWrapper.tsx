@@ -34,7 +34,7 @@ export default function AnalyticsWrapper({
   }
 
   return (
-    <div className='bg-white/10 py-5 px-6 rounded-2xl border border-white'>
+    <div className='w-full bg-white/10 py-5 px-6 rounded-2xl border border-white'>
       <div className='w-full flex sm:flex-row flex-col items-center sm:gap-0 gap-2 justify-between p-2'>
         <div className='flex justify-center items-center gap-3'>
           <FilterButton active={timeFilter === 'daily'} value='daily' onClick={() => setTimeFilter('daily')}>Today</FilterButton>

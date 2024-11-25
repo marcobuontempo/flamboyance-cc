@@ -44,7 +44,7 @@ export default function Table<T>({ columns, data, pageCount, pageIndex, setPageI
 
     content = (
       <>
-        <div className='w-full h-full overflow-x-auto overflow-y-hidden scroll-smooth'>
+        <div className={`w-full h-full overflow-x-auto overflow-y-hidden scroll-smooth ${className}`}>
           <table className='w-full h-full mb-4'>
             <thead className='font-montserrat font-bold text-left'>
               {
@@ -139,9 +139,5 @@ export default function Table<T>({ columns, data, pageCount, pageIndex, setPageI
     )
   }
 
-  return (
-    <div className={`${className}`}>
-      {content}
-    </div>
-  )
+  return (<>{content}</>);
 }
