@@ -1,4 +1,4 @@
-import { MouseEvent, useState } from "react";
+import { MouseEvent, useEffect, useState } from "react";
 import HorizontalRule from "@components/common/HorizontalRule"
 import HomeIcon from '@assets/icons/home.svg?react';
 import LiveDataIcon from '@assets/icons/live-data.svg?react';
@@ -15,13 +15,30 @@ export default function Sidebar() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [subMenuOpen, setSubMenuOpen] = useState<string | null>(null);
 
+  // Ensure sidebar is always open on md breakpoint
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768) {
+        setIsSidebarOpen(true);
+      }
+    };
+
+    // Set sidebar open initially if screen is wide enough
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const toggleSidebar = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    setIsSidebarOpen(!isSidebarOpen);
-    if (isSidebarOpen) {
-      setSubMenuOpen(null);
+    if (window.innerWidth >= 768) {
+      setIsSidebarOpen(!isSidebarOpen);
+      if (isSidebarOpen) {
+        setSubMenuOpen(null);
+      }
     }
-  }
+  };
 
   const toggleSubMenu = (menuName: string) => {
     if (isSidebarOpen) {
@@ -31,12 +48,12 @@ export default function Sidebar() {
 
   return (
     <nav
-      className={`${isSidebarOpen ? "md:w-[272px] md:min-w-[272px]" : "md:w-[76px] md:min-w-[76px]"} 
+      className={`${isSidebarOpen ? "md:w-[272px] md:min-w-[272px] md:max-w-[272px]" : "md:w-[76px] md:min-w-[76px] md:max-w-[76px]"} 
       z-50
-      fixed md:sticky bottom-0 md:bottom-auto left-0 md:left-auto right-0 md:right-auto w-dvw md:w-auto h-[90px] md:h-[960px] md:flex md:flex-col md:justify-between md:mr-8 md:pb-6 rounded-t-2xl md:rounded-2xl md:transition-all md:duration-300
-      border-2 border-white bg-black-primary overflow-hidden
-      `}
+      fixed md:sticky bottom-0 md:bottom-auto left-0 md:left-auto right-0 md:right-auto w-dvw md:w-auto h-[64px] md:h-[960px] md:flex md:flex-col md:justify-between md:mr-8 md:pb-6 rounded-t-2xl md:rounded-2xl md:transition-all md:duration-300
+      border-2 border-b-0 md:border-b-2 border-white bg-black-primary overflow-hidden`}
       aria-expanded={isSidebarOpen}
+
     >
       {/* HEADER (w/ toggle) */}
       <div>
@@ -77,7 +94,7 @@ export default function Sidebar() {
               Live Data
             </SidebarButton>
           </li>
-          <SubMenuList isSubMenuOpen={subMenuOpen === 'live-data'}>
+          <SubMenuList isSubMenuOpen={subMenuOpen === 'live-data'} title='Live Data'>
             <SidebarLink
               to={'/live-data/overview'}
               isSubMenuLink={true}
@@ -141,7 +158,7 @@ export default function Sidebar() {
               Analytics
             </SidebarButton>
           </li>
-          <SubMenuList isSubMenuOpen={subMenuOpen === 'analytics'}>
+          <SubMenuList isSubMenuOpen={subMenuOpen === 'analytics'} title='Analytics'>
             <SidebarLink
               to={'/analytics/claims'}
               isSubMenuLink={true}
@@ -177,7 +194,7 @@ export default function Sidebar() {
               Wallet
             </SidebarButton>
           </li>
-          <SubMenuList isSubMenuOpen={subMenuOpen === 'wallet'}>
+          <SubMenuList isSubMenuOpen={subMenuOpen === 'wallet'} title='Wallet'>
             <SidebarLink
               to={'/wallet/overview'}
               isSubMenuLink={true}

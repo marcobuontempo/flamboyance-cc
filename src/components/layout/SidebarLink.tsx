@@ -9,6 +9,7 @@ interface SidebarLinkProps extends NavLinkProps {
   children: ReactNode;
 }
 
+
 export default function SidebarLink({ icon: Icon, showContents = true, isSubMenuLink, toggleSubMenu, to, className, children, ...props }: SidebarLinkProps) {
   const contents = (
     <NavLink
@@ -19,7 +20,7 @@ export default function SidebarLink({ icon: Icon, showContents = true, isSubMenu
           : `sidebar-item ${isSubMenuLink ? 'sidebar-sub-item-inactive' : ''} ${className}`
       }
       onClick={
-        (!isSubMenuLink)
+        (!isSubMenuLink || window.innerWidth <= 768)
           ? () => toggleSubMenu(null)
           : undefined
       }

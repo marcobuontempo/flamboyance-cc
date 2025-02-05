@@ -32,7 +32,7 @@ export default function HomePage() {
 
   return (
     <MainWrapper title='Home'>
-      <div className='flex flex-wrap gap-6 text-white/80'>
+      <div className='flex flex-wrap gap-3 md:gap-6 text-white/80'>
         <div className='w-full p-6 border border-white rounded-2xl'>
           <h3 className='text-2xl font-bold mb-3'>Welcome to Flamboyance</h3>
           <p>
@@ -44,8 +44,8 @@ export default function HomePage() {
           </p>
         </div>
 
-        <div className='w-full flex gap-6 justify-between'>
-          <div className='w-1/2 border border-white rounded-2xl p-6'>
+        <div className='w-full flex flex-col lg:flex-row gap-6 justify-between'>
+          <div className='w-full lg:w-1/2 border border-white rounded-2xl p-6'>
             <h4 className='text-center font-bold mb-3'>Total FLM Supply</h4>
             <p className='rounded-lg py-6 px-4 text-3xl font-ibm-plex-mono text-center font-semibold text-pink-primary bg-pink-secondary/25'>
               {
@@ -55,7 +55,7 @@ export default function HomePage() {
               }
             </p>
           </div>
-          <div className='w-1/2 border border-white rounded-2xl p-6'>
+          <div className='w-full lg:w-1/2 border border-white rounded-2xl p-6'>
             <h4 className='text-center font-bold mb-3'>Total Value Locked ({preferredCurrency})</h4>
             <p className='rounded-lg py-6 px-4 text-3xl font-ibm-plex-mono text-center font-semibold text-green-primary bg-green-secondary/25'>
               {

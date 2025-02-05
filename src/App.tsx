@@ -8,7 +8,7 @@ export default function App() {
   useExchangeRate();
 
   return (
-    <div className="min-w-full flex flex-nowrap justify-start items-start min-h-dvh font-montserrat tracking-wider pt-20 pb-28 md:p-8 bg-black-primary text-white/80 cursor-default overflow-visible">
+    <div className="min-w-full flex flex-nowrap justify-start items-start min-h-dvh font-montserrat tracking-wider px-3 pt-20 pb-20 md:p-8 bg-black-primary text-white/80 cursor-default overflow-visible">
       <MobileHeader />
       <Sidebar />
       <Outlet />
