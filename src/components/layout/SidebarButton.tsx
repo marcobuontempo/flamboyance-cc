@@ -38,13 +38,13 @@ export default function SidebarButton({ icon: Icon, showContents, subMenuOpen, t
     >
       {
         Icon
-          ? <Icon width={24} height={24} className={`w-6 min-w-6 ${showContents && 'mr-3'}`} />
-          : <span className="w-6 min-w-6 mr-3 bg-red-500" />
+          ? <Icon width={24} height={24} className={`w-6 min-w-6 ${showContents && 'md:mr-3'}`} />
+          : <span className="w-6 min-w-6 md:mr-3" />
       }
-      <p className={`${showContents ? 'opacity-100' : 'opacity-0'} whitespace-nowrap overflow-hidden`}>{children}</p>
+      <p className={`${showContents ? 'opacity-100' : 'opacity-0'} hidden md:block whitespace-nowrap overflow-hidden`}>{children}</p>
       {
         (showContents) &&
-        <ArrowIcon width={16} height={16} className={`${(subMenuOpen === path) ? 'opacity-100 rotate-180' : 'rotate-0'} absolute right-0 w-4 h-4 mr-2 duration-200`} />
+        <ArrowIcon width={16} height={16} className={`${(subMenuOpen === path) ? 'opacity-100 rotate-180' : 'rotate-0'} hidden md:block absolute right-0 w-4 h-4 mr-2 duration-200`} />
       }
     </button>
   )

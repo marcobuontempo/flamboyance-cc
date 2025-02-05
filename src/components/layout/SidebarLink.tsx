@@ -1,16 +1,16 @@
 import { ElementType, ReactNode } from 'react'
 import { NavLink, NavLinkProps } from 'react-router-dom'
 
-interface Props extends NavLinkProps {
+interface SidebarLinkProps extends NavLinkProps {
   icon?: ElementType;
   showContents?: boolean;
   isSubMenuLink?: boolean;
-  toggleSubMenu: any;
+  toggleSubMenu?: any;
   children: ReactNode;
 }
 
-export default function SidebarLink({ icon: Icon, showContents = true, isSubMenuLink, toggleSubMenu, to, className, children, ...props }: Props) {
-  return (
+export default function SidebarLink({ icon: Icon, showContents = true, isSubMenuLink, toggleSubMenu, to, className, children, ...props }: SidebarLinkProps) {
+  const contents = (
     <NavLink
       to={to}
       className={({ isActive }) =>
@@ -27,10 +27,14 @@ export default function SidebarLink({ icon: Icon, showContents = true, isSubMenu
     >
       {
         Icon
-          ? <Icon width={24} height={24} className={`w-6 min-w-6 ${showContents && 'mr-3'}`} />
-          : <span className="w-6 min-w-6 mr-3 bg-red-500" />
+          ? <Icon width={24} height={24} className={`w-6 min-w-6 ${showContents && 'md:mr-3'}`} />
+          : <span className="hidden md:block w-6 min-w-6 md:mr-3" />
       }
-      <p className={`${showContents ? 'opacity-100' : 'opacity-0'} whitespace-nowrap overflow-hidden`}>{children}</p>
+      <p className={`${showContents ? 'opacity-100' : 'opacity-0'} ${!isSubMenuLink && 'hidden md:block'} whitespace-nowrap overflow-hidden w-full md:w-auto text-center md:text-left`}>{children}</p>
     </NavLink>
-  )
+  );
+
+  return isSubMenuLink
+    ? <li className='w-full md:w-auto'>{contents}</li>
+    : contents;
 };

@@ -8,6 +8,7 @@ import SettingsIcon from '@assets/icons/settings.svg?react';
 import ArrowIcon from '@assets/icons/arrow.svg?react';
 import SidebarLink from "@/components/layout/SidebarLink";
 import SidebarButton from "./SidebarButton";
+import SubMenuList from "./SubMenuList";
 import '@styles/sidebar.css';
 
 export default function Sidebar() {
@@ -30,13 +31,17 @@ export default function Sidebar() {
 
   return (
     <nav
-      className={`${isSidebarOpen ? "w-[272px] min-w-[272px]" : "w-[76px] min-w-[76px]"} sticky flex flex-col justify-between h-[960px] mr-8 pb-6 rounded-2xl border-2 border-white bg-black-primary overflow-hidden transition-all duration-300`}
+      className={`${isSidebarOpen ? "md:w-[272px] md:min-w-[272px]" : "md:w-[76px] md:min-w-[76px]"} 
+      z-50
+      fixed md:sticky bottom-0 md:bottom-auto left-0 md:left-auto right-0 md:right-auto w-dvw md:w-auto h-[90px] md:h-[960px] md:flex md:flex-col md:justify-between md:mr-8 md:pb-6 rounded-t-2xl md:rounded-2xl md:transition-all md:duration-300
+      border-2 border-white bg-black-primary overflow-hidden
+      `}
       aria-expanded={isSidebarOpen}
     >
       {/* HEADER (w/ toggle) */}
       <div>
         <button
-          className={`sidebar-item relative hover:bg-pink-primary/25`}
+          className={`hidden md:flex sidebar-item relative hover:bg-pink-primary/25`}
           aria-label='open navigation menu'
           onClick={toggleSidebar}
         >
@@ -45,9 +50,9 @@ export default function Sidebar() {
           <ArrowIcon className={`${isSidebarOpen ? 'opacity-100 -rotate-90' : 'opacity-0 rotate-90'} absolute right-0 w-4 h-4 mr-2 duration-200`} />
         </button>
 
-        <HorizontalRule className='mt-0' />
+        <HorizontalRule className='hidden md:block mt-0' />
 
-        <ul>
+        <ul className="w-full flex justify-evenly md:block">
           {/* HOME */}
           <li>
             <SidebarLink
@@ -72,74 +77,57 @@ export default function Sidebar() {
               Live Data
             </SidebarButton>
           </li>
-          <ul
-            className={(subMenuOpen === 'live-data') ? 'h-full' : 'h-0 opacity-0 overflow-hidden'}
-            aria-expanded={subMenuOpen === 'live-data'}
-          >
-            <li>
-              <SidebarLink
-                to={'/live-data/overview'}
-                isSubMenuLink={true}
-                toggleSubMenu={toggleSubMenu}
-              >
-                Overview
-              </SidebarLink>
-            </li>
-            <li>
-              <SidebarLink
-                to={'/live-data/claims'}
-                isSubMenuLink={true}
-                toggleSubMenu={toggleSubMenu}
-              >
-                Claims
-              </SidebarLink>
-            </li>
-            <li>
-              <SidebarLink
-                to={'/live-data/lending'}
-                isSubMenuLink={true}
-                toggleSubMenu={toggleSubMenu}
-              >
-                Lending
-              </SidebarLink>
-            </li>
-            <li>
-              <SidebarLink
-                to={'/live-data/liquidity-pools'}
-                isSubMenuLink={true}
-                toggleSubMenu={toggleSubMenu}
-              >
-                Liquidity Pools
-              </SidebarLink>
-            </li>
-            <li>
-              <SidebarLink
-                to={'/live-data/staking'}
-                isSubMenuLink={true}
-                toggleSubMenu={toggleSubMenu}
-              >
-                Staking
-              </SidebarLink>
-            </li>
-            <li>
-              <SidebarLink
-                to={'/live-data/trades'}
-                isSubMenuLink={true}
-                toggleSubMenu={toggleSubMenu}
-              >
-                Trades
-              </SidebarLink>
-            </li>
-            <li>
-              <SidebarLink
-                to={'/live-data/transfers'}
-                isSubMenuLink={true}
-                toggleSubMenu={toggleSubMenu}
-              >
-                Transfers
-              </SidebarLink>
-            </li>
-          </ul>
+          <SubMenuList isSubMenuOpen={subMenuOpen === 'live-data'}>
+            <SidebarLink
+              to={'/live-data/overview'}
+              isSubMenuLink={true}
+              toggleSubMenu={toggleSubMenu}
+            >
+              Overview
+            </SidebarLink>
+            <SidebarLink
+              to={'/live-data/claims'}
+              isSubMenuLink={true}
+              toggleSubMenu={toggleSubMenu}
+            >
+              Claims
+            </SidebarLink>
+            <SidebarLink
+              to={'/live-data/lending'}
+              isSubMenuLink={true}
+              toggleSubMenu={toggleSubMenu}
+            >
+              Lending
+            </SidebarLink>
+            <SidebarLink
+              to={'/live-data/liquidity-pools'}
+              isSubMenuLink={true}
+              toggleSubMenu={toggleSubMenu}
+            >
+              Liquidity Pools
+            </SidebarLink>
+            <SidebarLink
+              to={'/live-data/staking'}
+              isSubMenuLink={true}
+              toggleSubMenu={toggleSubMenu}
+            >
+              Staking
+            </SidebarLink>
+            <SidebarLink
+              to={'/live-data/trades'}
+              isSubMenuLink={true}
+              toggleSubMenu={toggleSubMenu}
+            >
+              Trades
+            </SidebarLink>
+            <SidebarLink
+              to={'/live-data/transfers'}
+              isSubMenuLink={true}
+              toggleSubMenu={toggleSubMenu}
+            >
+              Transfers
+            </SidebarLink>
+          </SubMenuList>
 
           {/* ANALYTICS */}
           <li>
@@ -153,38 +141,29 @@ export default function Sidebar() {
               Analytics
             </SidebarButton>
           </li>
-          <ul
-            className={(subMenuOpen === 'analytics') ? 'h-full' : 'h-0 opacity-0 overflow-hidden'}
-            aria-expanded={subMenuOpen === 'analytics'}
-          >
-            <li>
-              <SidebarLink
-                to={'/analytics/claims'}
-                isSubMenuLink={true}
-                toggleSubMenu={toggleSubMenu}
-              >
-                Claims
-              </SidebarLink>
-            </li>
-            <li>
-              <SidebarLink
-                to={'/analytics/total-value-locked'}
-                isSubMenuLink={true}
-                toggleSubMenu={toggleSubMenu}
-              >
-                Total Value Locked
-              </SidebarLink>
-            </li>
-            <li>
-              <SidebarLink
-                to={'/analytics/pools'}
-                isSubMenuLink={true}
-                toggleSubMenu={toggleSubMenu}
-              >
-                Pools
-              </SidebarLink>
-            </li>
-          </ul>
+          <SubMenuList isSubMenuOpen={subMenuOpen === 'analytics'}>
+            <SidebarLink
+              to={'/analytics/claims'}
+              isSubMenuLink={true}
+              toggleSubMenu={toggleSubMenu}
+            >
+              Claims
+            </SidebarLink>
+            <SidebarLink
+              to={'/analytics/total-value-locked'}
+              isSubMenuLink={true}
+              toggleSubMenu={toggleSubMenu}
+            >
+              Total Value Locked
+            </SidebarLink>
+            <SidebarLink
+              to={'/analytics/pools'}
+              isSubMenuLink={true}
+              toggleSubMenu={toggleSubMenu}
+            >
+              Pools
+            </SidebarLink>
+          </SubMenuList>
 
           {/* WALLET */}
           <li>
@@ -198,19 +177,14 @@ export default function Sidebar() {
               Wallet
             </SidebarButton>
           </li>
-          <ul
-            className={(subMenuOpen === 'wallet') ? 'h-full' : 'h-0 opacity-0 overflow-hidden'}
-            aria-expanded={subMenuOpen === 'wallet'}
-          >
-            <li>
-              <SidebarLink
-                to={'/wallet/overview'}
-                isSubMenuLink={true}
-                toggleSubMenu={toggleSubMenu}
-              >
-                Overview
-              </SidebarLink>
-            </li>
+          <SubMenuList isSubMenuOpen={subMenuOpen === 'wallet'}>
+            <SidebarLink
+              to={'/wallet/overview'}
+              isSubMenuLink={true}
+              toggleSubMenu={toggleSubMenu}
+            >
+              Overview
+            </SidebarLink>
             {/* WALLET MENUS CURRENTLY NOT ACCESSIBLE */}
             {/* <li>
               <SidebarLink
@@ -266,9 +240,9 @@ export default function Sidebar() {
                 Transfers
               </SidebarLink>
             </li> */}
-          </ul>
+          </SubMenuList>
 
-          <li>
+          <li className="hidden md:flex">
             <SidebarLink
               to={'/settings'}
               icon={SettingsIcon}
@@ -282,7 +256,7 @@ export default function Sidebar() {
       </div>
 
       {/* FOOTER */}
-      <div className="text-center text-white/15 whitespace-nowrap">{
+      <div className="hidden md:block text-center text-white/15 whitespace-nowrap">{
         isSidebarOpen
           ? <>2024 &copy; flamboyance.cc</>
           : <>&copy;</>
