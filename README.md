@@ -1,50 +1,18 @@
-# React + TypeScript + Vite
+# flamboyance.cc
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Logo](public/images/logo_alt.svg) ![Logo Alternative](public/images/logo.svg)
 
-Currently, two official plugins are available:
+### **⭐ 1st Place Winner of [Flamingo Finance's Dashboard-ATHON](https://medium.com/flamingo-finance/earn-1-000-gas-in-flamingo-finances-dashboard-athon-9b68f758535e) ⭐**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### [Flamboyance](https://flamboyance.cc) is your DeFi dashboard for [Flamingo Finance](https://flamingo.finance)!  
+Get real-time insights into token conversions, liquidity pools, staking, and more — all in one place.
 
-## Expanding the ESLint configuration
+> A group of flamingos is called a "flamboyance" 🦩🦩🦩
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Contributing 🤝
+As a solo-maintained project, contributions are welcome! Feel free to submit an issue or pull request.
 
-- Configure the top-level `parserOptions` property like this:
+*Thanks to @Freezz for providing improved & modernised [Figma Designs](figma-design.svg)!*
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+## License 📜
+This project is licensed under the MIT License – refer to the [LICENSE](LICENSE) file for details.
