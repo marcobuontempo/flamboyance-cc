@@ -61,7 +61,7 @@ export default function Sidebar() {
           aria-label='open navigation menu'
           onClick={toggleSidebar}
         >
-          <img src='/images/logo.svg' width={24} height={24} className='w-6 min-w-6 mr-3' />
+          <img src='/images/logo.svg' width={24} height={24} className='w-6 min-w-6 mr-3' alt='Flamboyance Logo' />
           <p className={`py-3 font-semibold ${isSidebarOpen ? 'opacity-100' : 'opacity-0'}`}>Menu</p>
           <ArrowIcon className={`${isSidebarOpen ? 'opacity-100 -rotate-90' : 'opacity-0 rotate-90'} absolute right-0 w-4 h-4 mr-2 duration-200`} />
         </button>
@@ -76,6 +76,7 @@ export default function Sidebar() {
               icon={HomeIcon}
               showContents={isSidebarOpen}
               toggleSubMenu={toggleSubMenu}
+              aria-label='Home'
             >
               Home
             </SidebarLink>
@@ -89,61 +90,64 @@ export default function Sidebar() {
               showContents={isSidebarOpen}
               subMenuOpen={subMenuOpen}
               toggleSubMenu={toggleSubMenu}
+              aria-label='Live Data'
             >
               Live Data
             </SidebarButton>
           </li>
-          <SubMenuList isSubMenuOpen={subMenuOpen === 'live-data'} title='Live Data'>
-            <SidebarLink
-              to={'/live-data/overview'}
-              isSubMenuLink={true}
-              toggleSubMenu={toggleSubMenu}
-            >
-              Overview
-            </SidebarLink>
-            <SidebarLink
-              to={'/live-data/claims'}
-              isSubMenuLink={true}
-              toggleSubMenu={toggleSubMenu}
-            >
-              Claims
-            </SidebarLink>
-            <SidebarLink
-              to={'/live-data/lending'}
-              isSubMenuLink={true}
-              toggleSubMenu={toggleSubMenu}
-            >
-              Lending
-            </SidebarLink>
-            <SidebarLink
-              to={'/live-data/liquidity-pools'}
-              isSubMenuLink={true}
-              toggleSubMenu={toggleSubMenu}
-            >
-              Liquidity Pools
-            </SidebarLink>
-            <SidebarLink
-              to={'/live-data/staking'}
-              isSubMenuLink={true}
-              toggleSubMenu={toggleSubMenu}
-            >
-              Staking
-            </SidebarLink>
-            <SidebarLink
-              to={'/live-data/trades'}
-              isSubMenuLink={true}
-              toggleSubMenu={toggleSubMenu}
-            >
-              Trades
-            </SidebarLink>
-            <SidebarLink
-              to={'/live-data/transfers'}
-              isSubMenuLink={true}
-              toggleSubMenu={toggleSubMenu}
-            >
-              Transfers
-            </SidebarLink>
-          </SubMenuList>
+          <li>
+            <SubMenuList isSubMenuOpen={subMenuOpen === 'live-data'} title='Live Data'>
+              <SidebarLink
+                to={'/live-data/overview'}
+                isSubMenuLink={true}
+                toggleSubMenu={toggleSubMenu}
+              >
+                Overview
+              </SidebarLink>
+              <SidebarLink
+                to={'/live-data/claims'}
+                isSubMenuLink={true}
+                toggleSubMenu={toggleSubMenu}
+              >
+                Claims
+              </SidebarLink>
+              <SidebarLink
+                to={'/live-data/lending'}
+                isSubMenuLink={true}
+                toggleSubMenu={toggleSubMenu}
+              >
+                Lending
+              </SidebarLink>
+              <SidebarLink
+                to={'/live-data/liquidity-pools'}
+                isSubMenuLink={true}
+                toggleSubMenu={toggleSubMenu}
+              >
+                Liquidity Pools
+              </SidebarLink>
+              <SidebarLink
+                to={'/live-data/staking'}
+                isSubMenuLink={true}
+                toggleSubMenu={toggleSubMenu}
+              >
+                Staking
+              </SidebarLink>
+              <SidebarLink
+                to={'/live-data/trades'}
+                isSubMenuLink={true}
+                toggleSubMenu={toggleSubMenu}
+              >
+                Trades
+              </SidebarLink>
+              <SidebarLink
+                to={'/live-data/transfers'}
+                isSubMenuLink={true}
+                toggleSubMenu={toggleSubMenu}
+              >
+                Transfers
+              </SidebarLink>
+            </SubMenuList>
+          </li>
 
           {/* ANALYTICS */}
           <li>
@@ -153,33 +157,36 @@ export default function Sidebar() {
               showContents={isSidebarOpen}
               subMenuOpen={subMenuOpen}
               toggleSubMenu={toggleSubMenu}
+              aria-label='Analytics'
             >
               Analytics
             </SidebarButton>
           </li>
-          <SubMenuList isSubMenuOpen={subMenuOpen === 'analytics'} title='Analytics'>
-            <SidebarLink
-              to={'/analytics/claims'}
-              isSubMenuLink={true}
-              toggleSubMenu={toggleSubMenu}
-            >
-              Claims
-            </SidebarLink>
-            <SidebarLink
-              to={'/analytics/total-value-locked'}
-              isSubMenuLink={true}
-              toggleSubMenu={toggleSubMenu}
-            >
-              Total Value Locked
-            </SidebarLink>
-            <SidebarLink
-              to={'/analytics/pools'}
-              isSubMenuLink={true}
-              toggleSubMenu={toggleSubMenu}
-            >
-              Pools
-            </SidebarLink>
-          </SubMenuList>
+          <li>
+            <SubMenuList isSubMenuOpen={subMenuOpen === 'analytics'} title='Analytics'>
+              <SidebarLink
+                to={'/analytics/claims'}
+                isSubMenuLink={true}
+                toggleSubMenu={toggleSubMenu}
+              >
+                Claims
+              </SidebarLink>
+              <SidebarLink
+                to={'/analytics/total-value-locked'}
+                isSubMenuLink={true}
+                toggleSubMenu={toggleSubMenu}
+              >
+                Total Value Locked
+              </SidebarLink>
+              <SidebarLink
+                to={'/analytics/pools'}
+                isSubMenuLink={true}
+                toggleSubMenu={toggleSubMenu}
+              >
+                Pools
+              </SidebarLink>
+            </SubMenuList>
+          </li>
 
           {/* WALLET */}
           <li>
@@ -189,20 +196,22 @@ export default function Sidebar() {
               showContents={isSidebarOpen}
               subMenuOpen={subMenuOpen}
               toggleSubMenu={toggleSubMenu}
+              aria-label='Wallet'
             >
               Wallet
             </SidebarButton>
           </li>
-          <SubMenuList isSubMenuOpen={subMenuOpen === 'wallet'} title='Wallet'>
-            <SidebarLink
-              to={'/wallet/overview'}
-              isSubMenuLink={true}
-              toggleSubMenu={toggleSubMenu}
-            >
-              Overview
-            </SidebarLink>
-            {/* WALLET MENUS CURRENTLY NOT ACCESSIBLE */}
-            {/* <li>
+          <li>
+            <SubMenuList isSubMenuOpen={subMenuOpen === 'wallet'} title='Wallet'>
+              <SidebarLink
+                to={'/wallet/overview'}
+                isSubMenuLink={true}
+                toggleSubMenu={toggleSubMenu}
+              >
+                Overview
+              </SidebarLink>
+              {/* WALLET MENUS CURRENTLY NOT ACCESSIBLE */}
+              {/* <li>
               <SidebarLink
                 to={'/wallet/claims'}
                 isSubMenuLink={true}
@@ -256,7 +265,8 @@ export default function Sidebar() {
                 Transfers
               </SidebarLink>
             </li> */}
-          </SubMenuList>
+            </SubMenuList>
+          </li>
 
           <li className="hidden md:flex">
             <SidebarLink
@@ -264,6 +274,7 @@ export default function Sidebar() {
               icon={SettingsIcon}
               showContents={isSidebarOpen}
               toggleSubMenu={toggleSubMenu}
+              aria-label='Settings'
             >
               Settings
             </SidebarLink>
