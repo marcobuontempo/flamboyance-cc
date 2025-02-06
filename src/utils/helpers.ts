@@ -1,7 +1,6 @@
 import bs58 from 'bs58';
-import tokens from '../flamingo-data/tokens';
-import pools from '../flamingo-data/pools';
-import { LocalStorageSettings } from '../types';
+import tokens from '@flamingo-data/tokens';
+import pools from '@flamingo-data/pools';
 
 export const poolHashToData = (hash: string) => {
   for (let key in pools) {
@@ -21,6 +20,19 @@ export const tokenHashToData = (hash: string) => {
     }
   }
   return null;
+}
+
+export const formatUnixTimestamp = (datetime: number) => {
+  return new Date(datetime).toLocaleString('en-GB', {
+    day: '2-digit',
+    month: '2-digit',
+    year: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: false,
+    timeZone: 'UTC',
+  }).replace(',', '') + ' GMT';
 }
 
 export const sha256 = async (data: Uint8Array): Promise<Uint8Array> => {
@@ -49,51 +61,7 @@ export const isValidNeoN3Address = async (address: string): Promise<boolean> => 
   }
 }
 
-export const getLocalStorageWallets = () => {
-  let wallets: Array<string> = [];
-  const storedWalletsData = localStorage.getItem('wallets');
-  if (storedWalletsData) {
-    wallets = JSON.parse(storedWalletsData);
-  }
-  return wallets;
-}
-
-export const addWalletToLocalStorage = (address: string) => {
-  const wallets = getLocalStorageWallets();
-  const exists = wallets.find(wallet => wallet === address);
-  if (!exists) {
-    wallets.push(address);
-  }
-  const updatedWalletsJSON = JSON.stringify(wallets);
-  localStorage.setItem('wallets', updatedWalletsJSON);
-}
-
-export const getLocalStorageSettings = () => {
-  let settings: LocalStorageSettings | null = null;
-  const storedSettings = localStorage.getItem('settings');
-  if (storedSettings) {
-    settings = JSON.parse(storedSettings);
-  }
-  return settings;
-}
-
-export const setLocalStorageSettings = (settings: LocalStorageSettings) => {
-  localStorage.setItem('settings', JSON.stringify(settings));
-}
-
-export const convertFiatCurrency = (amount: number | undefined, exchangeRate: number | undefined, outputDecimals: number) => {
-  if (!amount) return '';
-  exchangeRate = exchangeRate || 1;
-  return (exchangeRate * amount).toFixed(outputDecimals).toString();
-}
-
-export const convertRawAmountToDecimals = (amount: number | string | undefined, tokenDecimals: number | undefined, outputDecimals: number) => {
-  if (!amount) return '';
-  if (!tokenDecimals) return amount.toString();
-
-  amount = amount.toString();
-  const prefix = parseInt(amount.slice(0, -1 * tokenDecimals)) || 0;
-  const suffix = amount.slice(-1 * tokenDecimals, -1 * tokenDecimals + outputDecimals) || '0'.repeat(outputDecimals);
-
-  return `${prefix}${outputDecimals > 0 ? '.' : ''}${suffix}`;
+export function formatRawAmountToDecimals(value: number, decimalPosition: number = 0): string {
+  const scaledValue = value / Math.pow(10, decimalPosition);
+  return isNaN(scaledValue) ? '' : scaledValue.toLocaleString('en-US', { minimumFractionDigits: 4, maximumFractionDigits: 4 });
 }

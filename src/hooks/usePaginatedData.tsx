@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { HistoryResponse, LatestResponse } from '../types';
+import { HistoryResponse, LatestResponse } from '@custom-types/api';
 import { useQuery } from '@tanstack/react-query';
 
 type PaginatedDataHookParams<RawType, TransformedData> = {

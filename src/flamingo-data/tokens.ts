@@ -1,31 +1,31 @@
-import { FlamingoToken } from "../types/flamingo-data";
-import FLMSymbolImage from '../assets/images/tokens/FLM-Symbol.png';
-import FLUNDSymbolImage from '../assets/images/tokens/FLUND-Symbol.png';
-import TIPSSymbolImage from '../assets/images/tokens/TIPS-Symbol.png';
-import NEOSymbolImage from '../assets/images/tokens/NEO-Symbol.png';
-import GASSymbolImage from '../assets/images/tokens/GAS-Symbol.png';
-import bNEOSymbolImage from '../assets/images/tokens/bNEO-Symbol.png';
-import FUSDSymbolImage from '../assets/images/tokens/FUSD-Symbol.png';
-import SOMSymbolImage from '../assets/images/tokens/SOM-Symbol.png';
-import CANDYSymbolImage from '../assets/images/tokens/CANDY-Symbol.png';
-import DOGERSymbolImage from '../assets/images/tokens/DOGER-Symbol.png';
-import FDESymbolImage from '../assets/images/tokens/FDE-Symbol.png';
-import fUSDTSymbolImage from '../assets/images/tokens/fUSDT-Symbol.png';
-import fWETHSymbolImage from '../assets/images/tokens/fWETH-Symbol.png';
-import fWBTCSymbolImage from '../assets/images/tokens/fWBTC-Symbol.png';
-import pONTSymbolImage from '../assets/images/tokens/pONT-Symbol.png';
-import GMSymbolImage from '../assets/images/tokens/GM-Symbol.png';
-import fCAKESymbolImage from '../assets/images/tokens/fCAKE-Symbol.png';
-import SWTHSymbolImage from '../assets/images/tokens/SWTH-Symbol.png';
-import fBNBSymbolImage from '../assets/images/tokens/fBNB-Symbol.png';
-import PlaceHolderSymbolImage from '../assets/images/tokens/PlaceHolder-Symbol.png';
+import { FlamingoToken } from "@/custom-types/flamingo-data";
+import FLMSymbolImage from '@assets/images/tokens/FLM-Symbol.svg';
+import FLUNDSymbolImage from '@assets/images/tokens/FLUND-Symbol.svg';
+import TIPSSymbolImage from '@assets/images/tokens/TIPS-Symbol.svg';
+import NEOSymbolImage from '@assets/images/tokens/NEO-Symbol.svg';
+import GASSymbolImage from '@assets/images/tokens/GAS-Symbol.svg';
+import bNEOSymbolImage from '@assets/images/tokens/bNEO-Symbol.svg';
+import FUSDSymbolImage from '@assets/images/tokens/FUSD-Symbol.svg';
+import SOMSymbolImage from '@assets/images/tokens/SOM-Symbol.svg';
+import CANDYSymbolImage from '@assets/images/tokens/CANDY-Symbol.svg';
+import DOGERSymbolImage from '@assets/images/tokens/DOGER-Symbol.svg';
+import FDESymbolImage from '@assets/images/tokens/FDE-Symbol.svg';
+import fUSDTSymbolImage from '@assets/images/tokens/fUSDT-Symbol.svg';
+import fWETHSymbolImage from '@assets/images/tokens/fWETH-Symbol.svg';
+import fWBTCSymbolImage from '@assets/images/tokens/fWBTC-Symbol.svg';
+import pONTSymbolImage from '@assets/images/tokens/pONT-Symbol.svg';
+import GMSymbolImage from '@assets/images/tokens/GM-Symbol.svg';
+import fCAKESymbolImage from '@assets/images/tokens/fCAKE-Symbol.svg';
+import SWTHSymbolImage from '@assets/images/tokens/SWTH-Symbol.svg';
+import fBNBSymbolImage from '@assets/images/tokens/fBNB-Symbol.svg';
+import PlaceHolderSymbolImage from '@assets/icons/unknown-placeholder.svg';
 
 const tokens: Record<string, FlamingoToken> = {
   FLM: {
     symbol: "FLM",
     decimals: 8,
     hash: "0xf0151f528127558851b39c2cd8aa47da7418ab28",
-    colour: '#de49b1',
+    colour: '#d90070',
     image: FLMSymbolImage,
   },
   FLUND: {

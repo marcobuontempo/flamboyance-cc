@@ -1,4 +1,4 @@
-import { FlamingoPool } from "../types/flamingo-data";
+import { FlamingoPool } from "@/custom-types/flamingo-data";
 import tokens from "./tokens";
 
 const pools: Record<string, FlamingoPool> = {

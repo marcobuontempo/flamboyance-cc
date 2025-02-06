@@ -1,0 +1,15 @@
+.sidebar-item {
+  @apply w-full flex justify-start items-center py-3 px-4 md:px-6 my-2 md:m-0 rounded-2xl md:rounded-none font-medium hover:bg-white/10;
+}
+
+.sidebar-item-active {
+  @apply bg-white/30 hover:bg-white/30;
+}
+
+.sidebar-sub-item-active {
+  @apply bg-none m-0 px-0 rounded-none;
+}
+
+.sidebar-sub-item-inactive {
+  @apply font-normal text-white/50 m-0 px-0 rounded-none;
+}

@@ -1,39 +1,17 @@
-import { Outlet } from 'react-router-dom';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
-import { useContext, useEffect } from 'react';
-import { getLocalStorageSettings } from './utils/helpers';
-import apiClient from './services/api-client';
-import { UserSessionContext } from './contexts/UserSessionContext';
+import Sidebar from "@/components/layout/Sidebar";
+import { Outlet } from "react-router-dom";
+import useExchangeRate from "./hooks/useExchangeRate";
+import MobileHeader from "./components/layout/MobileHeader";
 
-function App() {
-  const sessionContext = useContext(UserSessionContext);
-
-  useEffect(() => {
-    const loadUserSettings = async () => {
-      const settings = getLocalStorageSettings();
-      if (settings) {
-        const exchangeRate = await apiClient.getFlamingoLivedataFiatexchangerate(`USD_${settings.currency}`);
-        sessionContext?.setUserSession({
-          ...sessionContext,
-          ...settings,
-          currency: settings.currency,
-          exchangeRate,
-        })
-      }
-    }
-    loadUserSettings();
-  }, [])
+export default function App() {
+  // call useExchangeRate to trigger the data fetching and caching
+  useExchangeRate();
 
   return (
-    <>
-      <header>
-        <Navbar />
-      </header>
+    <div className="min-w-full flex flex-nowrap justify-start items-start min-h-dvh font-montserrat tracking-wider px-3 pt-20 pb-20 md:p-8 bg-black-primary text-white/80 cursor-default overflow-visible">
+      <MobileHeader />
+      <Sidebar />
       <Outlet />
-      <Footer />
-    </>
+    </div>
   )
 }
-
-export default App

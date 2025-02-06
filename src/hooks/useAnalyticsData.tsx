@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { CollectionType } from '../types';
+import { CollectionType } from '@custom-types/api';
 import { useQuery } from '@tanstack/react-query';
-import apiClient from '../services/api-client';
+import apiClient from '@services/api-client';
 
 type AnalyticsDataHookParams<TransformedData> = {
   queryKey: CollectionType;

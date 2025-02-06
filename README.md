@@ -1,30 +1,36 @@
-# flamboyance-cc
+# flamboyance.cc
 
-## Contents
+![Logo](public/images/logo_alt.svg) ![Logo Alternative](public/images/logo.svg)
 
-1. [About](#about)
-2. [Contributing](#contributing)
-3. [Future Plans](#future-plans-to-do)
-4. [License](#license)
+### [Flamboyance](https://flamboyance.cc) is your DeFi dashboard for [Flamingo Finance](https://flamingo.finance)!
 
-## About
+Get real-time insights into token conversions, liquidity pools, staking, and more — all in one place.
 
-[flamboyance.cc](https://www.flamboyance.com/) is an open-source front-end dashboard for [Flamingo Finance](https://flamingo.finance/), created as part of the official ['Dashboard-ATHON'](https://medium.com/flamingo-finance/earn-1-000-gas-in-flamingo-finances-dashboard-athon-9b68f758535e)
+## 📌 About
 
-## Contributing
+- 🏆 **1st Place Winner** of [Flamingo Finance's Dashboard-ATHON](https://medium.com/flamingo-finance/earn-1-000-gas-in-flamingo-finances-dashboard-athon-9b68f758535e)
+  - 🔗 [View the original submission](https://old.flamboyance.cc)
+- 🚀 **Real-time, live data** at your fingertips
+- 🔍 **Explore & track your NEO N3 wallet** using its public address
+- 📊 **Gain insights** into the DeFi platform with analytics
+- ♿ **Built with accessibility in mind**, following best practices & standards
+- 💯 **Achieves a perfect** 100% Google Lighthouse score in:
 
-This project is currently open to contributions
+  - ✅ Accessibility
+  - ✅ Best Practices
+  - ✅ SEO
 
-## Future Plans (To-Do)
+    *(Tested for both desktop & mobile)*
 
-- [ ] format table data for better readability
-- [ ] add modal display to view detailed information about a selected table row
-- [ ] add conversion of hex addresses to NEO N3 'N...' addresses
-- [ ] improve homepage with better content
-- [ ] add more data charts
-- [ ] improve performance, display, and readability of existing charts
-- [ ] add UI themes
+> [!NOTE]
+> Did you know? A group of flamingos is called a "flamboyance" 🦩🦩🦩
 
-## License
+## 🤝 Contributing
 
-MIT - refer to the [LICENSE](LICENSE)
+As a solo-maintained project, contributions are welcome! Feel free to submit an issue or pull request.
+
+_Thanks to @Freezz for providing improved & modernised [Figma Designs](figma-design.svg)!_
+
+## 📜 License
+
+This project is licensed under the MIT License – refer to the [LICENSE](LICENSE) file for details.
