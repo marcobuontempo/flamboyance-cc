@@ -45,12 +45,12 @@ export default function Table<T>({ columns, data, pageCount, pageIndex, setPageI
     content = (
       <>
         <div className={`w-full h-full overflow-x-auto overflow-y-hidden scroll-smooth ${className}`}>
-          <table className='w-full h-full mb-4'>
+          <table className='w-full h-full mb-4 bg-black-transparent-gradient bg-white-black-gradient-primary rounded-2xl'>
             <thead className='font-montserrat font-bold text-left'>
               {
                 table.getHeaderGroups().map(header => {
                   return <tr key={header.id} className='sticky top-0'>{header.headers.map(cell => {
-                    return <th key={cell.id} colSpan={cell.colSpan} className='whitespace-nowrap pt-4 pb-3.5 bg-white/15 first:rounded-tl-2xl first:pl-6 px-4 last:rounded-tr-2xl last:pr-6'>
+                    return <th key={cell.id} colSpan={cell.colSpan} className='whitespace-nowrap pt-4 pb-3.5 bg-white/10 first:rounded-tl-2xl first:pl-6 px-4 last:rounded-tr-2xl last:pr-6'>
                       {flexRender(cell.column.columnDef.header, cell.getContext())}
                     </th>
                   })}
@@ -65,7 +65,7 @@ export default function Table<T>({ columns, data, pageCount, pageIndex, setPageI
                   <tr key={row.id} className='relative h-16 text-white/50'>
                     {
                       row.getVisibleCells().map((cell, cellNumber, cells) => (
-                        <td key={cell.id} className={`relative whitespace-nowrap bg-white/10 p-4 first:pl-6 last:pr-6 ${(rowNumber === rows.length - 1 && !tableFooter) && 'first:rounded-bl-2xl last:rounded-br-2xl'}`}>
+                        <td key={cell.id} className={`relative whitespace-nowrap p-4 first:pl-6 last:pr-6 ${(rowNumber === rows.length - 1 && !tableFooter) && 'first:rounded-bl-2xl last:rounded-br-2xl'}`}>
                           {flexRender(cell.column.columnDef.cell, cell.getContext())}
                           {
                             // right border. for every cell except last

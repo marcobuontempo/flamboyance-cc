@@ -34,7 +34,7 @@ export default function AnalyticsWrapper({
   }
 
   return (
-    <div className='w-full bg-white/10 py-5 px-6 rounded-2xl border border-white'>
+    <div className='w-full py-5 px-6 rounded-2xl border border-white/10 bg-white-black-gradient-primary'>
       <div className='w-full flex lg:flex-row flex-col items-center flex-wrap gap-2 justify-between p-2'>
         <div className='flex justify-center items-stretch gap-3'>
           <FilterButton active={timeFilter === 'daily'} value='daily' onClick={() => setTimeFilter('daily')}>Today</FilterButton>
@@ -44,8 +44,8 @@ export default function AnalyticsWrapper({
         {filterControls}
       </div>
 
-      <div className='bg-pink-secondary/15 rounded-lg mt-4'>
-        <div className='bg-white/5 rounded-lg p-4'>
+      <div className='bg-pink-primary/20 rounded-lg mt-4'>
+        <div className='bg-white-transparent rounded-lg p-4'>
           {children}
         </div>
       </div>

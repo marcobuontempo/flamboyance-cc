@@ -5,6 +5,6 @@ type Props = {
 
 export default function GreenTextCell({ value, className }: Props) {
   return (
-    <p className={`${className} text-green-primary font-medium`}>{value}</p>
+    <p className={`${className} bg-green-gradient bg-clip-text text-transparent font-medium`}>{value}</p>
   )
 }

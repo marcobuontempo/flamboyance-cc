@@ -40,7 +40,7 @@ export default function SettingsPage() {
   return (
     <MainWrapper title='Settings'>
       <form
-        className="w-full rounded-2xl p-8 mb-6 border text-white/80"
+        className="w-full rounded-2xl p-8 mb-6 border border-white/10 text-white/80"
         onSubmit={handleCurrencySubmit}
       >
         <h2 className="font-bold text-2xl pb-4">Set Currency:</h2>
@@ -63,7 +63,7 @@ export default function SettingsPage() {
         </Button>
       </form>
 
-      <form className="w-full rounded-2xl p-8 border text-white/80">
+      <form className="w-full rounded-2xl p-8 border border-white/10 text-white/80">
         <h2 className="font-bold text-2xl pb-4">Local Data:</h2>
         <p className="text-lg">
           Clearing local browser data on Flamboyance will remove all saved information, including your wallet(s) and selected currency. This action resets your browsing experience by deleting stored site data, ensuring your privacy but also requiring you to re-enter any previously saved details.

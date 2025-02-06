@@ -12,7 +12,7 @@ export default function HomePage() {
   }
 
   const selectTotalValueLocked = (data: string) => {
-    return (parseFloat(data.replace(',','')) * exchangeRate).toLocaleString('en-US', { style: 'currency', currency: preferredCurrency, maximumFractionDigits: 0 })
+    return (parseFloat(data.replace(',', '')) * exchangeRate).toLocaleString('en-US', { style: 'currency', currency: preferredCurrency, maximumFractionDigits: 0 })
   }
 
   const [totalSupplyQuery, valueLockedQuery] = useQueries({
@@ -33,7 +33,7 @@ export default function HomePage() {
   return (
     <MainWrapper title='Home'>
       <div className='flex flex-wrap gap-3 md:gap-6 text-white/80'>
-        <div className='w-full p-6 border border-white rounded-2xl text-center md:text-left'>
+        <div className='w-full p-6 border border-white/10 rounded-2xl text-center md:text-left bg-white-black-gradient-primary'>
           <h3 className='text-2xl font-bold mb-3'>Welcome to Flamboyance</h3>
           <p>
             Flamboyance, your DeFi dashboard for Flamingo Finance! Get real-time insights into token conversions, liquidity pools, staking, and more &mdash; all in one place.
@@ -45,25 +45,29 @@ export default function HomePage() {
         </div>
 
         <div className='w-full flex flex-col lg:flex-row gap-6 justify-between'>
-          <div className='w-full lg:w-1/2 border border-white rounded-2xl p-6'>
+          <div className='w-full lg:w-1/2 border border-white/10 rounded-2xl p-6 bg-white-black-gradient-primary'>
             <h4 className='text-center font-bold mb-3'>Total FLM Supply</h4>
-            <p className='rounded-lg py-6 px-4 text-3xl font-ibm-plex-mono text-center font-semibold text-pink-primary bg-pink-secondary/25'>
-              {
-                (totalSupplyQuery.isPending || valueLockedQuery.isPending)
-                  ? <PulseLoader color='#D90070' size={10} speedMultiplier={0.35} aria-label='loading spinner' />
-                  : totalSupplyQuery.data
-              }
-            </p>
+            <div className='rounded-lg py-6 px-4 text-3xl font-ibm-plex-mono text-center font-semibold text-pink-primary bg-white-pink-gradient'>
+              <p className='bg-pink-gradient bg-clip-text text-transparent'>
+                {
+                  (totalSupplyQuery.isPending || valueLockedQuery.isPending)
+                    ? <PulseLoader color='#D90070' size={10} speedMultiplier={0.35} aria-label='loading spinner' />
+                    : totalSupplyQuery.data
+                }
+              </p>
+            </div>
           </div>
-          <div className='w-full lg:w-1/2 border border-white rounded-2xl p-6'>
+          <div className='w-full lg:w-1/2 border border-white/10 rounded-2xl p-6 bg-white-black-gradient-primary'>
             <h4 className='text-center font-bold mb-3'>Total Value Locked ({preferredCurrency})</h4>
-            <p className='rounded-lg py-6 px-4 text-3xl font-ibm-plex-mono text-center font-semibold text-green-primary bg-green-secondary/25'>
-              {
-                (totalSupplyQuery.isPending || valueLockedQuery.isPending)
-                  ? <PulseLoader color='#3AD900' size={10} speedMultiplier={0.35} aria-label='loading spinner' />
-                  : valueLockedQuery.data
-              }
-            </p>
+            <div className='rounded-lg py-6 px-4 text-3xl font-ibm-plex-mono text-center font-semibold text-green-primary bg-white-green-gradient'>
+              <p className='bg-green-gradient bg-clip-text text-transparent'>
+                {
+                  (totalSupplyQuery.isPending || valueLockedQuery.isPending)
+                    ? <PulseLoader color='#3AD900' size={10} speedMultiplier={0.35} aria-label='loading spinner' />
+                    : valueLockedQuery.data
+                }
+              </p>
+            </div>
           </div>
         </div>
       </div>

@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        "montserrat": ["Montserrat", "sans-serif"],
+        montserrat: ["Montserrat", "sans-serif"],
         "ibm-plex-mono": ["IBM Plex Mono", "monospace"],
       },
       colors: {
@@ -14,6 +14,15 @@ export default {
         "pink-primary": "#D90070",
         "pink-secondary": "#EE006B",
         "purple-primary": "#DE49B1",
+        "white-transparent": "#FFFFFF0A",
+      },
+      backgroundImage: {
+        "white-black-gradient-primary": "linear-gradient(#111111BF, #111111BF), linear-gradient(60deg, #FFFFFF80, #FFFFFF40)",
+        "white-black-gradient-secondary": "linear-gradient(#111111CC, #111111CC), linear-gradient(20deg, #FFFFFF66, #FFFFFF40)",
+        "white-pink-gradient": "linear-gradient(to right, #FFFFFF26, #FFFFFF26), linear-gradient(45deg, #D9007026, #EE006B26)",
+        "white-green-gradient": "linear-gradient(to right, #FFFFFF26, #FFFFFF26), linear-gradient(45deg, #3AD90026, #00EE5726)",
+        "pink-gradient": "linear-gradient(45deg, #D90070, #EE006B)",
+        "green-gradient": "linear-gradient(45deg, #3AD900, #00EE57)",
       },
     },
   },

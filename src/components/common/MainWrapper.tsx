@@ -33,14 +33,14 @@ export default function MainWrapper({ title, baseURL, redirectURL, className, ch
       className={`md:min-h-[960px] flex flex-col overflow-x-hidden flex-1 text-white rounded-2xl ${className}`}
       {...props}
     >
-      <h2 className='text-center text-2xl tracking-widest font-bold py-5 rounded-t-2xl border-2 border-b-0 border-white bg-white/10 overflow-hidden whitespace-nowrap'>
+      <h2 className='text-center text-2xl tracking-widest font-bold py-5 rounded-t-2xl border-2 border-b-0 border-white/10 bg-white-black-gradient-secondary overflow-hidden whitespace-nowrap'>
         {title}{secondaryTitle && ': '}
         {
           secondaryTitle &&
           <span className='font-normal'>{secondaryTitle}</span>
         }
       </h2>
-      <div className='flex flex-col flex-1 items-center overflow-x-auto rounded-b-2xl border-2 border-t-0 border-white p-3 md:p-8'>
+      <div className='flex flex-col flex-1 items-center overflow-x-auto rounded-b-2xl border-2 border-t-0 border-white/10 bg-white-transparent p-3 md:p-8'>
         {children}
       </div>
     </main>

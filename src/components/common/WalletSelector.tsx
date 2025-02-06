@@ -43,7 +43,7 @@ export default function WalletSelector({ }: Props) {
         savedWalletAddresses.length > 0 &&
         <>
           <form
-            className="p-8 rounded-2xl border-2 border-solid border-white"
+            className="p-8 rounded-2xl border-2 border-solid border-white/20"
             onSubmit={selectExistingWallet}
           >
             <h2 className="text-2xl font-bold pb-4">Select Neo N3 Wallet Address:</h2>
@@ -72,7 +72,7 @@ export default function WalletSelector({ }: Props) {
         </>
       }
       <form
-        className="p-8 rounded-2xl border-2 border-solid border-white"
+        className="p-8 rounded-2xl border-2 border-solid border-white/20"
         onSubmit={addNewWallet}
       >
         <h2 className="text-2xl font-bold pb-4">Add Neo N3 Wallet Address:</h2>

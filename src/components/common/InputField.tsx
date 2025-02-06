@@ -9,7 +9,7 @@ const InputField = forwardRef<HTMLInputElement, Props>(
     return (
       <input
         ref={ref}
-        className={`h-14 bg-white/10 px-5 rounded-lg w-full border border-white font-medium text-xl ${className}`}
+        className={`h-14 bg-white/10 px-5 rounded-lg w-full border border-white/10 font-medium text-xl ${className}`}
         {...props}
       >
         {children}
