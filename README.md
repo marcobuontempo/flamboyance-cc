@@ -9,11 +9,11 @@ Get real-time insights into token conversions, liquidity pools, staking, and mor
 ## 📌 About
 
 - 🏆 **1st Place Winner** of [Flamingo Finance's Dashboard-ATHON](https://medium.com/flamingo-finance/earn-1-000-gas-in-flamingo-finances-dashboard-athon-9b68f758535e)
-  - 🔗 [View the original submission](https://old.flamboyance.cc)
+  - 🔗 *[View the original submission](https://old.flamboyance.cc)*
 - 🚀 **Real-time, live data** at your fingertips
 - 🔍 **Explore & track your NEO N3 wallet** using its public address
 - 📊 **Gain insights** into the DeFi platform with analytics
-- ♿ **Built with accessibility in mind**, following best practices & standards
+- ♿ **Built with accessibility in mind**, following best practices & standards from WCAG2
 - 💯 **Achieves a perfect** 100% Google Lighthouse score in:
 
   - ✅ Accessibility
@@ -24,6 +24,17 @@ Get real-time insights into token conversions, liquidity pools, staking, and mor
 
 > [!NOTE]
 > Did you know? A group of flamingos is called a "flamboyance" 🦩🦩🦩
+
+## 🖥️ Main Technologies
+- React with TypeScript
+- Vite
+- Tailwind
+- Redux
+- React Router DOM
+- Recharts
+- Tanstack Tables
+- Axios
+- Flamingo Finance API Service
 
 ## 🤝 Contributing
 
