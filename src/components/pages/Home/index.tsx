@@ -33,7 +33,7 @@ export default function HomePage() {
   return (
     <MainWrapper title='Home'>
       <div className='flex flex-wrap gap-3 md:gap-6 text-white/80'>
-        <div className='w-full p-6 border border-white rounded-2xl'>
+        <div className='w-full p-6 border border-white rounded-2xl text-center md:text-left'>
           <h3 className='text-2xl font-bold mb-3'>Welcome to Flamboyance</h3>
           <p>
             Flamboyance, your DeFi dashboard for Flamingo Finance! Get real-time insights into token conversions, liquidity pools, staking, and more &mdash; all in one place.

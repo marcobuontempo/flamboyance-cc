@@ -53,7 +53,6 @@ export default function Sidebar() {
       fixed md:sticky bottom-0 md:bottom-auto left-0 md:left-auto right-0 md:right-auto w-dvw md:w-auto h-[64px] md:h-[960px] md:flex md:flex-col md:justify-between md:mr-8 md:pb-6 rounded-t-2xl md:rounded-2xl md:transition-all md:duration-300
       border-2 border-b-0 md:border-b-2 border-white bg-black-primary overflow-hidden`}
       aria-expanded={isSidebarOpen}
-
     >
       {/* HEADER (w/ toggle) */}
       <div>

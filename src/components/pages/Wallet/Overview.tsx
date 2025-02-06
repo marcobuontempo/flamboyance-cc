@@ -128,7 +128,7 @@ export default function Overview() {
   )
 
   return (
-    <div className="flex justify-center items-center">
+    <div className="flex justify-center items-center w-full">
       <Table
         data={data}
         columns={columns}
