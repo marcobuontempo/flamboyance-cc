@@ -27,4 +27,4 @@ This project is currently open to contributions
 
 ## License
 
-MIT - refer to the [LICENSE](LICENSE)
+MIT - refer to the [LICENSE](LICENSE) 
