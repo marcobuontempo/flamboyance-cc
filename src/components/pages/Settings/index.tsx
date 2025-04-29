@@ -6,6 +6,7 @@ import MainWrapper from "@components/common/MainWrapper"
 import { ChangeEvent, FormEvent, MouseEvent, useState } from "react";
 import SaveIcon from "@assets/icons/save.svg?react"
 import TrashIcon from "@assets/icons/trash.svg?react"
+import { Link } from "react-router-dom";
 
 const currencyOptions = {
   'USD': 'US Dollar $',
@@ -63,7 +64,7 @@ export default function SettingsPage() {
         </Button>
       </form>
 
-      <form className="w-full rounded-2xl p-8 border border-white/10 text-white/80">
+      <form className="w-full rounded-2xl p-8 mb-6 border border-white/10 text-white/80">
         <h2 className="font-bold text-2xl pb-4">Local Data:</h2>
         <p className="text-lg">
           Clearing local browser data on Flamboyance will remove all saved information, including your wallet(s) and selected currency. This action resets your browsing experience by deleting stored site data, ensuring your privacy but also requiring you to re-enter any previously saved details.
@@ -77,6 +78,13 @@ export default function SettingsPage() {
           <TrashIcon />
         </Button>
       </form>
+
+      <div className="w-full rounded-2xl p-8 mb-6 border border-white/10 text-white/80 text-center">
+        <h2 className="font-bold text-2xl pb-4 italic underline">Did you know?</h2>
+        <p>A group of flamingos is called a "flamboyance"! 🦩🦩🦩</p>
+      </div>
+
+      <Link to={'/privacy'} className="text-purple-primary underline">Privacy Policy</Link>
     </MainWrapper >
   )
 }

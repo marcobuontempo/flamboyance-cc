@@ -6,6 +6,7 @@ import LiveDataPage, { LiveDataOverview, LiveDataClaims, LiveDataLending, LiveDa
 import AnalyticsPage, { AnalyticsClaims, AnalyticsPools, AnalyticsTotalValueLocked } from "@/components/pages/Analytics";
 import WalletPage, { WalletOverview } from "@components/pages/Wallet";
 import SettingsPage from "@components/pages/Settings";
+import PrivacyPolicyPage from "@/components/pages/PrivacyPolicy";
 
 export const routes = [
   {
@@ -107,6 +108,10 @@ export const routes = [
       {
         path: '/settings',
         element: <SettingsPage />,
+      },
+      {
+        path: '/privacy',
+        element: <PrivacyPolicyPage />,
       },
     ],
   },
